@@ -10,5 +10,11 @@ export const metadata: Metadata = {
 
 export default function ReadAlongDemoPage() {
   if (process.env.READ_ALONG_DEMO !== '1') notFound()
-  return <ReadAlongDemo audioSrc={withBasePath('/read-along-demo/alice.mp3')} />
+  return (
+    <ReadAlongDemo
+      audioSrc={withBasePath('/read-along-demo/alice.mp3')}
+      coverSrc={withBasePath('/read-along-demo/alice-cover.jpg')}
+      logoSrc={withBasePath('/images/Logo.png')}
+    />
+  )
 }

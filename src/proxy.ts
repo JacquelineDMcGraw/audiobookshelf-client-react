@@ -19,7 +19,7 @@ export async function proxy(request: NextRequest) {
   if (
     process.env.READ_ALONG_DEMO === '1' &&
     (request.method === 'GET' || request.method === 'HEAD') &&
-    (pathname === '/read-along-demo' || pathname === '/read-along-demo/alice.mp3')
+    (pathname === '/read-along-demo' || pathname === '/read-along-demo/alice.mp3' || pathname === '/read-along-demo/alice-cover.jpg')
   ) {
     return NextResponse.next()
   }

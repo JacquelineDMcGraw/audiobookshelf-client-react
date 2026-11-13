@@ -63,6 +63,8 @@ const html = (await readFile(new URL('index.html', import.meta.url), 'utf8'))
 await Promise.all([
   writeFile(resolve(outdir, 'index.html'), html),
   copyFile(audioFile, resolve(outdir, 'alice.mp3')),
+  copyFile(resolve(root, 'public/read-along-demo/alice-cover.jpg'), resolve(outdir, 'alice-cover.jpg')),
+  copyFile(resolve(root, 'public/images/Logo.png'), resolve(outdir, 'audiobookshelf-logo.png')),
   copyFile(resolve(root, 'LICENSE'), resolve(outdir, 'LICENSE')),
   writeFile(resolve(outdir, 'THIRD-PARTY-NOTICES.txt'), notices.join('\n\n---\n\n') + '\n'),
   writeFile(resolve(outdir, '.nojekyll'), '')

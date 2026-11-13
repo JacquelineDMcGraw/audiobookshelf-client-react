@@ -11,11 +11,20 @@ declare const READ_ALONG_AUDIO_URL: string
 const sharedLabels = new Set([
   'ButtonClose',
   'ButtonNext',
+  'ButtonPause',
+  'ButtonPlay',
   'ButtonPrevious',
   'ButtonSearch',
+  'LabelByAuthor',
   'LabelChapters',
+  'LabelDuration',
+  'LabelLanguage',
+  'LabelNarrators',
   'LabelPlayerChapterNumberMarker',
-  'LabelSearchTerm'
+  'LabelPublishYear',
+  'LabelSearchTerm',
+  'LabelStart',
+  'LabelTitle'
 ])
 const messages = Object.fromEntries(Object.entries(enUS).filter(([key]) => key.startsWith('LabelReadAlongDemo') || sharedLabels.has(key)))
 
@@ -23,6 +32,8 @@ createRoot(document.getElementById('root')!).render(
   <NextIntlClientProvider locale="en-US" messages={messages} timeZone="UTC">
     <ReadAlongDemo
       audioSrc={READ_ALONG_AUDIO_URL}
+      coverSrc="./alice-cover.jpg"
+      logoSrc="./audiobookshelf-logo.png"
       credits={
         <>
           <a href={READ_ALONG_SOURCE_URL}>Source code</a>

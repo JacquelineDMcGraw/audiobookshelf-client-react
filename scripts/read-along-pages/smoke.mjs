@@ -6,7 +6,6 @@ const demoUrl = process.env.READ_ALONG_SMOKE_URL ?? 'https://jacquelinedmcgraw.g
 const expectedJs = process.env.READ_ALONG_EXPECTED_JS
 const playwrightModule = process.env.READ_ALONG_PLAYWRIGHT_MODULE ?? 'playwright'
 const { chromium } = createRequire(import.meta.url)(playwrightModule)
-const repoUrl = 'https://github.com/JacquelineDMcGraw/audiobookshelf-client-react'
 
 async function openDeployment(page, errors) {
   const attempts = expectedJs ? 12 : 1
@@ -41,10 +40,13 @@ try {
 
   await openDeployment(page, errors)
 
-  const reader = page.getByRole('heading', { name: 'Read Along', exact: true })
+  const bookTitle = 'Alice’s Adventures in Wonderland'
+  const book = page.getByRole('heading', { level: 1, name: bookTitle, exact: true })
+  const openReader = page.getByRole('button', { name: 'Read Along', exact: true })
+  const reader = page.getByRole('heading', { level: 1, name: 'Read Along', exact: true })
   const audio = page.locator('audio')
   const pageNumber = page.getByRole('combobox', { name: 'Page', exact: true })
-  const chapterMenu = page.locator('details').filter({ has: page.locator('summary', { hasText: /^Chapters$/ }) })
+  const chapterMenu = page.locator('details:visible').filter({ has: page.locator('summary', { hasText: /^Chapters$/ }) })
   const bookmarkMenu = page.locator('details').filter({ has: page.locator('summary', { hasText: /^Bookmarks$/ }) })
   const bookmarkOnPage = (pageIndex) => bookmarkMenu.getByRole('button', { name: new RegExp(`^Page ${Number(pageIndex) + 1}\\b`) })
   const saveBookmark = async () => {
@@ -53,11 +55,25 @@ try {
   }
   const finalChapter = page.getByRole('heading', { name: 'Alice’s Evidence', exact: true })
 
-  await reader.waitFor()
+  await book.waitFor()
+  await reader.waitFor({ state: 'hidden' })
+  const cover = page.getByRole('img', { name: `${bookTitle} cover`, exact: true })
+  await cover.waitFor()
+  await page.waitForFunction((alt) => [...document.images].some((img) => img.alt === alt && img.complete && img.naturalWidth > 0), `${bookTitle} cover`)
+  await page.getByRole('button', { name: 'Play', exact: true }).click()
   await page.waitForFunction(() => {
     const audio = document.querySelector('audio')
-    return audio?.readyState >= HTMLMediaElement.HAVE_METADATA && audio.duration > 9_000 && audio.duration < 10_000
+    return audio && !audio.paused && audio.duration > 9_000 && audio.duration < 10_000 && audio.currentTime > 0.75
   })
+  assert(await book.isVisible(), 'Play should keep the book details visible')
+  await page.getByRole('button', { name: 'Pause', exact: true }).click()
+  assert(await audio.evaluate((element) => element.paused), 'Pause on the book page should stop playback')
+  const bookPosition = await audio.evaluate((element) => element.currentTime)
+  await openReader.click()
+  await reader.waitFor()
+  await book.waitFor({ state: 'hidden' })
+  assert(Math.abs((await audio.evaluate((element) => element.currentTime)) - bookPosition) < 0.1, 'Opening Read Along should keep the playback position')
+
   await chapterMenu.locator('summary').click()
   assert.equal(await chapterMenu.getByRole('button').count(), 12, 'All 12 chapters should be selectable')
   await chapterMenu.getByRole('button', { name: /^12\. Alice’s Evidence/ }).click()
@@ -106,6 +122,8 @@ try {
   await bookmarkOnPage(finalPage).waitFor()
 
   await page.reload({ waitUntil: 'domcontentloaded', timeout: 30_000 })
+  await book.waitFor()
+  await openReader.click()
   await reader.waitFor()
   await bookmarkMenu.locator('summary').click()
   await bookmarkOnPage(finalPage).waitFor()
@@ -116,16 +134,26 @@ try {
   await page.waitForFunction((start) => Math.abs(document.querySelector('audio').currentTime - start) < 0.1, chapterStart)
 
   await page.setViewportSize({ width: 1280, height: 800 })
-  await page.getByRole('button', { name: /Back to start/ }).click()
-  await page.getByRole('heading', { name: 'Audiobooks', exact: true }).waitFor()
-  const back = page.getByRole('link', { name: 'Back to GitHub repository', exact: true })
-  assert.equal(await back.getAttribute('href'), repoUrl)
-  await page.getByRole('button', { name: 'Read Along', exact: true }).click()
+  await page.getByRole('button', { name: 'Play audio', exact: true }).click()
+  await page.waitForFunction((start) => {
+    const audio = document.querySelector('audio')
+    return !audio.paused && audio.currentTime > start + 0.75
+  }, chapterStart)
+  await page.getByRole('button', { name: /Back to book/ }).click()
+  await book.waitFor()
+  const returnedPosition = await audio.evaluate((element) => {
+    if (!element.paused) throw new Error('Returning to the book should pause playback')
+    return element.currentTime
+  })
+  assert(returnedPosition > chapterStart, 'Returning to the book should keep the listening position')
+  await openReader.click()
   await reader.waitFor()
+  await finalChapter.waitFor()
+  assert(Math.abs((await audio.evaluate((element) => element.currentTime)) - returnedPosition) < 0.1, 'Reopening Read Along should keep the playback position')
 
   assert.deepEqual(errors, [], 'Browser did not complete the smoke test without JavaScript errors')
   console.log(
-    'Read Along smoke passed: 12 chapters, playback and highlighting, automatic page turn, bookmark deletion and restore after reload, and library navigation.'
+    'Read Along smoke passed: book details and playback, 12 chapters, highlighting and automatic page turn, bookmark deletion and restore after reload, and Back to book.'
   )
 } finally {
   await browser.close()
