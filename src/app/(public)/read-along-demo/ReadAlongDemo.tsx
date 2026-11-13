@@ -1,8 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { useEffect, useRef, useState } from 'react'
-import { withBasePath } from '@/lib/basePath'
+import { type ReactNode, useEffect, useRef, useState } from 'react'
 
 import { alicePages } from './alice'
 import styles from './read-along.module.css'
@@ -14,16 +13,25 @@ const textSettingsGlyph = 'Aa'
 const playbackSpeeds = [0.75, 0.9, 1, 1.15, 1.25, 1.5, 1.75, 2]
 const excerptEnd = alicePages.at(-1)!.at(-1)!.end
 const excerptWords = alicePages.flat()
+const pageParagraphs = alicePages.map((words) => {
+  const paragraphs: (typeof words)[number][][] = []
+  for (const word of words) {
+    if (!paragraphs.length || word.paragraphStart) paragraphs.push([])
+    paragraphs.at(-1)!.push(word)
+  }
+  return paragraphs
+})
 
 function clock(seconds: number) {
   const whole = Math.floor(seconds)
   return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
 }
 
-export default function ReadAlongDemo() {
+export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string; credits?: ReactNode }) {
   const t = useTranslations()
   const audioRef = useRef<HTMLAudioElement>(null)
   const searchRef = useRef<HTMLDialogElement>(null)
+  const leafRef = useRef<HTMLElement>(null)
   const [time, setTime] = useState(0)
   const [manualPage, setManualPage] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
@@ -40,8 +48,14 @@ export default function ReadAlongDemo() {
     pageStarts.findLastIndex((start) => start <= time)
   )
   const page = manualPage ?? audioPage
-  const words = alicePages[page]
+  const activeWord = alicePages[page].find((word) => time >= word.start && time < word.end)?.start
   const matchingWords = submittedQuery ? excerptWords.filter((word) => word.word.toLowerCase().includes(submittedQuery)) : []
+
+  useEffect(() => {
+    if (!playing && searchMatch === null) return
+    const marker = leafRef.current?.querySelector(searchMatch === null ? '[aria-current="true"]' : '[data-match="true"]')
+    marker?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
+  }, [activeWord, playing, searchMatch])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -215,24 +229,29 @@ export default function ReadAlongDemo() {
             {t(searchMatch !== null ? 'LabelReadAlongDemoPlayMatch' : 'LabelReadAlongDemoPlayHere')}
           </button>
         </div>
-        <article className={styles.leaf} data-size={largePrint ? 'large' : undefined} lang="en">
+        <article className={styles.leaf} ref={leafRef} data-size={largePrint ? 'large' : undefined} lang="en">
           <header className={styles.runningHead}>{bookTitle}</header>
           {page === 0 && <h2 className={styles.chapter}>{chapterTitle}</h2>}
-          <p className={styles.passage}>
-            {words.map((word, index) => (
-              <span key={word.start}>
-                <span aria-current={time >= word.start && time < word.end ? 'true' : undefined} data-match={searchMatch === word.start || undefined}>
-                  {word.word}
-                </span>
-                {index < words.length - 1 && ' '}
-              </span>
+          <div className={styles.passage}>
+            {pageParagraphs[page].map((paragraph) => (
+              <p key={paragraph[0].start}>
+                {paragraph.map((word, index) => (
+                  <span key={word.start}>
+                    <span aria-current={word.start === activeWord ? 'true' : undefined} data-match={searchMatch === word.start || undefined}>
+                      {word.word}
+                    </span>
+                    {index < paragraph.length - 1 && ' '}
+                  </span>
+                ))}
+              </p>
             ))}
-          </p>
+          </div>
           <footer className={styles.folio}>{page + 1}</footer>
         </article>
         <div className={styles.credits}>
           <a href="https://www.gutenberg.org/ebooks/11">{t('LabelReadAlongDemoTextCredit')}</a>
           <a href="https://librivox.org/alices-adventures-in-wonderland-by-lewis-carroll-3/">{t('LabelReadAlongDemoAudioCredit')}</a>
+          {credits}
         </div>
       </div>
 
@@ -243,7 +262,7 @@ export default function ReadAlongDemo() {
             controls
             preload="metadata"
             aria-label={t('LabelReadAlongDemoNarration')}
-            src={withBasePath('/read-along-demo/alice.mp3')}
+            src={audioSrc}
             onLoadedMetadata={(event) => setDuration(event.currentTarget.duration)}
             onTimeUpdate={(event) => setTime(event.currentTarget.currentTime)}
             onSeeking={(event) => {

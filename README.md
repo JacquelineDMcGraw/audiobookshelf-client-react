@@ -59,3 +59,13 @@ HOST=127.0.0.2 READ_ALONG_DEMO=1 pnpm dev --hostname 127.0.0.1 --port 3015
 Open [Read Along Demo](http://127.0.0.1:3015/read-along-demo). Play the sample narration to see word highlighting and automatic page turns. Previous and Next also seek the narration to the selected page.
 
 The demo uses a bundled excerpt from *Alice’s Adventures in Wonderland* by Lewis Carroll, with precomputed word timings. It runs without an Audiobookshelf server or account. The extra loopback address keeps backend requests from other routes separate from the preview listener. The [Project Gutenberg text](https://www.gutenberg.org/ebooks/11) and [LibriVox recording by Peter Yearsley](https://librivox.org/alices-adventures-in-wonderland-by-lewis-carroll-3/) are public domain in the United States.
+
+The [public Read Along demo](https://jacquelinedmcgraw.github.io/audiobookshelf-client-react/) is hosted on GitHub Pages. To rebuild the static site after installing the client dependencies, run:
+
+```sh
+tools_dir="$(mktemp -d)"
+npm install --prefix "$tools_dir" --ignore-scripts esbuild@0.27.7
+node scripts/read-along-pages/build.mjs ./out "$tools_dir/node_modules/esbuild"
+```
+
+Use a new output directory for each build. The export uses relative asset links and contains only the demo, its audio, and license files.
