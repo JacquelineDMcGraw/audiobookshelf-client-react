@@ -15,6 +15,15 @@ function isNextServerActionRequest(request: NextRequest): boolean {
 
 export async function proxy(request: NextRequest) {
   const { pathname, search } = request.nextUrl
+  // The opt-in demo serves only bundled sample content and needs no library session.
+  if (
+    process.env.READ_ALONG_DEMO === '1' &&
+    (request.method === 'GET' || request.method === 'HEAD') &&
+    (pathname === '/read-along-demo' || pathname === '/read-along-demo/alice.mp3')
+  ) {
+    return NextResponse.next()
+  }
+
   const accessTokenCookie = request.cookies.get('access_token')?.value
   const refreshTokenCookie = request.cookies.get('refresh_token')?.value
   const languageCookie = request.cookies.get(COOKIE_NAMES.language)?.value

@@ -47,3 +47,15 @@ module.exports.config = {
 
 1. `pnpm run build` this NextJS app
 2. Start the audiobookshelf server with `npm run start-dev` (uses the dev.js file w/ production)
+
+### Read Along demo
+
+After installing the client dependencies, start the standalone preview:
+
+```sh
+HOST=127.0.0.2 READ_ALONG_DEMO=1 pnpm dev --hostname 127.0.0.1 --port 3015
+```
+
+Open [Read Along Demo](http://127.0.0.1:3015/read-along-demo). Play the sample narration to see word highlighting and automatic page turns. Previous and Next also seek the narration to the selected page.
+
+The demo uses a bundled excerpt from *Alice’s Adventures in Wonderland* by Lewis Carroll, with precomputed word timings. It runs without an Audiobookshelf server or account. The extra loopback address keeps backend requests from other routes separate from the preview listener. The [Project Gutenberg text](https://www.gutenberg.org/ebooks/11) and [LibriVox recording by Peter Yearsley](https://librivox.org/alices-adventures-in-wonderland-by-lewis-carroll-3/) are public domain in the United States.
