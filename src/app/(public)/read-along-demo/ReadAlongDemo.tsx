@@ -69,6 +69,20 @@ function parseBookmarks(raw: string): number[] {
   }
 }
 
+function writeBookmarks(bookmarks: number[]) {
+  const updated = JSON.stringify(bookmarks)
+  let stored = true
+  try {
+    window.localStorage.setItem(bookmarkKey, updated)
+    sessionBookmarks = null
+  } catch {
+    sessionBookmarks = updated
+    stored = false
+  }
+  window.dispatchEvent(new Event(bookmarkEvent))
+  return stored
+}
+
 function getAudioPage(position: number) {
   return Math.max(
     0,
@@ -198,6 +212,7 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
     if (next < 0 || next >= alicePages.length) return
     if (manualPage !== null) setManualPage(next)
     seek(pageStarts[next])
+    frameRef.current?.scrollTo({ top: 0 })
   }
 
   function jumpFromMenu(next: number, menu: HTMLDetailsElement | null) {
@@ -230,16 +245,14 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
       setBookmarkStatus(t('LabelReadAlongDemoAlreadySaved'))
       return
     }
-    const updated = JSON.stringify([...savedBookmarks, position])
-    try {
-      window.localStorage.setItem(bookmarkKey, updated)
-      sessionBookmarks = null
-      setBookmarkStatus(t('LabelReadAlongDemoBookmarkSaved'))
-    } catch {
-      sessionBookmarks = updated
-      setBookmarkStatus(t('LabelReadAlongDemoBookmarkSavedSession'))
-    }
-    window.dispatchEvent(new Event(bookmarkEvent))
+    const stored = writeBookmarks([...savedBookmarks, position])
+    setBookmarkStatus(t(stored ? 'LabelReadAlongDemoBookmarkSaved' : 'LabelReadAlongDemoBookmarkSavedSession'))
+  }
+
+  function deleteBookmark(position: number, menu: HTMLDetailsElement | null) {
+    const stored = writeBookmarks(parseBookmarks(readBookmarks()).filter((saved) => saved !== position))
+    setBookmarkStatus(t(stored ? 'LabelReadAlongDemoBookmarkDeleted' : 'LabelReadAlongDemoBookmarkDeletedSession'))
+    menu?.querySelector('summary')?.focus({ preventScroll: true })
   }
 
   const reader = (
@@ -321,21 +334,33 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
             <summary>{t('LabelReadAlongDemoBookmarks')}</summary>
             <div className={styles.panel}>
               {bookmarks.length ? (
-                bookmarks.map((position) => (
-                  <button
-                    key={position}
-                    className={styles.chapterChoice}
-                    type="button"
-                    onClick={(event) => {
-                      setManualPage(null)
-                      seek(position)
-                      closeReadingMenu(event.currentTarget.closest('details'))
-                    }}
-                  >
-                    <span>{t('LabelReadAlongDemoBookmarkLocation', { page: getAudioPage(position) + 1 })}</span>
-                    <span className={styles.chapterPosition}>{clock(position)}</span>
-                  </button>
-                ))
+                bookmarks.map((position) => {
+                  const location = t('LabelReadAlongDemoBookmarkLocation', { page: getAudioPage(position) + 1 })
+                  const timestamp = clock(position)
+                  return (
+                    <div key={position} className={styles.bookmarkRow}>
+                      <button
+                        className={styles.chapterChoice}
+                        type="button"
+                        onClick={(event) => {
+                          setManualPage(null)
+                          seek(position)
+                          closeReadingMenu(event.currentTarget.closest('details'))
+                        }}
+                      >
+                        <span>{location}</span>
+                        <span className={styles.chapterPosition}>{timestamp}</span>
+                      </button>
+                      <button
+                        type="button"
+                        aria-label={t('LabelReadAlongDemoDeleteBookmarkAt', { timestamp })}
+                        onClick={(event) => deleteBookmark(position, event.currentTarget.closest('details'))}
+                      >
+                        {t('LabelReadAlongDemoDeleteBookmark')}
+                      </button>
+                    </div>
+                  )
+                })
               ) : (
                 <p>{t('LabelReadAlongDemoNoBookmarks')}</p>
               )}

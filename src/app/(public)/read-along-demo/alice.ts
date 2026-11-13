@@ -7,17 +7,17 @@ type AliceWord = { word: string; start?: number; end?: number; paragraphStart?: 
 
 export const aliceChapters: readonly { title: string; page: number; start: number }[] = [
   { title: 'Down the Rabbit-Hole', page: 0, start: 0.0 },
-  { title: 'The Pool of Tears', page: 15, start: 765.47 },
-  { title: 'A Caucus-Race and a Long Tale', page: 30, start: 1486.0 },
-  { title: 'The Rabbit Sends in a Little Bill', page: 42, start: 2069.88 },
-  { title: 'Advice from a Caterpillar', page: 60, start: 2912.34 },
-  { title: 'Pig and Pepper', page: 75, start: 3662.06 },
-  { title: 'A Mad Tea-Party', page: 93, start: 4587.11 },
-  { title: 'The Queen’s Croquet-Ground', page: 109, start: 5403.62 },
-  { title: 'The Mock Turtle’s Story', page: 126, start: 6224.63 },
-  { title: 'The Lobster Quadrille', page: 142, start: 7055.32 },
-  { title: 'Who Stole the Tarts?', page: 156, start: 7932.17 },
-  { title: 'Alice’s Evidence', page: 169, start: 8601.26 }
+  { title: 'The Pool of Tears', page: 9, start: 765.47 },
+  { title: 'A Caucus-Race and a Long Tale', page: 18, start: 1486.0 },
+  { title: 'The Rabbit Sends in a Little Bill', page: 25, start: 2069.88 },
+  { title: 'Advice from a Caterpillar', page: 36, start: 2912.34 },
+  { title: 'Pig and Pepper', page: 45, start: 3662.06 },
+  { title: 'A Mad Tea-Party', page: 56, start: 4587.11 },
+  { title: 'The Queen’s Croquet-Ground', page: 65, start: 5403.62 },
+  { title: 'The Mock Turtle’s Story', page: 75, start: 6224.63 },
+  { title: 'The Lobster Quadrille', page: 84, start: 7055.32 },
+  { title: 'Who Stole the Tarts?', page: 92, start: 7932.17 },
+  { title: 'Alice’s Evidence', page: 100, start: 8601.26 }
 ]
 
 export const alicePages: readonly (readonly AliceWord[])[] = [
@@ -164,9 +164,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“Oh' },
     { word: 'dear!', start: 53.84, end: 54.08 },
     { word: 'Oh' },
-    { word: 'dear!', start: 54.1, end: 54.32 }
-  ],
-  [
+    { word: 'dear!', start: 54.1, end: 54.32 },
     { word: 'I', start: 54.56, end: 54.7 },
     { word: 'shall', start: 54.7, end: 54.9 },
     { word: 'be', start: 54.9, end: 55.1 },
@@ -276,7 +274,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'rabbit-hole', start: 90.8, end: 91.32 },
     { word: 'under', start: 91.32, end: 91.62 },
     { word: 'the', start: 91.62, end: 91.82 },
-    { word: 'hedge.' },
+    { word: 'hedge.' }
+  ],
+  [
     { word: 'In', paragraphStart: true, start: 92.64, end: 92.8 },
     { word: 'another', start: 92.8, end: 93.1 },
     { word: 'moment', start: 93.1, end: 93.54 },
@@ -297,9 +297,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 97.02, end: 97.14 },
     { word: 'get', start: 97.14, end: 97.28 },
     { word: 'out', start: 97.28, end: 97.52 },
-    { word: 'again.', start: 97.52, end: 97.9 }
-  ],
-  [
+    { word: 'again.', start: 97.52, end: 97.9 },
     { word: 'The', paragraphStart: true, start: 98.78, end: 99.06 },
     { word: 'rabbit-hole', start: 99.06, end: 99.66 },
     { word: 'went', start: 99.66, end: 99.92 },
@@ -444,9 +442,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“ORANGE', start: 144.06, end: 144.8 },
     { word: 'MARMALADE”,', start: 144.8, end: 145.72 },
     { word: 'but', start: 145.72, end: 146.36 },
-    { word: 'to', start: 146.36, end: 146.86 }
-  ],
-  [
+    { word: 'to', start: 146.36, end: 146.86 },
     { word: 'her', start: 146.86, end: 147.08 },
     { word: 'great', start: 147.08, end: 147.5 },
     { word: 'disappointment', start: 147.5, end: 148.08 },
@@ -530,7 +526,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'was', start: 172.56, end: 173.32 },
     { word: 'very', start: 173.32, end: 173.6 },
     { word: 'likely', start: 173.6, end: 174.12 },
-    { word: 'true.)', start: 174.12, end: 174.84 },
+    { word: 'true.)', start: 174.12, end: 174.84 }
+  ],
+  [
     { word: 'Down,', paragraphStart: true, start: 176.6, end: 177.18 },
     { word: 'down,', start: 177.18, end: 177.76 },
     { word: 'down.', start: 177.76, end: 179 },
@@ -591,9 +589,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'sort', start: 197.62, end: 197.84 },
     { word: 'in', start: 197.84, end: 198.1 },
     { word: 'her', start: 198.1, end: 198.24 },
-    { word: 'lessons', start: 198.24, end: 198.54 }
-  ],
-  [
+    { word: 'lessons', start: 198.24, end: 198.54 },
     { word: 'in', start: 198.54, end: 198.8 },
     { word: 'the', start: 198.8, end: 198.88 },
     { word: 'schoolroom,', start: 198.88, end: 199.56 },
@@ -741,9 +737,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'New', start: 252.48, end: 252.58 },
     { word: 'Zealand', start: 252.58, end: 253.02 },
     { word: 'or', start: 253.02, end: 253.3 },
-    { word: 'Australia?”', start: 253.3, end: 253.9 }
-  ],
-  [
+    { word: 'Australia?”', start: 253.3, end: 253.9 },
     { word: '(and', start: 254.46, end: 254.84 },
     { word: 'she', start: 254.84, end: 255.18 },
     { word: 'tried', start: 255.18, end: 255.54 },
@@ -790,7 +784,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'it' },
     { word: 'written' },
     { word: 'up' },
-    { word: 'somewhere.”' },
+    { word: 'somewhere.”' }
+  ],
+  [
     { word: 'Down,', paragraphStart: true },
     { word: 'down,' },
     { word: 'down.' },
@@ -893,9 +889,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“Do', start: 307.58, end: 307.72 },
     { word: 'cats', start: 307.72, end: 308.24 },
     { word: 'eat', start: 308.24, end: 309.14 },
-    { word: 'bats?', start: 309.14, end: 309.58 }
-  ],
-  [
+    { word: 'bats?', start: 309.14, end: 309.58 },
     { word: 'Do' },
     { word: 'cats' },
     { word: 'eat' },
@@ -1150,9 +1144,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 393.72, end: 394.02 },
     { word: 'get', start: 394.02, end: 394.22 },
     { word: 'out', start: 394.22, end: 394.48 },
-    { word: 'again.', start: 394.48, end: 394.78 }
-  ],
-  [
+    { word: 'again.', start: 394.48, end: 394.78 },
     { word: 'Suddenly', paragraphStart: true, start: 396.04, end: 396.56 },
     { word: 'she', start: 396.76, end: 397 },
     { word: 'came', start: 397, end: 397.2 },
@@ -1261,7 +1253,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'great', start: 430.32, end: 430.52 },
     { word: 'delight', start: 430.52, end: 431.02 },
     { word: 'it', start: 431.02, end: 431.6 },
-    { word: 'fitted!', start: 431.6, end: 431.88 },
+    { word: 'fitted!', start: 431.6, end: 431.88 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 432.88, end: 433.06 },
     { word: 'opened', start: 433.06, end: 433.42 },
     { word: 'the', start: 433.42, end: 433.64 },
@@ -1295,9 +1289,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'garden', start: 443.66, end: 444.14 },
     { word: 'you', start: 444.14, end: 444.54 },
     { word: 'ever', start: 444.54, end: 444.94 },
-    { word: 'saw.', start: 444.94, end: 445.52 }
-  ],
-  [
+    { word: 'saw.', start: 444.94, end: 445.52 },
     { word: 'How', start: 445.66, end: 446.22 },
     { word: 'she', start: 446.22, end: 446.62 },
     { word: 'longed', start: 446.62, end: 447.38 },
@@ -1442,9 +1434,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'like', start: 493.5, end: 493.7 },
     { word: 'telescopes:', start: 493.7, end: 494.16 },
     { word: 'this', start: 495.04, end: 495.6 },
-    { word: 'time', start: 495.6, end: 496.1 }
-  ],
-  [
+    { word: 'time', start: 495.6, end: 496.1 },
     { word: 'she', start: 496.1, end: 496.52 },
     { word: 'found', start: 496.52, end: 496.9 },
     { word: 'a', start: 496.9, end: 497.02 },
@@ -1505,7 +1495,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'that', start: 517.04, end: 517.42 },
     { word: 'in', start: 517.42, end: 517.64 },
     { word: 'a', start: 517.64, end: 517.78 },
-    { word: 'hurry.', start: 517.78, end: 518.04 },
+    { word: 'hurry.', start: 517.78, end: 518.04 }
+  ],
+  [
     { word: '“No,', start: 518.78, end: 519.22 },
     { word: 'I’ll', start: 519.46, end: 519.72 },
     { word: 'look', start: 519.72, end: 519.96 },
@@ -1613,9 +1605,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'you,', start: 556.96, end: 557.32 },
     { word: 'sooner', start: 557.32, end: 557.62 },
     { word: 'or', start: 557.62, end: 557.76 },
-    { word: 'later.', start: 557.76, end: 558.04 }
-  ],
-  [
+    { word: 'later.', start: 557.76, end: 558.04 },
     { word: 'However,', paragraphStart: true, start: 559.12, end: 559.58 },
     { word: 'this', start: 559.9, end: 560.16 },
     { word: 'bottle', start: 560.16, end: 560.44 },
@@ -1746,7 +1736,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'was', start: 604.34, end: 604.48 },
     { word: 'going', start: 604.48, end: 604.62 },
     { word: 'to', start: 604.62, end: 604.72 },
-    { word: 'shrink', start: 604.72, end: 604.96 },
+    { word: 'shrink', start: 604.72, end: 604.96 }
+  ],
+  [
     { word: 'any', start: 604.96, end: 605.2 },
     { word: 'further:', start: 605.2, end: 605.56 },
     { word: 'she', start: 606, end: 606.16 },
@@ -1773,9 +1765,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'altogether,', start: 612.78, end: 613.2 },
     { word: 'like', start: 613.2, end: 613.56 },
     { word: 'a', start: 613.56, end: 613.78 },
-    { word: 'candle.', start: 613.78, end: 613.94 }
-  ],
-  [
+    { word: 'candle.', start: 613.78, end: 613.94 },
     { word: 'I', start: 614.28, end: 614.42 },
     { word: 'wonder', start: 614.42, end: 614.68 },
     { word: 'what', start: 614.68, end: 614.9 },
@@ -1914,9 +1904,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'sat', start: 657.82, end: 657.94 },
     { word: 'down', start: 657.94, end: 658.46 },
     { word: 'and', start: 658.46, end: 658.88 },
-    { word: 'cried.', start: 658.88, end: 659.1 }
-  ],
-  [
+    { word: 'cried.', start: 658.88, end: 659.1 },
     { word: '“Come,', paragraphStart: true, start: 660.42, end: 661 },
     { word: 'there’s', start: 661.28, end: 661.46 },
     { word: 'no', start: 661.46, end: 661.64 },
@@ -2002,7 +1990,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 688.88, end: 689.16 },
     { word: 'be', start: 689.16, end: 689.4 },
     { word: 'two', start: 689.4, end: 689.56 },
-    { word: 'people.', start: 689.56, end: 690.04 },
+    { word: 'people.', start: 689.56, end: 690.04 }
+  ],
+  [
     { word: '“But', start: 690.6, end: 690.92 },
     { word: 'it’s', start: 690.92, end: 691.46 },
     { word: 'no', start: 691.46, end: 691.72 },
@@ -2065,9 +2055,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'beautifully', start: 713.04, end: 713.52 },
     { word: 'marked', start: 713.52, end: 714.02 },
     { word: 'in', start: 714.02, end: 714.32 },
-    { word: 'currants.' }
-  ],
-  [
+    { word: 'currants.' },
     { word: '“Well,', start: 715.42, end: 715.98 },
     { word: 'I’ll', start: 716.12, end: 716.44 },
     { word: 'eat', start: 716.44, end: 716.66 },
@@ -2368,9 +2356,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'of', start: 811.25, end: 811.43 },
     { word: 'boots', start: 811.43, end: 811.63 },
     { word: 'every', start: 811.63, end: 811.91 },
-    { word: 'Christmas.”', start: 811.91, end: 813.15 }
-  ],
-  [
+    { word: 'Christmas.”', start: 811.91, end: 813.15 },
     { word: 'And', paragraphStart: true, start: 813.15, end: 813.49 },
     { word: 'she', start: 813.49, end: 813.61 },
     { word: 'went', start: 813.61, end: 813.77 },
@@ -2463,7 +2449,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 847.41, end: 847.49 },
     { word: 'the', start: 847.49, end: 847.63 },
     { word: 'garden', start: 847.63, end: 847.85 },
-    { word: 'door.', start: 847.85, end: 848.23 },
+    { word: 'door.', start: 847.85, end: 848.23 }
+  ],
+  [
     { word: 'Poor', paragraphStart: true, start: 849.05, end: 849.31 },
     { word: 'Alice!', start: 849.31, end: 849.85 },
     { word: 'It', start: 849.85, end: 850.67 },
@@ -2504,9 +2492,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'began', start: 862.37, end: 862.67 },
     { word: 'to', start: 862.67, end: 863.03 },
     { word: 'cry', start: 863.03, end: 863.17 },
-    { word: 'again.', start: 863.17, end: 863.63 }
-  ],
-  [
+    { word: 'again.', start: 863.17, end: 863.63 },
     { word: '“You', paragraphStart: true, start: 864.25, end: 864.85 },
     { word: 'ought', start: 864.85, end: 865.17 },
     { word: 'to', start: 865.17, end: 865.45 },
@@ -2646,9 +2632,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I’ve' },
     { word: 'kept', start: 909.91, end: 910.11 },
     { word: 'her', start: 910.11, end: 910.31 },
-    { word: 'waiting!”', start: 910.31, end: 910.59 }
-  ],
-  [
+    { word: 'waiting!”', start: 910.31, end: 910.59 },
     { word: 'Alice', start: 911.47, end: 911.77 },
     { word: 'felt', start: 911.77, end: 912.01 },
     { word: 'so', start: 912.01, end: 912.39 },
@@ -2704,7 +2688,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'as', start: 928.39, end: 928.57 },
     { word: 'he', start: 928.57, end: 928.63 },
     { word: 'could', start: 928.63, end: 928.83 },
-    { word: 'go.', start: 928.83, end: 929.23 },
+    { word: 'go.', start: 928.83, end: 929.23 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 930.09, end: 930.61 },
     { word: 'took', start: 930.61, end: 931.01 },
     { word: 'up', start: 931.01, end: 931.33 },
@@ -2792,9 +2778,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 957.85, end: 958.11 },
     { word: 'world', start: 958.11, end: 958.47 },
     { word: 'am', start: 958.47, end: 958.63 },
-    { word: 'I?', start: 958.63, end: 959.09 }
-  ],
-  [
+    { word: 'I?', start: 958.63, end: 959.09 },
     { word: 'Ah,' },
     { word: 'that’s', start: 959.65, end: 960.07 },
     { word: 'the', start: 960.07, end: 960.31 },
@@ -3085,9 +3069,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'all,', start: 1069.87, end: 1070.21 },
     { word: 'and', start: 1070.41, end: 1070.47 },
     { word: 'I', start: 1070.47, end: 1070.61 },
-    { word: 'shall', start: 1070.61, end: 1070.75 }
-  ],
-  [
+    { word: 'shall', start: 1070.61, end: 1070.75 },
     { word: 'have', start: 1070.75, end: 1070.99 },
     { word: 'to', start: 1070.99, end: 1071.19 },
     { word: 'go', start: 1071.19, end: 1071.29 },
@@ -3182,7 +3164,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'somebody', start: 1098.41, end: 1098.69 },
     { word: 'else’—but,', start: 1098.69, end: 1099.81 },
     { word: 'oh', start: 1099.81, end: 1100.51 },
-    { word: 'dear!”', start: 1100.53, end: 1100.87 },
+    { word: 'dear!”', start: 1100.53, end: 1100.87 }
+  ],
+  [
     { word: 'cried', start: 1101.43, end: 1101.75 },
     { word: 'Alice,', start: 1101.75, end: 1102.13 },
     { word: 'with', start: 1102.25, end: 1102.31 },
@@ -3209,9 +3193,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'being', start: 1108.47, end: 1108.71 },
     { word: 'all', start: 1108.71, end: 1109.09 },
     { word: 'alone', start: 1109.09, end: 1109.25 },
-    { word: 'here!”', start: 1109.25, end: 1109.79 }
-  ],
-  [
+    { word: 'here!”', start: 1109.25, end: 1109.79 },
     { word: 'As', paragraphStart: true, start: 1110.43, end: 1110.89 },
     { word: 'she', start: 1110.89, end: 1111.05 },
     { word: 'said', start: 1111.05, end: 1111.25 },
@@ -3362,9 +3344,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'little', start: 1156.07, end: 1156.33 },
     { word: 'door:', start: 1156.33, end: 1156.59 },
     { word: 'but,', start: 1157.13, end: 1157.29 },
-    { word: 'alas!', start: 1157.29, end: 1157.77 }
-  ],
-  [
+    { word: 'alas!', start: 1157.29, end: 1157.77 },
     { word: 'the', start: 1158.23, end: 1158.39 },
     { word: 'little', start: 1158.39, end: 1158.59 },
     { word: 'door', start: 1158.59, end: 1158.85 },
@@ -3412,7 +3392,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'bad,', start: 1172.85, end: 1173.21 },
     { word: 'that', start: 1173.21, end: 1173.53 },
     { word: 'it', start: 1173.53, end: 1173.79 },
-    { word: 'is!”', start: 1173.79, end: 1174.27 },
+    { word: 'is!”', start: 1173.79, end: 1174.27 }
+  ],
+  [
     { word: 'As', paragraphStart: true, start: 1175.09, end: 1175.61 },
     { word: 'she', start: 1175.61, end: 1175.83 },
     { word: 'said', start: 1175.83, end: 1175.99 },
@@ -3517,9 +3499,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'them', start: 1206.15, end: 1206.49 },
     { word: 'a', start: 1206.49, end: 1206.59 },
     { word: 'railway', start: 1206.59, end: 1206.87 },
-    { word: 'station.)', start: 1206.87, end: 1207.37 }
-  ],
-  [
+    { word: 'station.)', start: 1206.87, end: 1207.37 },
     { word: 'However,', start: 1208.09, end: 1208.57 },
     { word: 'she', start: 1208.83, end: 1208.99 },
     { word: 'soon', start: 1208.99, end: 1209.31 },
@@ -3796,9 +3776,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'with', start: 1299.85, end: 1300.09 },
     { word: 'William', start: 1300.09, end: 1300.33 },
     { word: 'the', start: 1300.33, end: 1300.53 },
-    { word: 'Conqueror.”', start: 1300.53, end: 1301.09 }
-  ],
-  [
+    { word: 'Conqueror.”', start: 1300.53, end: 1301.09 },
     { word: '(For,', start: 1301.73, end: 1301.91 },
     { word: 'with', start: 1301.91, end: 1302.27 },
     { word: 'all', start: 1302.27, end: 1302.63 },
@@ -3895,7 +3873,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'if', start: 1335.17, end: 1335.47 },
     { word: 'you', start: 1335.47, end: 1335.65 },
     { word: 'were', start: 1335.65, end: 1335.85 },
-    { word: 'me?”', start: 1335.85, end: 1336.31 },
+    { word: 'me?”', start: 1335.85, end: 1336.31 }
+  ],
+  [
     { word: '“Well,', paragraphStart: true, start: 1336.81, end: 1337.27 },
     { word: 'perhaps', start: 1337.41, end: 1337.67 },
     { word: 'not,”', start: 1337.67, end: 1338.07 },
@@ -3934,9 +3914,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'could', start: 1346.61, end: 1346.75 },
     { word: 'only', start: 1346.75, end: 1346.93 },
     { word: 'see', start: 1346.93, end: 1347.19 },
-    { word: 'her.', start: 1347.19, end: 1347.53 }
-  ],
-  [
+    { word: 'her.', start: 1347.19, end: 1347.53 },
     { word: 'She' },
     { word: 'is' },
     { word: 'such', start: 1348.03, end: 1348.31 },
@@ -4066,9 +4044,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'hear', start: 1389.91, end: 1390.07 },
     { word: 'the' },
     { word: 'name', start: 1390.37, end: 1390.65 },
-    { word: 'again!”', start: 1390.65, end: 1391.05 }
-  ],
-  [
+    { word: 'again!”', start: 1390.65, end: 1391.05 },
     { word: '“I', paragraphStart: true, start: 1391.59, end: 1392.11 },
     { word: 'won’t', start: 1392.11, end: 1392.43 },
     { word: 'indeed!”', start: 1392.43, end: 1392.79 },
@@ -4127,7 +4103,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'long', start: 1411.73, end: 1411.99 },
     { word: 'curly', start: 1411.99, end: 1412.45 },
     { word: 'brown', start: 1412.45, end: 1412.79 },
-    { word: 'hair!', start: 1412.79, end: 1413.21 },
+    { word: 'hair!', start: 1412.79, end: 1413.21 }
+  ],
+  [
     { word: 'And', start: 1413.85, end: 1414.07 },
     { word: 'it’ll', start: 1414.07, end: 1414.29 },
     { word: 'fetch', start: 1414.29, end: 1414.51 },
@@ -4218,9 +4196,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'pool', start: 1438.33, end: 1438.47 },
     { word: 'as', start: 1438.47, end: 1438.67 },
     { word: 'it', start: 1438.67, end: 1438.81 },
-    { word: 'went.', start: 1438.81, end: 1439.07 }
-  ],
-  [
+    { word: 'went.', start: 1438.81, end: 1439.07 },
     { word: 'So', paragraphStart: true, start: 1439.81, end: 1439.99 },
     { word: 'she', start: 1439.99, end: 1440.25 },
     { word: 'called', start: 1440.25, end: 1440.51 },
@@ -4487,9 +4463,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'more', start: 1529.05, end: 1529.25 },
     { word: 'to', start: 1529.25, end: 1529.43 },
     { word: 'be', start: 1529.43, end: 1529.59 },
-    { word: 'said.', start: 1529.59, end: 1529.83 }
-  ],
-  [
+    { word: 'said.', start: 1529.59, end: 1529.83 },
     { word: 'At', paragraphStart: true, start: 1530.67, end: 1530.83 },
     { word: 'last', start: 1530.83, end: 1531.21 },
     { word: 'the', start: 1531.21, end: 1531.49 },
@@ -4627,16 +4601,16 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'of', start: 1573.45, end: 1573.67 },
     { word: 'Mercia', start: 1573.67, end: 1574.07 },
     { word: 'and', start: 1574.07, end: 1574.31 },
-    { word: 'Northumbria—’”' },
+    { word: 'Northumbria—’”' }
+  ],
+  [
     { word: '“Ugh!”', paragraphStart: true, start: 1575.29, end: 1575.83 },
     { word: 'said', start: 1576.05, end: 1576.23 },
     { word: 'the' },
     { word: 'Lory,' },
     { word: 'with', start: 1576.65, end: 1577.03 },
     { word: 'a', start: 1577.03, end: 1577.19 },
-    { word: 'shiver.', start: 1577.19, end: 1577.39 }
-  ],
-  [
+    { word: 'shiver.', start: 1577.19, end: 1577.39 },
     { word: '“I', paragraphStart: true, start: 1578.01, end: 1578.13 },
     { word: 'beg', start: 1578.13, end: 1578.25 },
     { word: 'your', start: 1578.25, end: 1578.43 },
@@ -4792,9 +4766,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Alice', start: 1633.61, end: 1633.73 },
     { word: 'as', start: 1633.73, end: 1634.09 },
     { word: 'it', start: 1634.09, end: 1634.19 },
-    { word: 'spoke.', start: 1634.19, end: 1634.45 }
-  ],
-  [
+    { word: 'spoke.', start: 1634.19, end: 1634.45 },
     { word: '“As', paragraphStart: true, start: 1635.07, end: 1635.49 },
     { word: 'wet', start: 1635.49, end: 1635.67 },
     { word: 'as', start: 1635.67, end: 1635.87 },
@@ -4879,7 +4851,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'other', start: 1663.15, end: 1663.21 },
     { word: 'birds', start: 1663.21, end: 1663.55 },
     { word: 'tittered' },
-    { word: 'audibly.', start: 1663.89, end: 1664.55 },
+    { word: 'audibly.', start: 1663.89, end: 1664.55 }
+  ],
+  [
     { word: '“What', paragraphStart: true, start: 1665.15, end: 1665.35 },
     { word: 'I', start: 1665.35, end: 1665.55 },
     { word: 'was', start: 1665.55, end: 1665.79 },
@@ -4941,9 +4915,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'inclined', start: 1685.87, end: 1686.35 },
     { word: 'to', start: 1686.35, end: 1686.75 },
     { word: 'say', start: 1686.75, end: 1686.85 },
-    { word: 'anything.', start: 1686.85, end: 1687.27 }
-  ],
-  [
+    { word: 'anything.', start: 1686.85, end: 1687.27 },
     { word: '“Why,”', paragraphStart: true, start: 1688.03, end: 1688.33 },
     { word: 'said', start: 1688.61, end: 1688.71 },
     { word: 'the', start: 1688.71, end: 1688.85 },
@@ -5082,9 +5054,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“But', start: 1730.11, end: 1730.21 },
     { word: 'who', start: 1730.21, end: 1730.41 },
     { word: 'has', start: 1730.41, end: 1730.67 },
-    { word: 'won?”', start: 1730.67, end: 1731.03 }
-  ],
-  [
+    { word: 'won?”', start: 1730.67, end: 1731.03 },
     { word: 'This', paragraphStart: true, start: 1731.67, end: 1732.17 },
     { word: 'question', start: 1732.17, end: 1732.77 },
     { word: 'the', start: 1732.77, end: 1733.01 },
@@ -5143,7 +5113,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'all', start: 1750.93, end: 1751.21 },
     { word: 'must', start: 1751.21, end: 1751.53 },
     { word: 'have', start: 1751.53, end: 1751.87 },
-    { word: 'prizes.”', start: 1751.87, end: 1752.23 },
+    { word: 'prizes.”', start: 1751.87, end: 1752.23 }
+  ],
+  [
     { word: '“But', paragraphStart: true, start: 1753.07, end: 1753.35 },
     { word: 'who', start: 1753.35, end: 1753.51 },
     { word: 'is', start: 1753.51, end: 1753.69 },
@@ -5232,9 +5204,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'one', start: 1781.61, end: 1782.11 },
     { word: 'a-piece,', start: 1782.11, end: 1782.47 },
     { word: 'all', start: 1782.47, end: 1782.75 },
-    { word: 'round.', start: 1782.75, end: 1783.13 }
-  ],
-  [
+    { word: 'round.', start: 1782.75, end: 1783.13 },
     { word: '“But', paragraphStart: true, start: 1783.13, end: 1783.93 },
     { word: 'she', start: 1783.93, end: 1784.39 },
     { word: 'must', start: 1784.39, end: 1784.61 },
@@ -5515,9 +5485,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'was', start: 1879.45, end: 1879.85 },
     { word: 'something', start: 1879.85, end: 1880.33 },
     { word: 'like', start: 1880.33, end: 1880.71 },
-    { word: 'this:—', start: 1880.71, end: 1881.11 }
-  ],
-  [
+    { word: 'this:—', start: 1880.71, end: 1881.11 },
     { word: '“Fury', paragraphStart: true, start: 1881.63, end: 1882.19 },
     { word: 'said', start: 1882.19, end: 1882.73 },
     { word: 'to', start: 1882.73, end: 1883.09 },
@@ -5596,7 +5564,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'condemn', lineStart: true, start: 1907.61, end: 1907.85 },
     { word: 'you', lineStart: true, start: 1907.85, end: 1908.31 },
     { word: 'to', lineStart: true, start: 1908.31, end: 1908.61 },
-    { word: 'death.’”', lineStart: true, start: 1908.61, end: 1909.43 },
+    { word: 'death.’”', lineStart: true, start: 1908.61, end: 1909.43 }
+  ],
+  [
     { word: '“You', paragraphStart: true },
     { word: 'are' },
     { word: 'not', start: 1909.97, end: 1910.11 },
@@ -5661,9 +5631,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'help', start: 1930.67, end: 1930.89 },
     { word: 'to', start: 1930.89, end: 1931.13 },
     { word: 'undo', start: 1931.13, end: 1931.33 },
-    { word: 'it!”', start: 1931.33, end: 1931.67 }
-  ],
-  [
+    { word: 'it!”', start: 1931.33, end: 1931.67 },
     { word: '“I', paragraphStart: true, start: 1931.95, end: 1932.29 },
     { word: 'shall', start: 1932.29, end: 1932.51 },
     { word: 'do', start: 1932.51, end: 1932.73 },
@@ -5804,9 +5772,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'patience', start: 1978.79, end: 1979.07 },
     { word: 'of', start: 1979.07, end: 1979.29 },
     { word: 'an' },
-    { word: 'oyster!”', start: 1979.33, end: 1979.67 }
-  ],
-  [
+    { word: 'oyster!”', start: 1979.33, end: 1979.67 },
     { word: '“I', paragraphStart: true, start: 1980.17, end: 1980.51 },
     { word: 'wish', start: 1980.51, end: 1980.69 },
     { word: 'I', start: 1980.69, end: 1980.85 },
@@ -5829,7 +5795,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'soon', start: 1986.89, end: 1987.17 },
     { word: 'fetch', start: 1987.17, end: 1987.33 },
     { word: 'it', start: 1987.33, end: 1987.59 },
-    { word: 'back!”', start: 1987.59, end: 1987.87 },
+    { word: 'back!”', start: 1987.59, end: 1987.87 }
+  ],
+  [
     { word: '“And', paragraphStart: true, start: 1988.67, end: 1989.19 },
     { word: 'who', start: 1989.19, end: 1989.55 },
     { word: 'is', start: 1989.55, end: 1990.05 },
@@ -5950,9 +5918,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“Come', start: 2026.89, end: 2027.57 },
     { word: 'away,', start: 2027.57, end: 2027.85 },
     { word: 'my', start: 2027.87, end: 2028.15 },
-    { word: 'dears!', start: 2028.15, end: 2028.45 }
-  ],
-  [
+    { word: 'dears!', start: 2028.15, end: 2028.45 },
     { word: 'It’s', start: 2028.87, end: 2029.13 },
     { word: 'high', start: 2029.13, end: 2029.53 },
     { word: 'time', start: 2029.53, end: 2029.83 },
@@ -6222,9 +6188,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'you', start: 2121.07, end: 2121.27 },
     { word: 'doing', start: 2121.27, end: 2121.47 },
     { word: 'out', start: 2121.47, end: 2121.79 },
-    { word: 'here?', start: 2121.79, end: 2122.13 }
-  ],
-  [
+    { word: 'here?', start: 2121.79, end: 2122.13 },
     { word: 'Run', start: 2122.37, end: 2122.47 },
     { word: 'home', start: 2122.47, end: 2122.75 },
     { word: 'this', start: 2122.75, end: 2123.01 },
@@ -6306,7 +6270,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I', start: 2146.29, end: 2146.49 },
     { word: 'can', start: 2146.49, end: 2146.57 },
     { word: 'find', start: 2146.57, end: 2146.85 },
-    { word: 'them.”', start: 2146.85, end: 2147.99 },
+    { word: 'them.”', start: 2146.85, end: 2147.99 }
+  ],
+  [
     { word: 'As', start: 2147.99, end: 2148.27 },
     { word: 'she', start: 2148.27, end: 2148.39 },
     { word: 'said', start: 2148.39, end: 2148.59 },
@@ -6369,9 +6335,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 2165.29, end: 2165.49 },
     { word: 'fan', start: 2165.49, end: 2165.71 },
     { word: 'and', start: 2165.71, end: 2165.91 },
-    { word: 'gloves.', start: 2165.91, end: 2166.19 }
-  ],
-  [
+    { word: 'gloves.', start: 2165.91, end: 2166.19 },
     { word: '“How', paragraphStart: true, start: 2166.19, end: 2167.07 },
     { word: 'queer', start: 2167.07, end: 2167.45 },
     { word: 'it', start: 2167.45, end: 2167.59 },
@@ -6526,9 +6490,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'stood', start: 2213.59, end: 2213.83 },
     { word: 'near', start: 2213.83, end: 2214.11 },
     { word: 'the', start: 2214.11, end: 2214.31 },
-    { word: 'looking-glass.', start: 2214.31, end: 2215.01 }
-  ],
-  [
+    { word: 'looking-glass.', start: 2214.31, end: 2215.01 },
     { word: 'There', start: 2215.61, end: 2215.73 },
     { word: 'was', start: 2215.73, end: 2215.83 },
     { word: 'no', start: 2215.83, end: 2216.07 },
@@ -6550,7 +6512,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'it', start: 2221.37, end: 2221.73 },
     { word: 'to', start: 2221.73, end: 2221.81 },
     { word: 'her', start: 2221.81, end: 2222.07 },
-    { word: 'lips.', start: 2222.07, end: 2222.35 },
+    { word: 'lips.', start: 2222.07, end: 2222.35 }
+  ],
+  [
     { word: '“I', start: 2222.35, end: 2222.81 },
     { word: 'know', start: 2222.81, end: 2223.03 },
     { word: 'something', start: 2223.03, end: 2223.47 },
@@ -6669,9 +6633,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'drunk', start: 2258.75, end: 2259.23 },
     { word: 'quite', start: 2259.23, end: 2259.55 },
     { word: 'so', start: 2259.55, end: 2259.85 },
-    { word: 'much!”', start: 2259.85, end: 2261.27 }
-  ],
-  [
+    { word: 'much!”', start: 2259.85, end: 2261.27 },
     { word: 'Alas!', paragraphStart: true, start: 2261.27, end: 2261.75 },
     { word: 'it', start: 2261.75, end: 2261.89 },
     { word: 'was', start: 2261.89, end: 2262.05 },
@@ -6768,7 +6730,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'will', start: 2289.11, end: 2289.35 },
     { word: 'become', start: 2289.35, end: 2289.73 },
     { word: 'of', start: 2289.73, end: 2290.01 },
-    { word: 'me?”', start: 2290.01, end: 2291.07 },
+    { word: 'me?”', start: 2290.01, end: 2291.07 }
+  ],
+  [
     { word: 'Luckily', paragraphStart: true, start: 2291.07, end: 2291.55 },
     { word: 'for', start: 2291.55, end: 2291.95 },
     { word: 'Alice,', start: 2291.95, end: 2292.23 },
@@ -6815,9 +6779,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'wonder', start: 2306.09, end: 2306.37 },
     { word: 'she', start: 2306.37, end: 2306.61 },
     { word: 'felt', start: 2306.61, end: 2306.91 },
-    { word: 'unhappy.', start: 2306.91, end: 2307.35 }
-  ],
-  [
+    { word: 'unhappy.', start: 2306.91, end: 2307.35 },
     { word: '“It', paragraphStart: true, start: 2308.07, end: 2308.23 },
     { word: 'was', start: 2308.23, end: 2308.43 },
     { word: 'much', start: 2308.79, end: 2309.03 },
@@ -6971,9 +6933,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I', start: 2357.13, end: 2357.21 },
     { word: 'shouldn’t', start: 2357.21, end: 2357.45 },
     { word: 'like', start: 2357.45, end: 2357.69 },
-    { word: 'that!”', start: 2357.69, end: 2358.03 }
-  ],
-  [
+    { word: 'that!”', start: 2357.69, end: 2358.03 },
     { word: '“Oh,', paragraphStart: true, start: 2358.75, end: 2359.23 },
     { word: 'you', start: 2359.23, end: 2359.55 },
     { word: 'foolish', start: 2359.55, end: 2359.95 },
@@ -7001,7 +6961,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'all', start: 2366.69, end: 2366.87 },
     { word: 'for', start: 2366.87, end: 2367.13 },
     { word: 'any', start: 2367.13, end: 2367.39 },
-    { word: 'lesson-books!”', start: 2367.39, end: 2368.83 },
+    { word: 'lesson-books!”', start: 2367.39, end: 2368.83 }
+  ],
+  [
     { word: 'And', paragraphStart: true, start: 2368.83, end: 2369.35 },
     { word: 'so', start: 2369.35, end: 2369.61 },
     { word: 'she', start: 2369.61, end: 2369.79 },
@@ -7102,9 +7064,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'be', start: 2399.15, end: 2399.23 },
     { word: 'afraid', start: 2399.23, end: 2399.51 },
     { word: 'of', start: 2399.51, end: 2399.69 },
-    { word: 'it.', start: 2399.69, end: 2399.95 }
-  ],
-  [
+    { word: 'it.', start: 2399.69, end: 2399.95 },
     { word: 'Presently', paragraphStart: true, start: 2400.37, end: 2400.65 },
     { word: 'the', start: 2400.65, end: 2400.99 },
     { word: 'Rabbit', start: 2400.99, end: 2401.21 },
@@ -7403,9 +7363,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'sounds', start: 2494.99, end: 2495.37 },
     { word: 'of', start: 2495.37, end: 2495.55 },
     { word: 'broken', start: 2495.55, end: 2495.81 },
-    { word: 'glass.', start: 2495.81, end: 2496.73 }
-  ],
-  [
+    { word: 'glass.', start: 2495.81, end: 2496.73 },
     { word: '“What', start: 2496.73, end: 2497.11 },
     { word: 'a', start: 2497.11, end: 2497.25 },
     { word: 'number', start: 2497.25, end: 2497.49 },
@@ -7492,7 +7450,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Bill’s', start: 2520.97, end: 2521.25 },
     { word: 'got', start: 2521.25, end: 2521.33 },
     { word: 'the', start: 2521.33, end: 2521.49 },
-    { word: 'other—Bill!', start: 2521.49, end: 2522.35 },
+    { word: 'other—Bill!', start: 2521.49, end: 2522.35 }
+  ],
+  [
     { word: 'fetch', start: 2522.61, end: 2522.71 },
     { word: 'it' },
     { word: 'here,' },
@@ -7553,9 +7513,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 2543.31, end: 2543.51 },
     { word: 'chimney?—Nay,' },
     { word: 'I', start: 2544.61, end: 2544.67 },
-    { word: 'shan’t!', start: 2544.67, end: 2545.07 }
-  ],
-  [
+    { word: 'shan’t!', start: 2544.67, end: 2545.07 },
     { word: 'You', start: 2545.13, end: 2545.23 },
     { word: 'do', start: 2545.23, end: 2545.39 },
     { word: 'it!—That', start: 2545.39, end: 2546.05 },
@@ -7703,9 +7661,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'you', start: 2591.37, end: 2591.61 },
     { word: 'by', start: 2591.61, end: 2591.71 },
     { word: 'the', start: 2591.71, end: 2591.85 },
-    { word: 'hedge!”' }
-  ],
-  [
+    { word: 'hedge!”' },
     { word: 'then', start: 2592.69, end: 2593.11 },
     { word: 'silence,', start: 2593.11, end: 2593.41 },
     { word: 'and', start: 2594.09, end: 2594.19 },
@@ -7732,7 +7688,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'us', start: 2601.51, end: 2601.67 },
     { word: 'all', start: 2601.67, end: 2601.85 },
     { word: 'about', start: 2601.85, end: 2601.97 },
-    { word: 'it!”', start: 2601.97, end: 2602.37 },
+    { word: 'it!”', start: 2601.97, end: 2602.37 }
+  ],
+  [
     { word: 'Last', paragraphStart: true, start: 2602.81, end: 2603.23 },
     { word: 'came', start: 2603.23, end: 2603.55 },
     { word: 'a', start: 2603.55, end: 2603.95 },
@@ -7864,9 +7822,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'do,', start: 2650.83, end: 2651.05 },
     { word: 'to', start: 2651.05, end: 2651.25 },
     { word: 'begin', start: 2651.25, end: 2651.43 },
-    { word: 'with.”', start: 2651.43, end: 2651.77 }
-  ],
-  [
+    { word: 'with.”', start: 2651.43, end: 2651.77 },
     { word: '“A', paragraphStart: true, start: 2652.47, end: 2652.63 },
     { word: 'barrowful', start: 2652.63, end: 2653.09 },
     { word: 'of', start: 2653.09, end: 2653.41 },
@@ -7988,7 +7944,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'me', start: 2687.87, end: 2688.21 },
     { word: 'smaller,', start: 2688.21, end: 2688.37 },
     { word: 'I', start: 2688.53, end: 2688.61 },
-    { word: 'suppose.”', start: 2688.61, end: 2689.69 },
+    { word: 'suppose.”', start: 2688.61, end: 2689.69 }
+  ],
+  [
     { word: 'So', paragraphStart: true, start: 2689.69, end: 2690.19 },
     { word: 'she', start: 2690.19, end: 2690.39 },
     { word: 'swallowed', start: 2690.39, end: 2690.71 },
@@ -8005,9 +7963,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'she', start: 2693.89, end: 2694.01 },
     { word: 'began', start: 2694.01, end: 2694.31 },
     { word: 'shrinking', start: 2694.31, end: 2694.81 },
-    { word: 'directly.', start: 2694.81, end: 2695.51 }
-  ],
-  [
+    { word: 'directly.', start: 2694.81, end: 2695.51 },
     { word: 'As' },
     { word: 'soon', start: 2696.19, end: 2696.35 },
     { word: 'as', start: 2696.35, end: 2696.55 },
@@ -8137,9 +8093,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'be', start: 2730.09, end: 2730.31 },
     { word: 'the', start: 2730.31, end: 2730.37 },
     { word: 'best', start: 2730.37, end: 2730.63 },
-    { word: 'plan.”', start: 2730.63, end: 2730.99 }
-  ],
-  [
+    { word: 'plan.”', start: 2730.63, end: 2730.99 },
     { word: 'It', paragraphStart: true, start: 2731.67, end: 2732.03 },
     { word: 'sounded', start: 2732.03, end: 2732.33 },
     { word: 'an', start: 2732.33, end: 2732.59 },
@@ -8219,7 +8173,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'her.', start: 2756.79, end: 2757.15 },
     { word: '“Poor', start: 2757.79, end: 2758.05 },
     { word: 'little', start: 2758.05, end: 2758.47 },
-    { word: 'thing!”', start: 2758.47, end: 2759.07 },
+    { word: 'thing!”', start: 2758.47, end: 2759.07 }
+  ],
+  [
     { word: 'said', start: 2759.07, end: 2759.43 },
     { word: 'Alice,', start: 2759.43, end: 2759.79 },
     { word: 'in', start: 2760.07, end: 2760.23 },
@@ -8267,9 +8223,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'of', start: 2771.51, end: 2771.75 },
     { word: 'all', start: 2771.75, end: 2771.97 },
     { word: 'her', start: 2771.97, end: 2772.11 },
-    { word: 'coaxing.', start: 2772.11, end: 2772.63 }
-  ],
-  [
+    { word: 'coaxing.', start: 2772.11, end: 2772.63 },
     { word: 'Hardly', paragraphStart: true, start: 2773.33, end: 2773.65 },
     { word: 'knowing', start: 2773.65, end: 2773.87 },
     { word: 'what', start: 2773.87, end: 2774.17 },
@@ -8414,9 +8368,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'each', start: 2811.61, end: 2811.93 },
     { word: 'time', start: 2811.93, end: 2812.29 },
     { word: 'and', start: 2812.69, end: 2812.83 },
-    { word: 'a', start: 2812.83, end: 2812.91 }
-  ],
-  [
+    { word: 'a', start: 2812.83, end: 2812.91 },
     { word: 'long', start: 2812.91, end: 2813.03 },
     { word: 'way', start: 2813.03, end: 2813.25 },
     { word: 'back,', start: 2813.25, end: 2813.57 },
@@ -8450,7 +8402,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'great', start: 2821.83, end: 2821.95 },
     { word: 'eyes', start: 2821.95, end: 2822.41 },
     { word: 'half', start: 2822.41, end: 2822.77 },
-    { word: 'shut.', start: 2822.77, end: 2822.93 },
+    { word: 'shut.', start: 2822.77, end: 2822.93 }
+  ],
+  [
     { word: 'This', paragraphStart: true, start: 2823.53, end: 2823.97 },
     { word: 'seemed', start: 2823.97, end: 2824.55 },
     { word: 'to', start: 2824.55, end: 2824.71 },
@@ -8573,9 +8527,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'great', start: 2863.13, end: 2863.35 },
     { word: 'question', start: 2863.35, end: 2863.83 },
     { word: 'is,', start: 2863.83, end: 2864.23 },
-    { word: 'what?”', start: 2864.23, end: 2865.55 }
-  ],
-  [
+    { word: 'what?”', start: 2864.23, end: 2865.55 },
     { word: 'The', paragraphStart: true, start: 2865.55, end: 2865.85 },
     { word: 'great', start: 2865.85, end: 2866.27 },
     { word: 'question', start: 2866.27, end: 2866.63 },
@@ -8864,9 +8816,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'day', start: 2966.65, end: 2966.97 },
     { word: 'is', start: 2966.97, end: 2967.31 },
     { word: 'very', start: 2967.31, end: 2967.57 },
-    { word: 'confusing.”', start: 2967.57, end: 2968.75 }
-  ],
-  [
+    { word: 'confusing.”', start: 2967.57, end: 2968.75 },
     { word: '“It', paragraphStart: true, start: 2968.75, end: 2969.07 },
     { word: 'isn’t,”', start: 2969.07, end: 2970.17 },
     { word: 'said', start: 2970.17, end: 2970.27 },
@@ -8946,7 +8896,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'contemptuously.', start: 2996.13, end: 2997.01 },
     { word: '“Who', start: 2997.57, end: 2997.83 },
     { word: 'are', start: 2997.83, end: 2998.41 },
-    { word: 'you?”', start: 2998.41, end: 2999.05 },
+    { word: 'you?”', start: 2998.41, end: 2999.05 }
+  ],
+  [
     { word: 'Which', paragraphStart: true, start: 2999.57, end: 2999.95 },
     { word: 'brought', start: 2999.95, end: 3000.21 },
     { word: 'them', start: 3000.21, end: 3000.57 },
@@ -9026,9 +8978,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'mind,', start: 3025.43, end: 3025.77 },
     { word: 'she', start: 3026.01, end: 3026.15 },
     { word: 'turned', start: 3026.15, end: 3026.37 },
-    { word: 'away.', start: 3026.37, end: 3026.79 }
-  ],
-  [
+    { word: 'away.', start: 3026.37, end: 3026.79 },
     { word: '“Come', paragraphStart: true, start: 3027.49, end: 3027.65 },
     { word: 'back!”', start: 3027.65, end: 3028.05 },
     { word: 'the', start: 3028.05, end: 3028.29 },
@@ -9162,9 +9112,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'things?”', start: 3075.21, end: 3076.03 },
     { word: 'said', start: 3076.57, end: 3076.71 },
     { word: 'the', start: 3076.71, end: 3076.97 },
-    { word: 'Caterpillar.', start: 3076.97, end: 3077.41 }
-  ],
-  [
+    { word: 'Caterpillar.', start: 3076.97, end: 3077.41 },
     { word: '“Well,', paragraphStart: true, start: 3077.41, end: 3078.23 },
     { word: 'I’ve', start: 3078.45, end: 3078.87 },
     { word: 'tried', start: 3078.87, end: 3079.09 },
@@ -9196,7 +9144,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'William,’”', start: 3089.65, end: 3090.25 },
     { word: 'said', start: 3090.25, end: 3090.53 },
     { word: 'the', start: 3090.53, end: 3090.81 },
-    { word: 'Caterpillar.', start: 3090.81, end: 3091.39 },
+    { word: 'Caterpillar.', start: 3090.81, end: 3091.39 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 3092.37, end: 3092.75 },
     { word: 'folded', start: 3092.75, end: 3093.07 },
     { word: 'her', start: 3093.07, end: 3093.39 },
@@ -9311,9 +9261,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'shook', start: 3134.49, end: 3134.69 },
     { word: 'his', start: 3134.69, end: 3134.99 },
     { word: 'grey', start: 3134.99, end: 3135.13 },
-    { word: 'locks,', start: 3135.13, end: 3135.55 }
-  ],
-  [
+    { word: 'locks,', start: 3135.13, end: 3135.55 },
     { word: '“I', lineStart: true, start: 3135.93, end: 3136.19 },
     { word: 'kept', start: 3136.19, end: 3136.49 },
     { word: 'all', start: 3136.49, end: 3136.75 },
@@ -9442,7 +9390,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'you', start: 3177.09, end: 3177.45 },
     { word: 'so', start: 3177.45, end: 3177.65 },
     { word: 'awfully', start: 3177.65, end: 3178.21 },
-    { word: 'clever?”', start: 3178.21, end: 3178.67 },
+    { word: 'clever?”', start: 3178.21, end: 3178.67 }
+  ],
+  [
     { word: '“I', lineStart: true, start: 3179.37, end: 3179.59 },
     { word: 'have', start: 3179.59, end: 3179.95 },
     { word: 'answered', start: 3179.95, end: 3180.25 },
@@ -9458,9 +9408,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“don’t', start: 3183.55, end: 3183.77 },
     { word: 'give', start: 3183.77, end: 3184.01 },
     { word: 'yourself', start: 3184.01, end: 3184.33 },
-    { word: 'airs!' }
-  ],
-  [
+    { word: 'airs!' },
     { word: 'Do', lineStart: true, start: 3185.19, end: 3185.41 },
     { word: 'you', start: 3185.41, end: 3185.55 },
     { word: 'think', start: 3185.55, end: 3185.73 },
@@ -9616,9 +9564,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'wretched', start: 3245.65, end: 3246.01 },
     { word: 'height', start: 3246.01, end: 3246.35 },
     { word: 'to', start: 3246.35, end: 3246.65 },
-    { word: 'be.”', start: 3246.65, end: 3246.97 }
-  ],
-  [
+    { word: 'be.”', start: 3246.65, end: 3246.97 },
     { word: '“It', paragraphStart: true, start: 3247.47, end: 3247.79 },
     { word: 'is', start: 3247.79, end: 3248.21 },
     { word: 'a', start: 3248.21, end: 3248.55 },
@@ -9690,7 +9636,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'and', start: 3274.17, end: 3274.61 },
     { word: 'began', start: 3274.61, end: 3274.89 },
     { word: 'smoking', start: 3274.89, end: 3275.31 },
-    { word: 'again.', start: 3275.31, end: 3275.75 },
+    { word: 'again.', start: 3275.31, end: 3275.75 }
+  ],
+  [
     { word: 'This', paragraphStart: true, start: 3276.31, end: 3276.73 },
     { word: 'time', start: 3276.73, end: 3277.09 },
     { word: 'Alice', start: 3277.09, end: 3277.33 },
@@ -9757,9 +9705,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'make', start: 3296.37, end: 3296.67 },
     { word: 'you' },
     { word: 'grow', start: 3296.71, end: 3297.01 },
-    { word: 'shorter.”', start: 3297.01, end: 3297.47 }
-  ],
-  [
+    { word: 'shorter.”', start: 3297.01, end: 3297.47 },
     { word: '“One', paragraphStart: true, start: 3298.47, end: 3298.99 },
     { word: 'side', start: 3298.99, end: 3299.21 },
     { word: 'of', start: 3299.21, end: 3299.47 },
@@ -9892,9 +9838,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'had', start: 3341.49, end: 3341.63 },
     { word: 'struck', start: 3341.63, end: 3341.87 },
     { word: 'her', start: 3341.87, end: 3342.19 },
-    { word: 'foot!', start: 3342.19, end: 3342.45 }
-  ],
-  [
+    { word: 'foot!', start: 3342.19, end: 3342.45 },
     { word: 'She', paragraphStart: true, start: 3343.13, end: 3343.25 },
     { word: 'was', start: 3343.25, end: 3343.41 },
     { word: 'a', start: 3343.41, end: 3343.51 },
@@ -9935,7 +9879,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'of', start: 3351.81, end: 3351.91 },
     { word: 'the', start: 3351.91, end: 3351.99 },
     { word: 'other', start: 3351.99, end: 3352.19 },
-    { word: 'bit.', start: 3352.19, end: 3352.43 },
+    { word: 'bit.', start: 3352.19, end: 3352.43 }
+  ],
+  [
     { word: 'Her', start: 3352.91, end: 3353.09 },
     { word: 'chin', start: 3353.09, end: 3353.27 },
     { word: 'was', start: 3353.27, end: 3353.45 },
@@ -10053,9 +9999,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'lay', start: 3382.79, end: 3382.91 },
     { word: 'far', start: 3382.91, end: 3383.25 },
     { word: 'below', start: 3383.25, end: 3383.49 },
-    { word: 'her.', start: 3383.49, end: 3383.83 }
-  ],
-  [
+    { word: 'her.', start: 3383.49, end: 3383.83 },
     { word: '“What', paragraphStart: true, start: 3384.23, end: 3384.53 },
     { word: 'can', start: 3384.53, end: 3384.89 },
     { word: 'all', start: 3384.89, end: 3385.19 },
@@ -10181,7 +10125,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'tops', start: 3423.43, end: 3423.63 },
     { word: 'of', start: 3423.63, end: 3423.85 },
     { word: 'the', start: 3423.85, end: 3423.93 },
-    { word: 'trees', start: 3423.93, end: 3424.29 },
+    { word: 'trees', start: 3423.93, end: 3424.29 }
+  ],
+  [
     { word: 'under', start: 3424.29, end: 3424.57 },
     { word: 'which', start: 3424.57, end: 3424.93 },
     { word: 'she', start: 3424.93, end: 3425.15 },
@@ -10214,9 +10160,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'violently', start: 3432.31, end: 3432.65 },
     { word: 'with', start: 3432.65, end: 3433.05 },
     { word: 'its', start: 3433.05, end: 3433.25 },
-    { word: 'wings.', start: 3433.25, end: 3433.53 }
-  ],
-  [
+    { word: 'wings.', start: 3433.25, end: 3433.53 },
     { word: '“Serpent!”', paragraphStart: true, start: 3434.61, end: 3435.15 },
     { word: 'screamed', start: 3435.15, end: 3435.51 },
     { word: 'the', start: 3435.51, end: 3435.81 },
@@ -10357,9 +10301,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'sleep', start: 3481.07, end: 3481.17 },
     { word: 'these', start: 3481.17, end: 3481.43 },
     { word: 'three', start: 3481.67, end: 3481.91 },
-    { word: 'weeks!”', start: 3481.91, end: 3482.75 }
-  ],
-  [
+    { word: 'weeks!”', start: 3481.91, end: 3482.75 },
     { word: '“I’m', paragraphStart: true, start: 3482.75, end: 3483.11 },
     { word: 'very', start: 3483.11, end: 3483.27 },
     { word: 'sorry', start: 3483.27, end: 3483.55 },
@@ -10432,7 +10374,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Alice.', start: 3504.99, end: 3505.33 },
     { word: '“I’m', start: 3506.03, end: 3506.21 },
     { word: 'a—I’m', start: 3506.21, end: 3507.11 },
-    { word: 'a—”', start: 3507.11, end: 3507.73 },
+    { word: 'a—”', start: 3507.11, end: 3507.73 }
+  ],
+  [
     { word: '“Well!', paragraphStart: true, start: 3507.73, end: 3507.99 },
     { word: 'What', start: 3508.17, end: 3508.41 },
     { word: 'are', start: 3508.41, end: 3508.63 },
@@ -10503,9 +10447,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'as', start: 3530.67, end: 3531.05 },
     { word: 'that!', start: 3531.05, end: 3531.31 },
     { word: 'No,', start: 3531.63, end: 3532.11 },
-    { word: 'no!', start: 3532.13, end: 3532.41 }
-  ],
-  [
+    { word: 'no!', start: 3532.13, end: 3532.41 },
     { word: 'You’re', start: 3532.41, end: 3532.49 },
     { word: 'a', start: 3532.49, end: 3532.73 },
     { word: 'serpent;', start: 3532.73, end: 3532.95 },
@@ -10658,9 +10600,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'don’t', start: 3576.55, end: 3576.77 },
     { word: 'like', start: 3576.77, end: 3577.03 },
     { word: 'them', start: 3577.03, end: 3577.33 },
-    { word: 'raw.”', start: 3577.33, end: 3578.09 }
-  ],
-  [
+    { word: 'raw.”', start: 3577.33, end: 3578.09 },
     { word: '“Well,', paragraphStart: true, start: 3578.09, end: 3578.43 },
     { word: 'be' },
     { word: 'off,', start: 3578.55, end: 3578.79 },
@@ -10679,7 +10619,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'again', start: 3582.41, end: 3582.73 },
     { word: 'into', start: 3582.73, end: 3582.95 },
     { word: 'its', start: 3582.95, end: 3583.17 },
-    { word: 'nest.', start: 3583.17, end: 3583.55 },
+    { word: 'nest.', start: 3583.17, end: 3583.55 }
+  ],
+  [
     { word: 'Alice', start: 3584.65, end: 3584.95 },
     { word: 'crouched', start: 3584.95, end: 3585.59 },
     { word: 'down', start: 3585.59, end: 3585.95 },
@@ -10806,9 +10748,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'my', start: 3624.35, end: 3624.59 },
     { word: 'plan', start: 3624.59, end: 3624.81 },
     { word: 'done', start: 3624.81, end: 3624.99 },
-    { word: 'now!', start: 3624.99, end: 3625.57 }
-  ],
-  [
+    { word: 'now!', start: 3624.99, end: 3625.57 },
     { word: 'How', start: 3625.71, end: 3625.85 },
     { word: 'puzzling', start: 3625.85, end: 3626.19 },
     { word: 'all', start: 3626.19, end: 3626.53 },
@@ -11074,9 +11014,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'tone,' },
     { word: '“For', start: 3713.14, end: 3713.24 },
     { word: 'the', start: 3713.24, end: 3713.52 },
-    { word: 'Duchess.', start: 3713.52, end: 3714 }
-  ],
-  [
+    { word: 'Duchess.', start: 3713.52, end: 3714 },
     { word: 'An', start: 3714.62, end: 3714.96 },
     { word: 'invitation', start: 3714.96, end: 3715.46 },
     { word: 'from', start: 3715.46, end: 3716.04 },
@@ -11171,7 +11109,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'up', start: 3746.56, end: 3746.72 },
     { word: 'into', start: 3746.72, end: 3746.96 },
     { word: 'the', start: 3746.96, end: 3747.12 },
-    { word: 'sky.', start: 3747.12, end: 3747.48 },
+    { word: 'sky.', start: 3747.12, end: 3747.48 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 3748.18, end: 3748.56 },
     { word: 'went', start: 3748.56, end: 3748.98 },
     { word: 'timidly', start: 3748.98, end: 3749.5 },
@@ -11222,9 +11162,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'could', start: 3762.4, end: 3762.62 },
     { word: 'possibly', start: 3762.62, end: 3763.16 },
     { word: 'hear', start: 3763.16, end: 3763.5 },
-    { word: 'you.”', start: 3763.5, end: 3764 }
-  ],
-  [
+    { word: 'you.”', start: 3763.5, end: 3764 },
     { word: 'And', start: 3764.78, end: 3765.18 },
     { word: 'certainly', start: 3765.18, end: 3765.56 },
     { word: 'there', start: 3765.56, end: 3765.82 },
@@ -11365,9 +11303,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'in?”', start: 3812.64, end: 3813.3 },
     { word: 'she', start: 3813.3, end: 3813.58 },
     { word: 'repeated,', start: 3813.58, end: 3814.1 },
-    { word: 'aloud.', start: 3814.1, end: 3814.64 }
-  ],
-  [
+    { word: 'aloud.', start: 3814.1, end: 3814.64 },
     { word: '“I', paragraphStart: true, start: 3815.28, end: 3815.66 },
     { word: 'shall', start: 3815.66, end: 3816.22 },
     { word: 'sit', start: 3816.22, end: 3816.64 },
@@ -11413,7 +11349,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 3831.08, end: 3831.14 },
     { word: 'trees', start: 3831.14, end: 3831.44 },
     { word: 'behind', start: 3831.44, end: 3831.76 },
-    { word: 'him.', start: 3831.76, end: 3832.26 },
+    { word: 'him.', start: 3831.76, end: 3832.26 }
+  ],
+  [
     { word: '“—or', paragraphStart: true, start: 3832.54, end: 3832.82 },
     { word: 'next', start: 3832.82, end: 3833.26 },
     { word: 'day,', start: 3833.26, end: 3834.04 },
@@ -11519,9 +11457,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'for', start: 3875.14, end: 3875.3 },
     { word: 'days', start: 3875.3, end: 3875.72 },
     { word: 'and', start: 3875.72, end: 3876 },
-    { word: 'days.”', start: 3876, end: 3876.66 }
-  ],
-  [
+    { word: 'days.”', start: 3876, end: 3876.66 },
     { word: '“But', paragraphStart: true, start: 3876.66, end: 3877.6 },
     { word: 'what', start: 3877.6, end: 3877.88 },
     { word: 'am', start: 3877.88, end: 3878.06 },
@@ -11630,7 +11566,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'she', start: 3915.22, end: 3915.38 },
     { word: 'could', start: 3915.38, end: 3915.62 },
     { word: 'for', start: 3915.62, end: 3915.88 },
-    { word: 'sneezing.', start: 3915.88, end: 3916.34 },
+    { word: 'sneezing.', start: 3915.88, end: 3916.34 }
+  ],
+  [
     { word: 'There', paragraphStart: true, start: 3916.92, end: 3917.18 },
     { word: 'was', start: 3917.18, end: 3917.38 },
     { word: 'certainly', start: 3917.38, end: 3917.94 },
@@ -11660,9 +11598,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'without', start: 3925.44, end: 3925.74 },
     { word: 'a', start: 3925.74, end: 3925.92 },
     { word: 'moment’s', start: 3925.92, end: 3926.34 },
-    { word: 'pause.', start: 3926.34, end: 3926.7 }
-  ],
-  [
+    { word: 'pause.', start: 3926.34, end: 3926.7 },
     { word: 'The', start: 3927.14, end: 3927.28 },
     { word: 'only', start: 3927.28, end: 3927.54 },
     { word: 'things', start: 3927.54, end: 3927.84 },
@@ -11800,9 +11736,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'most', start: 3974.5, end: 3974.94 },
     { word: 'of', start: 3974.94, end: 3975.06 },
     { word: '’em' },
-    { word: 'do.”', start: 3975.26, end: 3975.6 }
-  ],
-  [
+    { word: 'do.”', start: 3975.26, end: 3975.6 },
     { word: '“I', paragraphStart: true, start: 3976.12, end: 3976.5 },
     { word: 'don’t', start: 3976.5, end: 3976.86 },
     { word: 'know', start: 3976.86, end: 3977.14 },
@@ -11858,7 +11792,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'other', start: 3995.28, end: 3995.48 },
     { word: 'subject', start: 3995.48, end: 3995.8 },
     { word: 'of', start: 3995.8, end: 3996.12 },
-    { word: 'conversation.', start: 3996.12, end: 3996.66 },
+    { word: 'conversation.', start: 3996.12, end: 3996.66 }
+  ],
+  [
     { word: 'While', start: 3997.3, end: 3997.44 },
     { word: 'she', start: 3997.44, end: 3997.64 },
     { word: 'was', start: 3997.64, end: 3997.76 },
@@ -11939,9 +11875,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'hurt', start: 4020.54, end: 4020.84 },
     { word: 'it', start: 4020.84, end: 4021.08 },
     { word: 'or', start: 4021.08, end: 4021.16 },
-    { word: 'not.', start: 4021.16, end: 4021.5 }
-  ],
-  [
+    { word: 'not.', start: 4021.16, end: 4021.5 },
     { word: '“Oh,', paragraphStart: true, start: 4021.92, end: 4022.32 },
     { word: 'please', start: 4022.48, end: 4022.86 },
     { word: 'mind', start: 4022.86, end: 4023.1 },
@@ -12247,9 +12181,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'CHORUS.', paragraphStart: true, start: 4140.62, end: 4141.26 },
     { word: '“Wow!', paragraphStart: true, start: 4142.02, end: 4142.34 },
     { word: 'wow!', start: 4142.78, end: 4143.1 },
-    { word: 'wow!”', start: 4143.3, end: 4143.86 }
-  ],
-  [
+    { word: 'wow!”', start: 4143.3, end: 4143.86 },
     { word: '“Here!', paragraphStart: true, start: 4144.34, end: 4144.62 },
     { word: 'you', start: 4144.9, end: 4144.98 },
     { word: 'may', start: 4144.98, end: 4145.14 },
@@ -12337,7 +12269,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'a', start: 4169.52, end: 4169.8 },
     { word: 'star-fish,”', start: 4169.8, end: 4170.4 },
     { word: 'thought', start: 4170.84, end: 4171.04 },
-    { word: 'Alice.', start: 4171.04, end: 4171.44 },
+    { word: 'Alice.', start: 4171.04, end: 4171.44 }
+  ],
+  [
     { word: 'The', start: 4172.04, end: 4172.28 },
     { word: 'poor', start: 4172.28, end: 4172.48 },
     { word: 'little', start: 4172.48, end: 4172.68 },
@@ -12380,9 +12314,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'do', start: 4182.74, end: 4183 },
     { word: 'to', start: 4183, end: 4183.28 },
     { word: 'hold', start: 4183.28, end: 4183.5 },
-    { word: 'it.', start: 4183.5, end: 4183.82 }
-  ],
-  [
+    { word: 'it.', start: 4183.5, end: 4183.82 },
     { word: 'As', paragraphStart: true, start: 4184.6, end: 4184.8 },
     { word: 'soon', start: 4184.8, end: 4184.96 },
     { word: 'as', start: 4184.96, end: 4185.12 },
@@ -12518,9 +12450,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 4226.4, end: 4226.5 },
     { word: 'matter', start: 4226.5, end: 4226.7 },
     { word: 'with', start: 4226.7, end: 4226.98 },
-    { word: 'it.', start: 4226.98, end: 4227.22 }
-  ],
-  [
+    { word: 'it.', start: 4226.98, end: 4227.22 },
     { word: 'There', start: 4227.74, end: 4227.86 },
     { word: 'could', start: 4227.86, end: 4228.04 },
     { word: 'be', start: 4228.04, end: 4228.14 },
@@ -12584,7 +12514,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'there' },
     { word: 'were', start: 4246.82, end: 4246.96 },
     { word: 'any', start: 4246.96, end: 4247.2 },
-    { word: 'tears.', start: 4247.2, end: 4247.56 },
+    { word: 'tears.', start: 4247.2, end: 4247.56 }
+  ],
+  [
     { word: 'No,', paragraphStart: true, start: 4248.2, end: 4248.58 },
     { word: 'there', start: 4248.88, end: 4249.08 },
     { word: 'were', start: 4249.08, end: 4249.22 },
@@ -12657,9 +12589,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I', start: 4271.3, end: 4271.44 },
     { word: 'get', start: 4271.44, end: 4271.58 },
     { word: 'it', start: 4271.58, end: 4271.86 },
-    { word: 'home?”', start: 4271.86, end: 4272.24 }
-  ],
-  [
+    { word: 'home?”', start: 4271.86, end: 4272.24 },
     { word: 'when', start: 4272.7, end: 4272.86 },
     { word: 'it', start: 4272.86, end: 4273.12 },
     { word: 'grunted', start: 4273.12, end: 4273.28 },
@@ -12954,9 +12884,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'only', start: 4371.92, end: 4372.2 },
     { word: 'walk', start: 4372.2, end: 4372.74 },
     { word: 'long', start: 4372.74, end: 4373.08 },
-    { word: 'enough.”', start: 4373.08, end: 4373.52 }
-  ],
-  [
+    { word: 'enough.”', start: 4373.08, end: 4373.52 },
     { word: 'Alice', paragraphStart: true, start: 4374.16, end: 4374.4 },
     { word: 'felt', start: 4374.4, end: 4374.88 },
     { word: 'that', start: 4374.88, end: 4375.4 },
@@ -13056,7 +12984,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'wouldn’t', start: 4411.84, end: 4412.06 },
     { word: 'have', start: 4412.06, end: 4412.28 },
     { word: 'come', start: 4412.28, end: 4412.48 },
-    { word: 'here.”', start: 4412.48, end: 4413.58 },
+    { word: 'here.”', start: 4412.48, end: 4413.58 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 4413.58, end: 4414.18 },
     { word: 'didn’t', start: 4414.18, end: 4414.76 },
     { word: 'think', start: 4414.76, end: 4415.2 },
@@ -13094,9 +13024,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'suppose', start: 4425.62, end: 4425.88 },
     { word: 'so,”', start: 4425.88, end: 4426.72 },
     { word: 'said', start: 4426.8, end: 4426.98 },
-    { word: 'Alice.', start: 4426.98, end: 4427.22 }
-  ],
-  [
+    { word: 'Alice.', start: 4426.98, end: 4427.22 },
     { word: '“Well,', paragraphStart: true, start: 4427.78, end: 4428.2 },
     { word: 'then,”', start: 4428.2, end: 4428.64 },
     { word: 'the', start: 4428.84, end: 4429 },
@@ -13244,9 +13172,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'in', start: 4481.3, end: 4481.48 },
     { word: 'a', start: 4481.48, end: 4481.58 },
     { word: 'natural', start: 4481.58, end: 4481.9 },
-    { word: 'way.', start: 4481.9, end: 4482.4 }
-  ],
-  [
+    { word: 'way.', start: 4481.9, end: 4482.4 },
     { word: '“I', paragraphStart: true, start: 4482.4, end: 4483.24 },
     { word: 'thought', start: 4483.24, end: 4483.5 },
     { word: 'it', start: 4483.5, end: 4483.74 },
@@ -13292,7 +13218,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'was', start: 4495.76, end: 4496 },
     { word: 'said', start: 4496, end: 4496.18 },
     { word: 'to', start: 4496.18, end: 4496.4 },
-    { word: 'live.', start: 4496.4, end: 4496.6 },
+    { word: 'live.', start: 4496.4, end: 4496.6 }
+  ],
+  [
     { word: '“I’ve', start: 4497.18, end: 4497.6 },
     { word: 'seen', start: 4497.6, end: 4497.84 },
     { word: 'hatters' },
@@ -13379,9 +13307,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'make', start: 4525.6, end: 4525.84 },
     { word: 'one', start: 4525.84, end: 4526.12 },
     { word: 'quite', start: 4526.12, end: 4526.46 },
-    { word: 'giddy.”' }
-  ],
-  [
+    { word: 'giddy.”' },
     { word: '“All', paragraphStart: true, start: 4527.54, end: 4527.76 },
     { word: 'right,”', start: 4527.76, end: 4528.48 },
     { word: 'said', start: 4528.48, end: 4528.86 },
@@ -13703,9 +13629,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'any', start: 4638.35, end: 4638.79 },
     { word: 'wine,”', start: 4638.79, end: 4639.37 },
     { word: 'she', start: 4639.37, end: 4639.53 },
-    { word: 'remarked.', start: 4639.53, end: 4639.97 }
-  ],
-  [
+    { word: 'remarked.', start: 4639.53, end: 4639.97 },
     { word: '“There', paragraphStart: true, start: 4640.51, end: 4640.99 },
     { word: 'isn’t', start: 4640.99, end: 4641.37 },
     { word: 'any,”', start: 4641.37, end: 4641.89 },
@@ -13800,7 +13724,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'severity;', start: 4672.31, end: 4672.85 },
     { word: '“it’s', start: 4673.37, end: 4673.63 },
     { word: 'very', start: 4673.63, end: 4673.89 },
-    { word: 'rude.”', start: 4673.89, end: 4674.31 },
+    { word: 'rude.”', start: 4673.89, end: 4674.31 }
+  ],
+  [
     { word: 'The', paragraphStart: true, start: 4675.13, end: 4675.33 },
     { word: 'Hatter', start: 4675.33, end: 4675.61 },
     { word: 'opened', start: 4675.61, end: 4676.17 },
@@ -13845,9 +13771,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'that,”', start: 4690.77, end: 4691.29 },
     { word: 'she', start: 4691.29, end: 4691.69 },
     { word: 'added', start: 4691.69, end: 4692.01 },
-    { word: 'aloud.', start: 4692.01, end: 4692.51 }
-  ],
-  [
+    { word: 'aloud.', start: 4692.01, end: 4692.51 },
     { word: '“Do', paragraphStart: true, start: 4692.51, end: 4693.19 },
     { word: 'you', start: 4693.19, end: 4693.79 },
     { word: 'mean', start: 4693.79, end: 4693.99 },
@@ -13989,9 +13913,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'sleep', start: 4737.91, end: 4738.35 },
     { word: 'when', start: 4738.35, end: 4738.73 },
     { word: 'I', start: 4738.73, end: 4738.99 },
-    { word: 'breathe’!”', start: 4738.99, end: 4739.77 }
-  ],
-  [
+    { word: 'breathe’!”', start: 4738.99, end: 4739.77 },
     { word: '“It', paragraphStart: true, start: 4740.29, end: 4740.61 },
     { word: 'is', start: 4740.61, end: 4740.75 },
     { word: 'the', start: 4740.75, end: 4740.99 },
@@ -14077,7 +13999,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'it', start: 4768.87, end: 4769.25 },
     { word: 'to', start: 4769.25, end: 4769.35 },
     { word: 'his', start: 4769.35, end: 4769.57 },
-    { word: 'ear.', start: 4769.57, end: 4769.85 },
+    { word: 'ear.', start: 4769.57, end: 4769.85 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 4770.61, end: 4770.85 },
     { word: 'considered', start: 4770.85, end: 4771.33 },
     { word: 'a', start: 4771.33, end: 4771.59 },
@@ -14140,9 +14064,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'in', start: 4793.11, end: 4793.23 },
     { word: 'with', start: 4793.23, end: 4793.45 },
     { word: 'the', start: 4793.45, end: 4793.63 },
-    { word: 'bread-knife.”', start: 4793.63, end: 4794.89 }
-  ],
-  [
+    { word: 'bread-knife.”', start: 4793.63, end: 4794.89 },
     { word: 'The', paragraphStart: true, start: 4794.89, end: 4795.09 },
     { word: 'March', start: 4795.09, end: 4795.39 },
     { word: 'Hare' },
@@ -14297,9 +14219,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'politely', start: 4846.91, end: 4847.17 },
     { word: 'as', start: 4847.17, end: 4847.57 },
     { word: 'she', start: 4847.57, end: 4847.67 },
-    { word: 'could.', start: 4847.67, end: 4848.05 }
-  ],
-  [
+    { word: 'could.', start: 4847.67, end: 4848.05 },
     { word: '“The', paragraphStart: true, start: 4848.65, end: 4848.79 },
     { word: 'Dormouse' },
     { word: 'is', start: 4849.17, end: 4849.37 },
@@ -14341,7 +14261,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'going', start: 4862.29, end: 4862.45 },
     { word: 'to', start: 4862.45, end: 4862.65 },
     { word: 'remark', start: 4862.65, end: 4862.93 },
-    { word: 'myself.”', start: 4862.93, end: 4863.85 },
+    { word: 'myself.”', start: 4862.93, end: 4863.85 }
+  ],
+  [
     { word: '“Have', paragraphStart: true, start: 4864.61, end: 4864.91 },
     { word: 'you', start: 4864.91, end: 4865.07 },
     { word: 'guessed', start: 4865.07, end: 4865.27 },
@@ -14451,9 +14373,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'even', start: 4905.73, end: 4906.01 },
     { word: 'spoke', start: 4906.01, end: 4906.29 },
     { word: 'to', start: 4906.29, end: 4906.55 },
-    { word: 'Time!”', start: 4906.55, end: 4906.85 }
-  ],
-  [
+    { word: 'Time!”', start: 4906.55, end: 4906.85 },
     { word: '“Perhaps', paragraphStart: true, start: 4907.45, end: 4907.97 },
     { word: 'not,”', start: 4907.97, end: 4908.53 },
     { word: 'Alice', start: 4908.91, end: 4909.11 },
@@ -14589,7 +14509,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'long', start: 4952.89, end: 4953.01 },
     { word: 'as', start: 4953.01, end: 4953.19 },
     { word: 'you', start: 4953.19, end: 4953.27 },
-    { word: 'liked.”', start: 4953.27, end: 4953.63 },
+    { word: 'liked.”', start: 4953.27, end: 4953.63 }
+  ],
+  [
     { word: '“Is', paragraphStart: true, start: 4954.15, end: 4954.41 },
     { word: 'that', start: 4954.41, end: 4954.65 },
     { word: 'the', start: 4954.65, end: 4954.83 },
@@ -14597,9 +14519,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'you', start: 4954.97, end: 4955.25 },
     { word: 'manage?”', start: 4955.25, end: 4955.97 },
     { word: 'Alice', start: 4955.97, end: 4956.25 },
-    { word: 'asked.', start: 4956.25, end: 4956.73 }
-  ],
-  [
+    { word: 'asked.', start: 4956.25, end: 4956.73 },
     { word: 'The', paragraphStart: true, start: 4957.39, end: 4957.59 },
     { word: 'Hatter', start: 4957.59, end: 4957.83 },
     { word: 'shook', start: 4957.83, end: 4958.09 },
@@ -14748,9 +14668,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Off', start: 5010.91, end: 5011.03 },
     { word: 'with', start: 5011.03, end: 5011.25 },
     { word: 'his', start: 5011.25, end: 5011.41 },
-    { word: 'head!’”', start: 5011.41, end: 5011.69 }
-  ],
-  [
+    { word: 'head!’”', start: 5011.41, end: 5011.69 },
     { word: '“How', paragraphStart: true, start: 5011.69, end: 5012.33 },
     { word: 'dreadfully' },
     { word: 'savage!”', start: 5012.77, end: 5013.27 },
@@ -14841,7 +14759,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'things', start: 5043.23, end: 5043.57 },
     { word: 'get', start: 5043.57, end: 5043.89 },
     { word: 'used', start: 5043.89, end: 5044.29 },
-    { word: 'up.”', start: 5044.29, end: 5044.65 },
+    { word: 'up.”', start: 5044.29, end: 5044.65 }
+  ],
+  [
     { word: '“But', paragraphStart: true, start: 5044.81, end: 5045.11 },
     { word: 'what', start: 5045.11, end: 5045.37 },
     { word: 'happens', start: 5045.37, end: 5045.61 },
@@ -14892,9 +14812,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'alarmed', start: 5061.73, end: 5062.25 },
     { word: 'at', start: 5062.25, end: 5062.49 },
     { word: 'the', start: 5062.49, end: 5062.59 },
-    { word: 'proposal.', start: 5062.59, end: 5063.11 }
-  ],
-  [
+    { word: 'proposal.', start: 5062.59, end: 5063.11 },
     { word: '“Then', paragraphStart: true, start: 5063.87, end: 5064.03 },
     { word: 'the', start: 5064.03, end: 5064.23 },
     { word: 'Dormouse', start: 5064.23, end: 5064.61 },
@@ -15045,9 +14963,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“they’d', start: 5116.11, end: 5116.39 },
     { word: 'have', start: 5116.39, end: 5116.41 },
     { word: 'been', start: 5116.41, end: 5116.65 },
-    { word: 'ill.”', start: 5116.65, end: 5117.09 }
-  ],
-  [
+    { word: 'ill.”', start: 5116.65, end: 5117.09 },
     { word: '“So', paragraphStart: true, start: 5117.51, end: 5117.81 },
     { word: 'they', start: 5117.81, end: 5118.03 },
     { word: 'were,”', start: 5118.03, end: 5118.35 },
@@ -15092,7 +15008,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'bottom', start: 5131.93, end: 5132.23 },
     { word: 'of', start: 5132.23, end: 5132.43 },
     { word: 'a', start: 5132.43, end: 5132.57 },
-    { word: 'well?”', start: 5132.57, end: 5132.85 },
+    { word: 'well?”', start: 5132.57, end: 5132.85 }
+  ],
+  [
     { word: '“Take', paragraphStart: true, start: 5133.43, end: 5133.75 },
     { word: 'some', start: 5133.75, end: 5134.11 },
     { word: 'more', start: 5134.11, end: 5134.53 },
@@ -15190,9 +15108,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'bottom', start: 5171.11, end: 5171.39 },
     { word: 'of', start: 5171.39, end: 5171.65 },
     { word: 'a', start: 5171.65, end: 5171.77 },
-    { word: 'well?”', start: 5171.77, end: 5172.03 }
-  ],
-  [
+    { word: 'well?”', start: 5171.77, end: 5172.03 },
     { word: 'The', paragraphStart: true, start: 5172.45, end: 5172.75 },
     { word: 'Dormouse' },
     { word: 'again', start: 5173.07, end: 5173.69 },
@@ -15467,9 +15383,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 5265.73, end: 5265.93 },
     { word: 'Dormouse;' },
     { word: '“—well', start: 5266.75, end: 5267.25 },
-    { word: 'in.”', start: 5267.25, end: 5268.23 }
-  ],
-  [
+    { word: 'in.”', start: 5267.25, end: 5268.23 },
     { word: 'This', paragraphStart: true, start: 5268.23, end: 5268.59 },
     { word: 'answer', start: 5268.59, end: 5268.81 },
     { word: 'so', start: 5268.81, end: 5269.09 },
@@ -15605,7 +15519,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'drawing', start: 5316.65, end: 5316.87 },
     { word: 'of', start: 5316.87, end: 5317.13 },
     { word: 'a', start: 5317.13, end: 5317.23 },
-    { word: 'muchness?”' },
+    { word: 'muchness?”' }
+  ],
+  [
     { word: '“Really,', paragraphStart: true, start: 5318.23, end: 5318.71 },
     { word: 'now', start: 5319.09, end: 5319.39 },
     { word: 'you', start: 5319.39, end: 5319.53 },
@@ -15618,9 +15534,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'confused,', start: 5321.65, end: 5322.11 },
     { word: '“I', start: 5322.69, end: 5322.87 },
     { word: 'don’t', start: 5322.87, end: 5323.19 },
-    { word: 'think—”', start: 5323.19, end: 5324.25 }
-  ],
-  [
+    { word: 'think—”', start: 5323.19, end: 5324.25 },
     { word: '“Then', paragraphStart: true },
     { word: 'you', start: 5324.25, end: 5324.47 },
     { word: 'shouldn’t', start: 5324.47, end: 5324.87 },
@@ -15766,9 +15680,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'And', start: 5370.37, end: 5370.55 },
     { word: 'in', start: 5370.55, end: 5370.99 },
     { word: 'she', start: 5370.99, end: 5371.11 },
-    { word: 'went.', start: 5371.11, end: 5371.39 }
-  ],
-  [
+    { word: 'went.', start: 5371.11, end: 5371.39 },
     { word: 'Once', paragraphStart: true, start: 5372.35, end: 5372.65 },
     { word: 'more', start: 5372.65, end: 5373.09 },
     { word: 'she', start: 5373.29, end: 5373.51 },
@@ -16017,9 +15929,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'tulip-roots', start: 5456.72, end: 5457.66 },
     { word: 'instead', start: 5457.66, end: 5458.04 },
     { word: 'of', start: 5458.04, end: 5458.22 },
-    { word: 'onions.”', start: 5458.22, end: 5458.6 }
-  ],
-  [
+    { word: 'onions.”', start: 5458.22, end: 5458.6 },
     { word: 'Seven', paragraphStart: true, start: 5459.42, end: 5459.68 },
     { word: 'flung', start: 5459.68, end: 5459.96 },
     { word: 'down', start: 5459.96, end: 5460.24 },
@@ -16114,7 +16024,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'we', start: 5492.22, end: 5492.38 },
     { word: 'put', start: 5492.38, end: 5492.54 },
     { word: 'a', start: 5492.54, end: 5492.74 },
-    { word: 'white', start: 5492.74, end: 5492.94 },
+    { word: 'white', start: 5492.74, end: 5492.94 }
+  ],
+  [
     { word: 'one', start: 5492.94, end: 5493.14 },
     { word: 'in', start: 5493.14, end: 5493.32 },
     { word: 'by' },
@@ -16165,9 +16077,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'called', start: 5506.46, end: 5506.52 },
     { word: 'out', start: 5506.52, end: 5507 },
     { word: '“The', start: 5507, end: 5507.22 },
-    { word: 'Queen!', start: 5507.22, end: 5507.48 }
-  ],
-  [
+    { word: 'Queen!', start: 5507.22, end: 5507.48 },
     { word: 'The', start: 5507.76, end: 5507.96 },
     { word: 'Queen!”', start: 5507.96, end: 5508.26 },
     { word: 'and', start: 5508.84, end: 5509.12 },
@@ -16307,9 +16217,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'by', start: 5557.94, end: 5558.3 },
     { word: 'without', start: 5558.3, end: 5558.58 },
     { word: 'noticing', start: 5558.58, end: 5559.06 },
-    { word: 'her.', start: 5559.06, end: 5559.46 }
-  ],
-  [
+    { word: 'her.', start: 5559.06, end: 5559.46 },
     { word: 'Then', start: 5560.12, end: 5560.28 },
     { word: 'followed', start: 5560.28, end: 5560.66 },
     { word: 'the', start: 5560.66, end: 5560.94 },
@@ -16338,7 +16246,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'AND', start: 5569.48, end: 5569.98 },
     { word: 'QUEEN', start: 5569.98, end: 5570.22 },
     { word: 'OF', start: 5570.22, end: 5570.54 },
-    { word: 'HEARTS.', start: 5570.54, end: 5571.04 },
+    { word: 'HEARTS.', start: 5570.54, end: 5571.04 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 5572.04, end: 5572.32 },
     { word: 'was', start: 5572.32, end: 5572.54 },
     { word: 'rather', start: 5572.54, end: 5572.84 },
@@ -16463,9 +16373,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“What’s', start: 5611.6, end: 5611.96 },
     { word: 'your', start: 5611.96, end: 5612.1 },
     { word: 'name,', start: 5612.1, end: 5612.52 },
-    { word: 'child?”', start: 5612.54, end: 5613.12 }
-  ],
-  [
+    { word: 'child?”', start: 5612.54, end: 5613.12 },
     { word: '“My', paragraphStart: true, start: 5613.12, end: 5613.52 },
     { word: 'name', start: 5613.52, end: 5613.78 },
     { word: 'is', start: 5613.78, end: 5614.08 },
@@ -16598,7 +16506,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'with', start: 5652.96, end: 5653.26 },
     { word: 'her', start: 5653.26, end: 5653.5 },
     { word: 'head!', start: 5653.5, end: 5653.82 },
-    { word: 'Off—”', start: 5654.12, end: 5654.48 },
+    { word: 'Off—”', start: 5654.12, end: 5654.48 }
+  ],
+  [
     { word: '“Nonsense!”', paragraphStart: true, start: 5654.48, end: 5655.16 },
     { word: 'said', start: 5655.54, end: 5655.9 },
     { word: 'Alice,', start: 5655.9, end: 5656.08 },
@@ -16610,9 +16520,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 5658.42, end: 5658.58 },
     { word: 'Queen', start: 5658.58, end: 5658.74 },
     { word: 'was', start: 5658.74, end: 5658.98 },
-    { word: 'silent.', start: 5658.98, end: 5659.28 }
-  ],
-  [
+    { word: 'silent.', start: 5658.98, end: 5659.28 },
     { word: 'The', paragraphStart: true, start: 5659.86, end: 5660.02 },
     { word: 'King', start: 5660.02, end: 5660.26 },
     { word: 'laid', start: 5660.26, end: 5660.5 },
@@ -16772,9 +16680,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 5715.7, end: 5716 },
     { word: 'Alice', start: 5716, end: 5716.14 },
     { word: 'for', start: 5716.14, end: 5716.36 },
-    { word: 'protection.', start: 5716.36, end: 5716.78 }
-  ],
-  [
+    { word: 'protection.', start: 5716.36, end: 5716.78 },
     { word: '“You', paragraphStart: true, start: 5717.3, end: 5717.62 },
     { word: 'shan’t', start: 5717.62, end: 5718 },
     { word: 'be', start: 5718, end: 5718.24 },
@@ -16858,7 +16764,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'evidently', start: 5744.2, end: 5744.58 },
     { word: 'meant', start: 5744.58, end: 5744.96 },
     { word: 'for', start: 5744.96, end: 5745.16 },
-    { word: 'her.', start: 5745.16, end: 5745.56 },
+    { word: 'her.', start: 5745.16, end: 5745.56 }
+  ],
+  [
     { word: '“Yes!”', paragraphStart: true, start: 5745.94, end: 5746.54 },
     { word: 'shouted', start: 5746.54, end: 5746.94 },
     { word: 'Alice.', start: 5746.94, end: 5747.38 },
@@ -16911,9 +16819,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Alice:', start: 5765.26, end: 5765.58 },
     { word: '“—where’s', start: 5765.92, end: 5766.36 },
     { word: 'the', start: 5766.36, end: 5766.5 },
-    { word: 'Duchess?”', start: 5766.5, end: 5767.5 }
-  ],
-  [
+    { word: 'Duchess?”', start: 5766.5, end: 5767.5 },
     { word: '“Hush!', paragraphStart: true, start: 5767.5, end: 5767.86 },
     { word: 'Hush!”', start: 5768, end: 5768.4 },
     { word: 'said', start: 5768.4, end: 5768.66 },
@@ -17060,9 +16966,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'and', start: 5816.28, end: 5816.44 },
     { word: 'the', start: 5816.44, end: 5816.62 },
     { word: 'game', start: 5816.62, end: 5816.78 },
-    { word: 'began.', start: 5816.78, end: 5817.22 }
-  ],
-  [
+    { word: 'began.', start: 5816.78, end: 5817.22 },
     { word: 'Alice', start: 5818.14, end: 5818.4 },
     { word: 'thought', start: 5818.4, end: 5819 },
     { word: 'she', start: 5819, end: 5819.38 },
@@ -17110,7 +17014,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 5833.28, end: 5833.68 },
     { word: 'make', start: 5833.68, end: 5833.86 },
     { word: 'the', start: 5833.86, end: 5834.18 },
-    { word: 'arches.', start: 5834.18, end: 5834.4 },
+    { word: 'arches.', start: 5834.18, end: 5834.4 }
+  ],
+  [
     { word: 'The', paragraphStart: true, start: 5835.18, end: 5835.36 },
     { word: 'chief', start: 5835.36, end: 5835.6 },
     { word: 'difficulty', start: 5835.6, end: 5836.16 },
@@ -17207,9 +17113,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'was', start: 5863.3, end: 5863.44 },
     { word: 'very', start: 5863.44, end: 5863.64 },
     { word: 'provoking', start: 5863.64, end: 5864.18 },
-    { word: 'to', start: 5864.18, end: 5864.44 }
-  ],
-  [
+    { word: 'to', start: 5864.18, end: 5864.44 },
     { word: 'find', start: 5864.44, end: 5864.9 },
     { word: 'that', start: 5864.9, end: 5865.2 },
     { word: 'the', start: 5865.2, end: 5865.4 },
@@ -17329,9 +17233,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'once', start: 5900.88, end: 5901.32 },
     { word: 'in', start: 5901.32, end: 5901.48 },
     { word: 'a', start: 5901.48, end: 5901.5 },
-    { word: 'minute.', start: 5901.5, end: 5901.82 }
-  ],
-  [
+    { word: 'minute.', start: 5901.5, end: 5901.82 },
     { word: 'Alice', paragraphStart: true, start: 5902.88, end: 5903.1 },
     { word: 'began', start: 5903.1, end: 5903.4 },
     { word: 'to', start: 5903.4, end: 5903.7 },
@@ -17369,7 +17271,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'would', start: 5913.1, end: 5913.34 },
     { word: 'become', start: 5913.34, end: 5913.7 },
     { word: 'of', start: 5913.7, end: 5913.98 },
-    { word: 'me?', start: 5913.98, end: 5914.24 },
+    { word: 'me?', start: 5913.98, end: 5914.24 }
+  ],
+  [
     { word: 'They’re', start: 5914.68, end: 5914.86 },
     { word: 'dreadfully', start: 5914.86, end: 5915.28 },
     { word: 'fond', start: 5915.28, end: 5915.52 },
@@ -17474,9 +17378,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'it', start: 5944.3, end: 5944.54 },
     { word: 'to', start: 5944.54, end: 5944.62 },
     { word: 'speak', start: 5944.62, end: 5944.96 },
-    { word: 'with.', start: 5944.96, end: 5945.3 }
-  ],
-  [
+    { word: 'with.', start: 5944.96, end: 5945.3 },
     { word: 'Alice', paragraphStart: true, start: 5945.7, end: 5945.86 },
     { word: 'waited', start: 5945.86, end: 5946.22 },
     { word: 'till', start: 5946.22, end: 5946.56 },
@@ -17787,9 +17689,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Alice', start: 6043.98, end: 6044.36 },
     { word: 'as', start: 6044.36, end: 6044.64 },
     { word: 'he', start: 6044.64, end: 6044.72 },
-    { word: 'spoke.', start: 6044.72, end: 6045.06 }
-  ],
-  [
+    { word: 'spoke.', start: 6044.72, end: 6045.06 },
     { word: '“A', paragraphStart: true, start: 6045.5, end: 6045.72 },
     { word: 'cat', start: 6045.72, end: 6045.94 },
     { word: 'may', start: 6045.94, end: 6046.2 },
@@ -17876,7 +17776,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'and', start: 6071.8, end: 6071.98 },
     { word: 'he', start: 6071.98, end: 6072.18 },
     { word: 'hurried', start: 6072.18, end: 6072.38 },
-    { word: 'off.', start: 6072.38, end: 6072.84 },
+    { word: 'off.', start: 6072.38, end: 6072.84 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 6073.56, end: 6073.84 },
     { word: 'thought', start: 6073.84, end: 6074.34 },
     { word: 'she', start: 6074.34, end: 6074.72 },
@@ -17959,9 +17861,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'search', start: 6094.28, end: 6094.54 },
     { word: 'of', start: 6094.54, end: 6094.76 },
     { word: 'her', start: 6094.76, end: 6094.94 },
-    { word: 'hedgehog.', start: 6094.94, end: 6095.48 }
-  ],
-  [
+    { word: 'hedgehog.', start: 6094.94, end: 6095.48 },
     { word: 'The', paragraphStart: true },
     { word: 'hedgehog', start: 6096.72, end: 6097.14 },
     { word: 'was', start: 6097.14, end: 6097.3 },
@@ -18089,9 +17989,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'conversation', start: 6131.52, end: 6132 },
     { word: 'with', start: 6132, end: 6132.32 },
     { word: 'her', start: 6132.32, end: 6132.48 },
-    { word: 'friend.', start: 6132.48, end: 6132.82 }
-  ],
-  [
+    { word: 'friend.', start: 6132.48, end: 6132.82 },
     { word: 'When', paragraphStart: true, start: 6133.38, end: 6133.94 },
     { word: 'she', start: 6133.94, end: 6134.18 },
     { word: 'got', start: 6134.18, end: 6134.38 },
@@ -18142,7 +18040,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'and', start: 6147.4, end: 6148.1 },
     { word: 'looked', start: 6148.1, end: 6148.54 },
     { word: 'very', start: 6148.54, end: 6148.94 },
-    { word: 'uncomfortable.', start: 6148.94, end: 6149.42 },
+    { word: 'uncomfortable.', start: 6148.94, end: 6149.42 }
+  ],
+  [
     { word: 'The', paragraphStart: true, start: 6150.48, end: 6150.66 },
     { word: 'moment', start: 6150.66, end: 6150.94 },
     { word: 'Alice', start: 6150.94, end: 6151.28 },
@@ -18227,9 +18127,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'his', start: 6174.32, end: 6174.54 },
     { word: 'time', start: 6174.54, end: 6174.86 },
     { word: 'of', start: 6174.86, end: 6175.08 },
-    { word: 'life.', start: 6175.08, end: 6175.42 }
-  ],
-  [
+    { word: 'life.', start: 6175.08, end: 6175.42 },
     { word: 'The', paragraphStart: true, start: 6175.84, end: 6176.02 },
     { word: 'King’s', start: 6176.02, end: 6176.38 },
     { word: 'argument', start: 6176.38, end: 6176.66 },
@@ -18533,9 +18431,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'about', start: 6285.17, end: 6285.51 },
     { word: 'it,', start: 6285.51, end: 6285.71 },
     { word: 'you', start: 6285.71, end: 6285.79 },
-    { word: 'know—”', start: 6285.79, end: 6286.69 }
-  ],
-  [
+    { word: 'know—”', start: 6285.79, end: 6286.69 },
     { word: 'She', paragraphStart: true, start: 6286.69, end: 6287.01 },
     { word: 'had', start: 6287.01, end: 6287.21 },
     { word: 'quite', start: 6287.21, end: 6287.41 },
@@ -18627,7 +18523,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'side', start: 6316.37, end: 6316.85 },
     { word: 'as', start: 6316.85, end: 6317.21 },
     { word: 'she', start: 6317.21, end: 6317.33 },
-    { word: 'spoke.', start: 6317.33, end: 6317.77 },
+    { word: 'spoke.', start: 6317.33, end: 6317.77 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 6318.79, end: 6319.17 },
     { word: 'did', start: 6319.17, end: 6319.57 },
     { word: 'not', start: 6319.57, end: 6319.83 },
@@ -18684,9 +18582,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'well', start: 6337.91, end: 6338.01 },
     { word: 'as', start: 6338.01, end: 6338.23 },
     { word: 'she', start: 6338.23, end: 6338.37 },
-    { word: 'could.', start: 6338.37, end: 6338.81 }
-  ],
-  [
+    { word: 'could.', start: 6338.37, end: 6338.81 },
     { word: '“The', paragraphStart: true, start: 6339.19, end: 6339.29 },
     { word: 'game’s', start: 6339.29, end: 6339.65 },
     { word: 'going', start: 6339.65, end: 6339.93 },
@@ -18828,9 +18724,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I', start: 6386.25, end: 6386.39 },
     { word: 'try', start: 6386.39, end: 6386.59 },
     { word: 'the', start: 6386.59, end: 6386.79 },
-    { word: 'experiment?”', start: 6386.79, end: 6387.15 }
-  ],
-  [
+    { word: 'experiment?”', start: 6386.79, end: 6387.15 },
     { word: '“He', paragraphStart: true, start: 6387.87, end: 6388.27 },
     { word: 'might', start: 6388.27, end: 6388.81 },
     { word: 'bite,”' },
@@ -18889,7 +18783,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'have', start: 6410.15, end: 6410.37 },
     { word: 'of', start: 6410.37, end: 6410.55 },
     { word: 'putting' },
-    { word: 'things!”', start: 6410.71, end: 6411.11 },
+    { word: 'things!”', start: 6410.71, end: 6411.11 }
+  ],
+  [
     { word: '“It’s', paragraphStart: true, start: 6411.59, end: 6411.93 },
     { word: 'a', start: 6411.93, end: 6411.99 },
     { word: 'mineral,', start: 6411.99, end: 6412.21 },
@@ -18960,9 +18856,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'one,', start: 6433.69, end: 6433.83 },
     { word: 'but', start: 6433.83, end: 6434.01 },
     { word: 'it', start: 6434.01, end: 6434.15 },
-    { word: 'is.”', start: 6434.15, end: 6434.79 }
-  ],
-  [
+    { word: 'is.”', start: 6434.15, end: 6434.79 },
     { word: '“I', paragraphStart: true, start: 6434.79, end: 6434.95 },
     { word: 'quite', start: 6434.95, end: 6435.21 },
     { word: 'agree', start: 6435.21, end: 6435.43 },
@@ -19102,9 +18996,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I’ve', start: 6475.85, end: 6476.15 },
     { word: 'said', start: 6476.15, end: 6476.29 },
     { word: 'as', start: 6476.29, end: 6476.47 },
-    { word: 'yet.”', start: 6476.47, end: 6476.79 }
-  ],
-  [
+    { word: 'yet.”', start: 6476.47, end: 6476.79 },
     { word: '“A', paragraphStart: true, start: 6476.79, end: 6477.35 },
     { word: 'cheap', start: 6477.35, end: 6477.71 },
     { word: 'sort', start: 6477.71, end: 6477.99 },
@@ -19143,7 +19035,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'her', start: 6489.31, end: 6489.49 },
     { word: 'sharp', start: 6489.49, end: 6489.77 },
     { word: 'little', start: 6489.77, end: 6490.09 },
-    { word: 'chin.', start: 6490.09, end: 6490.39 },
+    { word: 'chin.', start: 6490.09, end: 6490.39 }
+  ],
+  [
     { word: '“I’ve', paragraphStart: true, start: 6490.87, end: 6491.29 },
     { word: 'a', start: 6491.29, end: 6491.37 },
     { word: 'right', start: 6491.37, end: 6491.53 },
@@ -19240,9 +19134,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'a', start: 6525.29, end: 6525.67 },
     { word: 'low,', start: 6525.67, end: 6526.11 },
     { word: 'weak', start: 6526.11, end: 6526.35 },
-    { word: 'voice.', start: 6526.35, end: 6526.81 }
-  ],
-  [
+    { word: 'voice.', start: 6526.35, end: 6526.81 },
     { word: '“Now,', paragraphStart: true, start: 6526.81, end: 6527.83 },
     { word: 'I' },
     { word: 'give', start: 6528.19, end: 6528.31 },
@@ -19533,9 +19425,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“You', start: 6624.55, end: 6624.65 },
     { word: 'are', start: 6624.65, end: 6624.97 },
     { word: 'all', start: 6624.97, end: 6625.37 },
-    { word: 'pardoned.”', start: 6625.37, end: 6626.21 }
-  ],
-  [
+    { word: 'pardoned.”', start: 6625.37, end: 6626.21 },
     { word: '“Come,', start: 6626.21, end: 6626.75 },
     { word: 'that’s', start: 6627.05, end: 6627.15 },
     { word: 'a', start: 6627.15, end: 6627.29 },
@@ -19663,7 +19553,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Queen:', start: 6665.47, end: 6665.95 },
     { word: 'so', start: 6666.23, end: 6666.45 },
     { word: 'she', start: 6666.45, end: 6666.63 },
-    { word: 'waited.', start: 6666.63, end: 6666.95 },
+    { word: 'waited.', start: 6666.63, end: 6666.95 }
+  ],
+  [
     { word: 'The', paragraphStart: true, start: 6668.29, end: 6668.51 },
     { word: 'Gryphon', start: 6668.51, end: 6668.91 },
     { word: 'sat', start: 6668.91, end: 6669.19 },
@@ -19696,9 +19588,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'itself,', start: 6677.79, end: 6678.23 },
     { word: 'half', start: 6678.49, end: 6678.65 },
     { word: 'to', start: 6678.65, end: 6678.93 },
-    { word: 'Alice.', start: 6678.93, end: 6679.17 }
-  ],
-  [
+    { word: 'Alice.', start: 6678.93, end: 6679.17 },
     { word: '“What', paragraphStart: true, start: 6679.91, end: 6680.37 },
     { word: 'is', start: 6680.37, end: 6680.71 },
     { word: 'the', start: 6680.71, end: 6680.97 },
@@ -19845,9 +19735,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'tears,', start: 6730.69, end: 6731.11 },
     { word: 'but', start: 6731.41, end: 6731.63 },
     { word: 'said', start: 6731.63, end: 6731.75 },
-    { word: 'nothing.', start: 6731.75, end: 6732.13 }
-  ],
-  [
+    { word: 'nothing.', start: 6731.75, end: 6732.13 },
     { word: '“This', paragraphStart: true, start: 6732.95, end: 6733.13 },
     { word: 'here' },
     { word: 'young', start: 6733.41, end: 6733.75 },
@@ -19919,7 +19807,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'But', start: 6758.95, end: 6759.23 },
     { word: 'she', start: 6759.23, end: 6759.55 },
     { word: 'waited', start: 6759.55, end: 6759.83 },
-    { word: 'patiently.', start: 6759.83, end: 6760.41 },
+    { word: 'patiently.', start: 6759.83, end: 6760.41 }
+  ],
+  [
     { word: '“Once,”', paragraphStart: true },
     { word: 'said', start: 6761.75, end: 6762.81 },
     { word: 'the', start: 6762.81, end: 6763.05 },
@@ -19998,9 +19888,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'still', start: 6790.97, end: 6791.55 },
     { word: 'and', start: 6791.55, end: 6791.71 },
     { word: 'said', start: 6791.71, end: 6791.93 },
-    { word: 'nothing.', start: 6791.93, end: 6792.37 }
-  ],
-  [
+    { word: 'nothing.', start: 6791.93, end: 6792.37 },
     { word: '“When', paragraphStart: true, start: 6793.27, end: 6793.53 },
     { word: 'we', start: 6793.53, end: 6794.09 },
     { word: 'were', start: 6794.09, end: 6794.29 },
@@ -20143,9 +20031,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'you', start: 6844.41, end: 6844.65 },
     { word: 'mayn’t' },
     { word: 'believe', start: 6845.13, end: 6845.51 },
-    { word: 'it—”', start: 6845.51, end: 6846.01 }
-  ],
-  [
+    { word: 'it—”', start: 6845.51, end: 6846.01 },
     { word: '“I', paragraphStart: true, start: 6846.19, end: 6846.41 },
     { word: 'never', start: 6846.41, end: 6846.63 },
     { word: 'said', start: 6846.63, end: 6846.83 },
@@ -20174,7 +20060,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Mock', start: 6855.47, end: 6855.73 },
     { word: 'Turtle', start: 6855.73, end: 6856.09 },
     { word: 'went', start: 6856.09, end: 6856.33 },
-    { word: 'on.', start: 6856.33, end: 6856.75 },
+    { word: 'on.', start: 6856.33, end: 6856.75 }
+  ],
+  [
     { word: '“We', paragraphStart: true, start: 6857.07, end: 6857.27 },
     { word: 'had', start: 6857.27, end: 6857.53 },
     { word: 'the', start: 6857.53, end: 6857.87 },
@@ -20298,9 +20186,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'took', start: 6905.55, end: 6905.87 },
     { word: 'the', start: 6905.87, end: 6906.13 },
     { word: 'regular', start: 6906.13, end: 6906.51 },
-    { word: 'course.”', start: 6906.51, end: 6907.07 }
-  ],
-  [
+    { word: 'course.”', start: 6906.51, end: 6907.07 },
     { word: '“What', paragraphStart: true, start: 6907.37, end: 6907.77 },
     { word: 'was', start: 6907.77, end: 6908.03 },
     { word: 'that?”', start: 6908.03, end: 6908.39 },
@@ -20415,7 +20301,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'had', start: 6958.85, end: 6959.05 },
     { word: 'you', start: 6959.05, end: 6959.21 },
     { word: 'to', start: 6959.21, end: 6959.35 },
-    { word: 'learn?”', start: 6959.35, end: 6959.59 },
+    { word: 'learn?”', start: 6959.35, end: 6959.59 }
+  ],
+  [
     { word: '“Well,', paragraphStart: true, start: 6959.59, end: 6960.49 },
     { word: 'there', start: 6960.49, end: 6960.77 },
     { word: 'was', start: 6960.77, end: 6961.05 },
@@ -20459,9 +20347,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'and', start: 6976.55, end: 6976.59 },
     { word: 'Fainting' },
     { word: 'in' },
-    { word: 'Coils.”', start: 6977.33, end: 6977.71 }
-  ],
-  [
+    { word: 'Coils.”', start: 6977.33, end: 6977.71 },
     { word: '“What', paragraphStart: true, start: 6978.41, end: 6978.89 },
     { word: 'was', start: 6978.89, end: 6979.11 },
     { word: 'that', start: 6979.11, end: 6979.39 },
@@ -20589,9 +20475,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'curious', start: 7021.75, end: 7022.05 },
     { word: 'plan!”', start: 7022.05, end: 7022.79 },
     { word: 'exclaimed', start: 7022.79, end: 7023.29 },
-    { word: 'Alice.', start: 7023.29, end: 7023.73 }
-  ],
-  [
+    { word: 'Alice.', start: 7023.29, end: 7023.73 },
     { word: '“That’s', paragraphStart: true, start: 7024.27, end: 7024.67 },
     { word: 'the', start: 7024.67, end: 7024.91 },
     { word: 'reason', start: 7024.91, end: 7025.33 },
@@ -20818,9 +20702,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'a', start: 7110.5, end: 7110.62 },
     { word: 'dance', start: 7110.62, end: 7110.74 },
     { word: 'is', start: 7110.74, end: 7111.12 },
-    { word: 'it?”', start: 7111.12, end: 7111.52 }
-  ],
-  [
+    { word: 'it?”', start: 7111.12, end: 7111.52 },
     { word: '“Why,”', paragraphStart: true },
     { word: 'said', start: 7112.58, end: 7112.7 },
     { word: 'the', start: 7112.7, end: 7112.96 },
@@ -20934,7 +20816,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'them!”', start: 7154.56, end: 7154.9 },
     { word: 'screamed', start: 7155.1, end: 7155.48 },
     { word: 'the', start: 7155.48, end: 7155.72 },
-    { word: 'Gryphon.' },
+    { word: 'Gryphon.' }
+  ],
+  [
     { word: '“Turn', paragraphStart: true, start: 7156.52, end: 7156.76 },
     { word: 'a', start: 7156.76, end: 7156.98 },
     { word: 'somersault' },
@@ -20959,9 +20843,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'top', start: 7164.52, end: 7164.66 },
     { word: 'of', start: 7164.66, end: 7164.8 },
     { word: 'its', start: 7164.8, end: 7165.02 },
-    { word: 'voice.', start: 7165.02, end: 7165.46 }
-  ],
-  [
+    { word: 'voice.', start: 7165.02, end: 7165.46 },
     { word: '“Back', paragraphStart: true, start: 7165.86, end: 7166.14 },
     { word: 'to', start: 7166.14, end: 7166.36 },
     { word: 'land', start: 7166.36, end: 7166.56 },
@@ -21106,9 +20988,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'very', start: 7219.78, end: 7220.18 },
     { word: 'slowly', start: 7220.18, end: 7220.72 },
     { word: 'and', start: 7220.72, end: 7221.12 },
-    { word: 'sadly:—', start: 7221.12, end: 7221.48 }
-  ],
-  [
+    { word: 'sadly:—', start: 7221.12, end: 7221.48 },
     { word: '“Will', paragraphStart: true, start: 7222.12, end: 7222.44 },
     { word: 'you', start: 7222.44, end: 7222.92 },
     { word: 'walk', start: 7222.92, end: 7223.34 },
@@ -21191,7 +21071,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'delightful', start: 7260.88, end: 7261.48 },
     { word: 'it', start: 7261.48, end: 7261.92 },
     { word: 'will', start: 7261.92, end: 7262.2 },
-    { word: 'be', start: 7262.2, end: 7262.76 },
+    { word: 'be', start: 7262.2, end: 7262.76 }
+  ],
+  [
     { word: 'When', lineStart: true, start: 7262.76, end: 7263.08 },
     { word: 'they', start: 7263.08, end: 7263.48 },
     { word: 'take', start: 7263.48, end: 7263.8 },
@@ -21257,9 +21139,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'not', start: 7288.2, end: 7288.62 },
     { word: 'join', start: 7288.62, end: 7288.96 },
     { word: 'the', start: 7288.96, end: 7289.34 },
-    { word: 'dance.', start: 7289.34, end: 7289.92 }
-  ],
-  [
+    { word: 'dance.', start: 7289.34, end: 7289.92 },
     { word: '“What', lineStart: true, start: 7290.72, end: 7291.52 },
     { word: 'matters', start: 7291.52, end: 7292.14 },
     { word: 'it' },
@@ -21411,9 +21291,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'know', start: 7353.74, end: 7353.88 },
     { word: 'what', start: 7353.88, end: 7354.24 },
     { word: 'they’re' },
-    { word: 'like.”', start: 7354.38, end: 7354.72 }
-  ],
-  [
+    { word: 'like.”', start: 7354.38, end: 7354.72 },
     { word: '“I', paragraphStart: true, start: 7355.3, end: 7355.58 },
     { word: 'believe', start: 7355.58, end: 7355.8 },
     { word: 'so,”', start: 7355.8, end: 7356.3 },
@@ -21447,7 +21325,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'off', start: 7367.26, end: 7367.56 },
     { word: 'in', start: 7367.56, end: 7367.7 },
     { word: 'the', start: 7367.7, end: 7367.96 },
-    { word: 'sea.', start: 7367.96, end: 7368.26 },
+    { word: 'sea.', start: 7367.96, end: 7368.26 }
+  ],
+  [
     { word: 'But', start: 7368.82, end: 7369.1 },
     { word: 'they', start: 7369.1, end: 7369.58 },
     { word: 'have', start: 7369.58, end: 7369.72 },
@@ -21566,9 +21446,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'it’s', start: 7408.18, end: 7408.42 },
     { word: 'called', start: 7408.42, end: 7408.74 },
     { word: 'a', start: 7408.74, end: 7408.9 },
-    { word: 'whiting?”', start: 7408.9, end: 7409.3 }
-  ],
-  [
+    { word: 'whiting?”', start: 7408.9, end: 7409.3 },
     { word: '“I', paragraphStart: true, start: 7409.82, end: 7410.1 },
     { word: 'never', start: 7410.1, end: 7410.36 },
     { word: 'thought', start: 7410.36, end: 7410.7 },
@@ -21692,7 +21570,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'have', start: 7460.24, end: 7460.32 },
     { word: 'told', start: 7460.32, end: 7460.5 },
     { word: 'you', start: 7460.5, end: 7460.72 },
-    { word: 'that.”', start: 7460.72, end: 7461.12 },
+    { word: 'that.”', start: 7460.72, end: 7461.12 }
+  ],
+  [
     { word: '“If', paragraphStart: true, start: 7461.72, end: 7462.06 },
     { word: 'I’d', start: 7462.06, end: 7462.36 },
     { word: 'been', start: 7462.36, end: 7462.54 },
@@ -21722,9 +21602,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'want', start: 7470.08, end: 7470.34 },
     { word: 'you', start: 7470.34, end: 7470.56 },
     { word: 'with', start: 7470.56, end: 7470.78 },
-    { word: 'us!’”', start: 7470.78, end: 7471.74 }
-  ],
-  [
+    { word: 'us!’”', start: 7470.78, end: 7471.74 },
     { word: '“They', paragraphStart: true, start: 7471.74, end: 7471.82 },
     { word: 'were', start: 7471.82, end: 7472.02 },
     { word: 'obliged', start: 7472.02, end: 7472.6 },
@@ -21868,9 +21746,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'such', start: 7525.34, end: 7525.66 },
     { word: 'a', start: 7525.66, end: 7525.74 },
     { word: 'dreadful', start: 7525.74, end: 7526.2 },
-    { word: 'time.”', start: 7526.2, end: 7526.88 }
-  ],
-  [
+    { word: 'time.”', start: 7526.2, end: 7526.88 },
     { word: 'So', paragraphStart: true, start: 7527.66, end: 7528.06 },
     { word: 'Alice', start: 7528.06, end: 7528.26 },
     { word: 'began', start: 7528.26, end: 7528.58 },
@@ -21968,7 +21844,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'said', start: 7558.22, end: 7558.46 },
     { word: '“That’s', start: 7558.92, end: 7559.18 },
     { word: 'very', start: 7559.18, end: 7559.78 },
-    { word: 'curious.”', start: 7559.78, end: 7560.3 },
+    { word: 'curious.”', start: 7559.78, end: 7560.3 }
+  ],
+  [
     { word: '“It’s', paragraphStart: true, start: 7561.32, end: 7561.68 },
     { word: 'all', start: 7561.68, end: 7562 },
     { word: 'about', start: 7562, end: 7562.2 },
@@ -22021,9 +21899,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'of', start: 7577.6, end: 7577.66 },
     { word: 'authority', start: 7577.66, end: 7578.14 },
     { word: 'over', start: 7578.14, end: 7578.48 },
-    { word: 'Alice.', start: 7578.48, end: 7578.78 }
-  ],
-  [
+    { word: 'Alice.', start: 7578.48, end: 7578.78 },
     { word: '“Stand', paragraphStart: true, start: 7579.7, end: 7580.16 },
     { word: 'up', start: 7580.16, end: 7580.48 },
     { word: 'and', start: 7580.48, end: 7580.98 },
@@ -22178,9 +22054,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'timid', start: 7629.74, end: 7629.96 },
     { word: 'and', start: 7629.96, end: 7630.38 },
     { word: 'tremulous', start: 7630.38, end: 7630.76 },
-    { word: 'sound.]', start: 7630.76, end: 7631.34 }
-  ],
-  [
+    { word: 'sound.]', start: 7630.76, end: 7631.34 },
     { word: '“That’s', paragraphStart: true, start: 7631.34, end: 7632.5 },
     { word: 'different', start: 7632.5, end: 7632.76 },
     { word: 'from', start: 7632.76, end: 7633.06 },
@@ -22211,7 +22085,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'it', start: 7640.14, end: 7640.44 },
     { word: 'sounds', start: 7640.44, end: 7640.84 },
     { word: 'uncommon', start: 7640.84, end: 7641.46 },
-    { word: 'nonsense.”', start: 7641.46, end: 7642.26 },
+    { word: 'nonsense.”', start: 7641.46, end: 7642.26 }
+  ],
+  [
     { word: 'Alice', paragraphStart: true, start: 7643.36, end: 7643.68 },
     { word: 'said', start: 7643.68, end: 7644.1 },
     { word: 'nothing;', start: 7644.1, end: 7644.54 },
@@ -22318,9 +22194,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'passed' },
     { word: 'by', start: 7683.62, end: 7683.86 },
     { word: 'his', start: 7683.86, end: 7684.16 },
-    { word: 'garden.’”', start: 7684.16, end: 7684.54 }
-  ],
-  [
+    { word: 'garden.’”', start: 7684.16, end: 7684.54 },
     { word: 'Alice', paragraphStart: true },
     { word: 'did', start: 7685.92, end: 7686.02 },
     { word: 'not', start: 7686.02, end: 7686.26 },
@@ -22619,9 +22493,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'only', start: 7846.82, end: 7847.92 },
     { word: 'of', start: 7847.92, end: 7848.3 },
     { word: 'beautiful', start: 7848.3, end: 7849.26 },
-    { word: 'Soup?', start: 7849.26, end: 7850.92 }
-  ],
-  [
+    { word: 'Soup?', start: 7849.26, end: 7850.92 },
     { word: 'Pennyworth', lineStart: true, start: 7851.28, end: 7852.6 },
     { word: 'only', start: 7852.6, end: 7853.66 },
     { word: 'of', start: 7853.66, end: 7854.44 },
@@ -22872,9 +22744,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'pass', start: 7979.23, end: 7979.51 },
     { word: 'away', start: 7979.51, end: 7979.75 },
     { word: 'the', start: 7979.75, end: 7980.01 },
-    { word: 'time.', start: 7980.01, end: 7980.49 }
-  ],
-  [
+    { word: 'time.', start: 7980.01, end: 7980.49 },
     { word: 'Alice', paragraphStart: true, start: 7981.65, end: 7981.97 },
     { word: 'had', start: 7981.97, end: 7982.21 },
     { word: 'never', start: 7982.21, end: 7982.47 },
@@ -22963,7 +22833,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'was', start: 8005.45, end: 8005.51 },
     { word: 'certainly', start: 8005.51, end: 8005.93 },
     { word: 'not', start: 8005.93, end: 8006.31 },
-    { word: 'becoming.', start: 8006.31, end: 8006.75 },
+    { word: 'becoming.', start: 8006.31, end: 8006.75 }
+  ],
+  [
     { word: '“And', paragraphStart: true, start: 8007.67, end: 8007.75 },
     { word: 'that’s', start: 8007.75, end: 8008.15 },
     { word: 'the', start: 8008.15, end: 8008.27 },
@@ -23043,9 +22915,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'done', start: 8036.11, end: 8036.37 },
     { word: 'just', start: 8036.67, end: 8036.87 },
     { word: 'as', start: 8036.87, end: 8037.07 },
-    { word: 'well.', start: 8037.07, end: 8037.55 }
-  ],
-  [
+    { word: 'well.', start: 8037.07, end: 8037.55 },
     { word: 'The', paragraphStart: true, start: 8038.37, end: 8038.53 },
     { word: 'twelve', start: 8038.53, end: 8038.99 },
     { word: 'jurors' },
@@ -23357,9 +23227,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'took', start: 8144.43, end: 8144.65 },
     { word: 'them', start: 8144.65, end: 8145.09 },
     { word: 'quite', start: 8145.09, end: 8145.29 },
-    { word: 'away!”', start: 8145.29, end: 8145.77 }
-  ],
-  [
+    { word: 'away!”', start: 8145.29, end: 8145.77 },
     { word: '“Consider', paragraphStart: true, start: 8146.43, end: 8146.93 },
     { word: 'your', start: 8146.93, end: 8147.35 },
     { word: 'verdict,”', start: 8147.35, end: 8147.71 },
@@ -23452,7 +23320,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'I', start: 8177.59, end: 8177.81 },
     { word: 'was', start: 8177.81, end: 8178.03 },
     { word: 'sent', start: 8178.03, end: 8178.19 },
-    { word: 'for.”', start: 8178.19, end: 8178.55 },
+    { word: 'for.”', start: 8178.19, end: 8178.55 }
+  ],
+  [
     { word: '“You', paragraphStart: true, start: 8178.55, end: 8179.15 },
     { word: 'ought', start: 8179.15, end: 8179.65 },
     { word: 'to', start: 8179.65, end: 8179.75 },
@@ -23500,9 +23370,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: '“Sixteenth,”', paragraphStart: true, start: 8195.27, end: 8195.79 },
     { word: 'added', start: 8196.29, end: 8196.43 },
     { word: 'the', start: 8196.43, end: 8196.69 },
-    { word: 'Dormouse.' }
-  ],
-  [
+    { word: 'Dormouse.' },
     { word: '“Write', paragraphStart: true },
     { word: 'that', start: 8198.13, end: 8198.47 },
     { word: 'down,”', start: 8198.47, end: 8198.81 },
@@ -23810,9 +23678,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'side', start: 8305.21, end: 8305.49 },
     { word: 'of', start: 8305.49, end: 8305.59 },
     { word: 'the', start: 8305.59, end: 8305.79 },
-    { word: 'court.', start: 8305.79, end: 8306.05 }
-  ],
-  [
+    { word: 'court.', start: 8305.79, end: 8306.05 },
     { word: 'All', paragraphStart: true, start: 8306.87, end: 8307.23 },
     { word: 'this', start: 8307.23, end: 8307.51 },
     { word: 'time', start: 8307.51, end: 8307.73 },
@@ -23921,7 +23787,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'twinkling' },
     { word: 'of' },
     { word: 'the' },
-    { word: 'tea—”' },
+    { word: 'tea—”' }
+  ],
+  [
     { word: '“The', paragraphStart: true, start: 8346.07, end: 8346.51 },
     { word: 'twinkling', start: 8346.51, end: 8346.81 },
     { word: 'of', start: 8346.81, end: 8347.07 },
@@ -23957,9 +23825,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'a', start: 8357.29, end: 8357.51 },
     { word: 'dunce?', start: 8357.51, end: 8357.83 },
     { word: 'Go', start: 8358.23, end: 8358.39 },
-    { word: 'on!”', start: 8358.39, end: 8358.75 }
-  ],
-  [
+    { word: 'on!”', start: 8358.39, end: 8358.75 },
     { word: '“I’m', paragraphStart: true, start: 8359.05, end: 8359.57 },
     { word: 'a', start: 8359.57, end: 8360.09 },
     { word: 'poor', start: 8360.09, end: 8360.47 },
@@ -24100,9 +23966,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'your', start: 8412.63, end: 8412.79 },
     { word: 'Majesty,”', start: 8412.79, end: 8413.57 },
     { word: 'he', start: 8413.57, end: 8413.81 },
-    { word: 'began.', start: 8413.81, end: 8414.17 }
-  ],
-  [
+    { word: 'began.', start: 8413.81, end: 8414.17 },
     { word: '“You’re', paragraphStart: true, start: 8414.67, end: 8415.03 },
     { word: 'a', start: 8415.03, end: 8415.47 },
     { word: 'very', start: 8415.47, end: 8415.73 },
@@ -24170,7 +24034,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'then', start: 8436.05, end: 8436.33 },
     { word: 'sat', start: 8436.33, end: 8436.41 },
     { word: 'upon', start: 8436.41, end: 8436.65 },
-    { word: 'it.)', start: 8436.65, end: 8437.09 },
+    { word: 'it.)', start: 8436.65, end: 8437.09 }
+  ],
+  [
     { word: '“I’m', paragraphStart: true, start: 8437.55, end: 8438.09 },
     { word: 'glad', start: 8438.09, end: 8438.31 },
     { word: 'I’ve', start: 8438.31, end: 8438.57 },
@@ -24244,9 +24110,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'floor,', start: 8461.19, end: 8461.35 },
     { word: 'as', start: 8461.35, end: 8461.63 },
     { word: 'it', start: 8461.63, end: 8461.71 },
-    { word: 'is.”', start: 8461.71, end: 8462.45 }
-  ],
-  [
+    { word: 'is.”', start: 8461.71, end: 8462.45 },
     { word: '“Then', paragraphStart: true, start: 8462.45, end: 8462.63 },
     { word: 'you', start: 8462.63, end: 8462.75 },
     { word: 'may', start: 8462.75, end: 8462.89 },
@@ -24532,9 +24396,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 8563.65, end: 8563.93 },
     { word: 'cook', start: 8563.93, end: 8564.23 },
     { word: 'had', start: 8564.23, end: 8564.45 },
-    { word: 'disappeared.', start: 8564.45, end: 8565.09 }
-  ],
-  [
+    { word: 'disappeared.', start: 8564.45, end: 8565.09 },
     { word: '“Never', paragraphStart: true, start: 8565.83, end: 8566.25 },
     { word: 'mind!”', start: 8566.25, end: 8567.37 },
     { word: 'said', start: 8567.37, end: 8567.41 },
@@ -24764,9 +24626,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'or', start: 8646.82, end: 8647.08 },
     { word: 'they', start: 8647.08, end: 8647.24 },
     { word: 'would', start: 8647.24, end: 8647.4 },
-    { word: 'die.', start: 8647.4, end: 8647.78 }
-  ],
-  [
+    { word: 'die.', start: 8647.4, end: 8647.78 },
     { word: '“The', paragraphStart: true, start: 8648.64, end: 8649 },
     { word: 'trial', start: 8649, end: 8649.46 },
     { word: 'cannot', start: 8649.46, end: 8650.16 },
@@ -24877,7 +24737,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'up', start: 8686.12, end: 8686.4 },
     { word: 'as', start: 8686.4, end: 8686.8 },
     { word: 'the', start: 8686.8, end: 8686.96 },
-    { word: 'other.”', start: 8686.96, end: 8687.34 },
+    { word: 'other.”', start: 8686.96, end: 8687.34 }
+  ],
+  [
     { word: 'As', paragraphStart: true, start: 8688.34, end: 8688.82 },
     { word: 'soon', start: 8688.82, end: 8688.98 },
     { word: 'as', start: 8688.98, end: 8689.16 },
@@ -24911,9 +24773,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 8696.86, end: 8697.12 },
     { word: 'work', start: 8697.12, end: 8697.34 },
     { word: 'very', start: 8697.34, end: 8697.7 },
-    { word: 'diligently', start: 8697.7, end: 8698.1 }
-  ],
-  [
+    { word: 'diligently', start: 8697.7, end: 8698.1 },
     { word: 'to', start: 8698.1, end: 8698.56 },
     { word: 'write', start: 8698.56, end: 8698.72 },
     { word: 'out', start: 8698.72, end: 8699 },
@@ -25047,9 +24907,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'which', start: 8749.9, end: 8750.22 },
     { word: 'word', start: 8750.22, end: 8750.6 },
     { word: 'sounded', start: 8750.6, end: 8750.88 },
-    { word: 'best.', start: 8750.88, end: 8751.42 }
-  ],
-  [
+    { word: 'best.', start: 8750.88, end: 8751.42 },
     { word: 'Some', paragraphStart: true, start: 8752.22, end: 8752.46 },
     { word: 'of', start: 8752.46, end: 8752.7 },
     { word: 'the', start: 8752.7, end: 8752.72 },
@@ -25122,7 +24980,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 8777.84, end: 8778.32 },
     { word: 'leave', start: 8778.32, end: 8778.72 },
     { word: 'the', start: 8778.72, end: 8779.08 },
-    { word: 'court.”', start: 8779.08, end: 8779.4 },
+    { word: 'court.”', start: 8779.08, end: 8779.4 }
+  ],
+  [
     { word: 'Everybody', paragraphStart: true, start: 8780.16, end: 8780.64 },
     { word: 'looked', start: 8780.64, end: 8781.1 },
     { word: 'at', start: 8781.1, end: 8781.46 },
@@ -25184,9 +25044,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Number', start: 8804.06, end: 8804.28 },
     { word: 'One,”', start: 8804.28, end: 8804.92 },
     { word: 'said', start: 8804.92, end: 8805.16 },
-    { word: 'Alice.', start: 8805.16, end: 8805.6 }
-  ],
-  [
+    { word: 'Alice.', start: 8805.16, end: 8805.6 },
     { word: 'The', paragraphStart: true, start: 8806.24, end: 8806.4 },
     { word: 'King', start: 8806.4, end: 8806.6 },
     { word: 'turned', start: 8806.6, end: 8806.9 },
@@ -25328,9 +25186,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'a', start: 8853.68, end: 8853.7 },
     { word: 'set', start: 8853.7, end: 8853.88 },
     { word: 'of', start: 8853.88, end: 8854.12 },
-    { word: 'verses.”', start: 8854.12, end: 8854.48 }
-  ],
-  [
+    { word: 'verses.”', start: 8854.12, end: 8854.48 },
     { word: '“Are', paragraphStart: true, start: 8855.32, end: 8855.82 },
     { word: 'they', start: 8855.82, end: 8856.24 },
     { word: 'in', start: 8856.24, end: 8856.3 },
@@ -25360,7 +25216,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'jury', start: 8865.88, end: 8866.22 },
     { word: 'all', start: 8866.22, end: 8866.6 },
     { word: 'looked', start: 8866.6, end: 8866.94 },
-    { word: 'puzzled.)', start: 8866.94, end: 8867.26 },
+    { word: 'puzzled.)', start: 8866.94, end: 8867.26 }
+  ],
+  [
     { word: '“He', paragraphStart: true, start: 8867.94, end: 8868.18 },
     { word: 'must', start: 8868.18, end: 8868.58 },
     { word: 'have', start: 8868.58, end: 8868.82 },
@@ -25475,9 +25333,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'know', start: 8906.86, end: 8907.2 },
     { word: 'what', start: 8907.2, end: 8907.5 },
     { word: 'they’re', start: 8907.5, end: 8907.68 },
-    { word: 'about!”', start: 8907.68, end: 8908.7 }
-  ],
-  [
+    { word: 'about!”', start: 8907.68, end: 8908.7 },
     { word: '“Read', paragraphStart: true, start: 8908.7, end: 8909.02 },
     { word: 'them,”', start: 8909.02, end: 8909.54 },
     { word: 'said', start: 8909.54, end: 8909.74 },
@@ -25590,7 +25446,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'us', start: 8946.04, end: 8946.34 },
     { word: 'three', start: 8946.34, end: 8946.5 },
     { word: 'or', start: 8946.5, end: 8946.72 },
-    { word: 'more;', start: 8946.72, end: 8947 },
+    { word: 'more;', start: 8946.72, end: 8947 }
+  ],
+  [
     { word: 'They', lineStart: true, start: 8947, end: 8947.78 },
     { word: 'all', start: 8947.78, end: 8948.14 },
     { word: 'returned', start: 8948.14, end: 8948.56 },
@@ -25622,9 +25480,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 8957.06, end: 8957.36 },
     { word: 'set', start: 8957.36, end: 8957.5 },
     { word: 'them', start: 8957.5, end: 8957.78 },
-    { word: 'free,', start: 8957.78, end: 8958.12 }
-  ],
-  [
+    { word: 'free,', start: 8957.78, end: 8958.12 },
     { word: 'Exactly', lineStart: true, start: 8958.38, end: 8958.76 },
     { word: 'as', start: 8958.76, end: 8959.22 },
     { word: 'we', start: 8959.22, end: 8959.32 },
@@ -25765,9 +25621,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'to', start: 9005.92, end: 9006.14 },
     { word: 'explain', start: 9006.14, end: 9006.48 },
     { word: 'the', start: 9006.48, end: 9006.76 },
-    { word: 'paper.', start: 9006.76, end: 9007.26 }
-  ],
-  [
+    { word: 'paper.', start: 9006.76, end: 9007.26 },
     { word: '“If', paragraphStart: true, start: 9007.9, end: 9008.36 },
     { word: 'there’s', start: 9008.36, end: 9008.52 },
     { word: 'no', start: 9008.52, end: 9008.8 },
@@ -25839,7 +25693,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'turning', start: 9032.48, end: 9032.64 },
     { word: 'to', start: 9032.64, end: 9032.96 },
     { word: 'the', start: 9032.96, end: 9033.02 },
-    { word: 'Knave.' },
+    { word: 'Knave.' }
+  ],
+  [
     { word: 'The', paragraphStart: true, start: 9033.9, end: 9034.08 },
     { word: 'Knave' },
     { word: 'shook', start: 9034.34, end: 9034.54 },
@@ -25909,9 +25765,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the', start: 9056.14, end: 9056.38 },
     { word: 'tarts,', start: 9056.38, end: 9056.58 },
     { word: 'you', start: 9056.58, end: 9056.76 },
-    { word: 'know—”', start: 9056.76, end: 9057.18 }
-  ],
-  [
+    { word: 'know—”', start: 9056.76, end: 9057.18 },
     { word: '“But,', paragraphStart: true, start: 9057.18, end: 9057.92 },
     { word: 'it', start: 9057.92, end: 9058.16 },
     { word: 'goes', start: 9058.16, end: 9058.36 },
@@ -26210,9 +26064,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'trees', start: 9169.32, end: 9169.68 },
     { word: 'upon', start: 9169.68, end: 9169.96 },
     { word: 'her', start: 9169.96, end: 9170.2 },
-    { word: 'face.', start: 9170.2, end: 9170.64 }
-  ],
-  [
+    { word: 'face.', start: 9170.2, end: 9170.64 },
     { word: '“Wake', paragraphStart: true, start: 9171.48, end: 9171.62 },
     { word: 'up,', start: 9171.62, end: 9171.98 },
     { word: 'Alice', start: 9172.2, end: 9172.28 },
@@ -26310,7 +26162,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'dream', start: 9205.64, end: 9206.06 },
     { word: 'it', start: 9206.06, end: 9206.3 },
     { word: 'had', start: 9206.3, end: 9206.42 },
-    { word: 'been.', start: 9206.42, end: 9206.94 },
+    { word: 'been.', start: 9206.42, end: 9206.94 }
+  ],
+  [
     { word: 'But', paragraphStart: true, start: 9207.54, end: 9208.08 },
     { word: 'her', start: 9208.08, end: 9208.24 },
     { word: 'sister', start: 9208.24, end: 9208.7 },
@@ -26353,9 +26207,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'this', start: 9222.64, end: 9222.94 },
     { word: 'was', start: 9222.94, end: 9223.32 },
     { word: 'her', start: 9223.32, end: 9223.62 },
-    { word: 'dream:—', start: 9223.62, end: 9223.92 }
-  ],
-  [
+    { word: 'dream:—', start: 9223.62, end: 9223.92 },
     { word: 'First,', paragraphStart: true, start: 9224.8, end: 9225.34 },
     { word: 'she', start: 9225.64, end: 9225.8 },
     { word: 'dreamed', start: 9225.8, end: 9226.08 },
@@ -26500,9 +26352,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'on', start: 9274.08, end: 9274.34 },
     { word: 'the', start: 9274.34, end: 9274.52 },
     { word: 'Duchess’s' },
-    { word: 'knee,', start: 9275, end: 9275.28 }
-  ],
-  [
+    { word: 'knee,', start: 9275, end: 9275.28 },
     { word: 'while', start: 9275.8, end: 9275.94 },
     { word: 'plates', start: 9275.94, end: 9276.48 },
     { word: 'and', start: 9276.48, end: 9276.7 },
@@ -26542,7 +26392,9 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'the' },
     { word: 'miserable' },
     { word: 'Mock' },
-    { word: 'Turtle.' },
+    { word: 'Turtle.' }
+  ],
+  [
     { word: 'So', paragraphStart: true },
     { word: 'she' },
     { word: 'sat' },
@@ -26655,9 +26507,7 @@ export const alicePages: readonly (readonly AliceWord[])[] = [
     { word: 'Mock', start: 9330.54, end: 9330.82 },
     { word: 'Turtle’s', start: 9330.82, end: 9331.22 },
     { word: 'heavy', start: 9331.64, end: 9331.98 },
-    { word: 'sobs.', start: 9331.98, end: 9332.52 }
-  ],
-  [
+    { word: 'sobs.', start: 9331.98, end: 9332.52 },
     { word: 'Lastly,', paragraphStart: true, start: 9333.74, end: 9334.22 },
     { word: 'she', start: 9334.66, end: 9334.88 },
     { word: 'pictured', start: 9334.88, end: 9335.14 },

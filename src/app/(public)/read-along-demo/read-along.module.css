@@ -333,6 +333,17 @@
   font-variant-numeric: tabular-nums;
 }
 
+.bookmarkRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+
+.bookmarkRow > button:first-child {
+  text-align: start;
+}
+
 .panel .check {
   margin-inline-start: 0;
 }
