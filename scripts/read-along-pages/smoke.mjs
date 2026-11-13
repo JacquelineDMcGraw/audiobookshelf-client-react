@@ -46,6 +46,11 @@ try {
   const pageNumber = page.getByRole('combobox', { name: 'Page', exact: true })
   const chapterMenu = page.locator('details').filter({ has: page.locator('summary', { hasText: /^Chapters$/ }) })
   const bookmarkMenu = page.locator('details').filter({ has: page.locator('summary', { hasText: /^Bookmarks$/ }) })
+  const bookmarkOnPage = (pageIndex) => bookmarkMenu.getByRole('button', { name: new RegExp(`^Page ${Number(pageIndex) + 1}\\b`) })
+  const saveBookmark = async () => {
+    await page.getByRole('button', { name: 'Save bookmark', exact: true }).click()
+    await page.getByText('Bookmark saved in this browser.', { exact: true }).waitFor()
+  }
   const finalChapter = page.getByRole('heading', { name: 'Alice’s Evidence', exact: true })
 
   await reader.waitFor()
@@ -61,8 +66,7 @@ try {
   const chapterStart = await audio.evaluate((element) => element.currentTime)
   assert(chapterStart > 8_000, 'The last chapter should seek into the last part of the recording')
 
-  await page.getByRole('button', { name: 'Save bookmark', exact: true }).click()
-  await page.getByText('Bookmark saved in this browser.', { exact: true }).waitFor()
+  await saveBookmark()
 
   await page.getByRole('button', { name: 'Play audio', exact: true }).click()
   await page.waitForFunction((start) => {
@@ -85,11 +89,28 @@ try {
   await page.getByRole('button', { name: 'Play audio', exact: true }).click()
   await page.waitForFunction((value) => document.querySelector('#sample-page')?.value === value, nextPage)
   await page.getByRole('button', { name: 'Pause audio', exact: true }).click()
+  await saveBookmark()
+
+  await bookmarkMenu.locator('summary').click()
+  const bookmarkToDelete = bookmarkOnPage(nextPage)
+  await bookmarkToDelete.waitFor()
+  await bookmarkToDelete
+    .locator('..')
+    .getByRole('button', { name: /^Delete bookmark at / })
+    .click()
+  await page
+    .getByRole('status')
+    .filter({ hasText: /^Bookmark deleted\.$/ })
+    .waitFor()
+  await bookmarkToDelete.waitFor({ state: 'detached' })
+  await bookmarkOnPage(finalPage).waitFor()
 
   await page.reload({ waitUntil: 'domcontentloaded', timeout: 30_000 })
   await reader.waitFor()
   await bookmarkMenu.locator('summary').click()
-  await bookmarkMenu.getByRole('button', { name: new RegExp(`^Page ${Number(finalPage) + 1}\\b`) }).click()
+  await bookmarkOnPage(finalPage).waitFor()
+  assert.equal(await bookmarkToDelete.count(), 0, 'Deleted bookmark should stay deleted after reload')
+  await bookmarkOnPage(finalPage).click()
   await finalChapter.waitFor()
   assert.equal(await pageNumber.inputValue(), finalPage, 'Bookmark should restore the saved page after reload')
   await page.waitForFunction((start) => Math.abs(document.querySelector('audio').currentTime - start) < 0.1, chapterStart)
@@ -103,7 +124,9 @@ try {
   await reader.waitFor()
 
   assert.deepEqual(errors, [], 'Browser did not complete the smoke test without JavaScript errors')
-  console.log('Read Along smoke passed: 12 chapters, playback and highlighting, automatic page turn, bookmark after reload, and library navigation.')
+  console.log(
+    'Read Along smoke passed: 12 chapters, playback and highlighting, automatic page turn, bookmark deletion and restore after reload, and library navigation.'
+  )
 } finally {
   await browser.close()
 }
