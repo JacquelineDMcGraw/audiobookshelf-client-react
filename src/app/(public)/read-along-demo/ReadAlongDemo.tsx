@@ -1,55 +1,120 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { type ReactNode, useEffect, useRef, useState } from 'react'
+import { type ReactNode, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 
-import { alicePages } from './alice'
+import { aliceChapters, alicePages } from './alice'
 import styles from './read-along.module.css'
 
-const pageStarts = alicePages.map((page) => page[0].start)
+const chaptersByOpeningPage = new Map(aliceChapters.map((chapter) => [chapter.page, chapter]))
+const pageStarts = alicePages.map((page, index) => {
+  const start = chaptersByOpeningPage.get(index)?.start ?? page.find((word) => word.start !== undefined)?.start
+  if (start === undefined) throw new Error(`Alice read-along page ${index + 1} needs a narration cue`)
+  return start
+})
 const bookTitle = 'Alice’s Adventures in Wonderland'
-const chapterTitle = 'Down the Rabbit-Hole'
 const textSettingsGlyph = 'Aa'
 const playbackSpeeds = [0.75, 0.9, 1, 1.15, 1.25, 1.5, 1.75, 2]
-const excerptEnd = alicePages.at(-1)!.at(-1)!.end
-const excerptWords = alicePages.flat()
-const pageParagraphs = alicePages.map((words) => {
-  const paragraphs: (typeof words)[number][][] = []
-  for (const word of words) {
-    if (!paragraphs.length || word.paragraphStart) paragraphs.push([])
-    paragraphs.at(-1)!.push(word)
-  }
-  return paragraphs
+const bookWords = alicePages.flatMap((words, page) => {
+  // An unmatched printed word still belongs to the book and is searchable.
+  // In that case playback starts at the nearest preceding cue on the page.
+  let position = pageStarts[page]
+  return words.map((word, index) => {
+    position = word.start ?? position
+    return { ...word, index, page, position }
+  })
 })
+type BookWord = (typeof bookWords)[number]
+const lastWordEnd = bookWords.findLast((word) => word.end !== undefined)?.end ?? 0
+const pageParagraphs = alicePages.map<BookWord[][]>(() => [])
+for (const word of bookWords) {
+  const paragraphs = pageParagraphs[word.page]
+  if (!paragraphs.length || word.paragraphStart) paragraphs.push([])
+  paragraphs.at(-1)!.push(word)
+}
+
+const bookmarkKey = 'audiobookshelf:read-along:alice-full-v1:bookmarks'
+const bookmarkEvent = 'audiobookshelf-read-along-bookmarks'
+const emptyBookmarks = () => '[]'
+let sessionBookmarks: string | null = null
+
+function subscribeToBookmarks(onChange: () => void) {
+  function onStorage(event: StorageEvent) {
+    if (event.key === bookmarkKey || event.key === null) onChange()
+  }
+  window.addEventListener('storage', onStorage)
+  window.addEventListener(bookmarkEvent, onChange)
+  return () => {
+    window.removeEventListener('storage', onStorage)
+    window.removeEventListener(bookmarkEvent, onChange)
+  }
+}
+
+function readBookmarks() {
+  try {
+    return sessionBookmarks ?? window.localStorage.getItem(bookmarkKey) ?? emptyBookmarks()
+  } catch {
+    return sessionBookmarks ?? emptyBookmarks()
+  }
+}
+
+function parseBookmarks(raw: string): number[] {
+  try {
+    const values: unknown = JSON.parse(raw)
+    return Array.isArray(values) ? values.filter((value): value is number => typeof value === 'number' && Number.isFinite(value) && value >= 0) : []
+  } catch {
+    return []
+  }
+}
+
+function getAudioPage(position: number) {
+  return Math.max(
+    0,
+    pageStarts.findLastIndex((start) => start <= position)
+  )
+}
 
 function clock(seconds: number) {
   const whole = Math.floor(seconds)
-  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`
+  const hours = Math.floor(whole / 3600)
+  const minutes = String(Math.floor(whole / 60) % 60)
+  const remaining = String(whole % 60).padStart(2, '0')
+  return hours ? `${hours}:${minutes.padStart(2, '0')}:${remaining}` : `${minutes}:${remaining}`
 }
 
 export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string; credits?: ReactNode }) {
   const t = useTranslations()
   const audioRef = useRef<HTMLAudioElement>(null)
   const searchRef = useRef<HTMLDialogElement>(null)
+  const frameRef = useRef<HTMLDivElement>(null)
   const leafRef = useRef<HTMLElement>(null)
   const [time, setTime] = useState(0)
   const [manualPage, setManualPage] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
   const [audioFailed, setAudioFailed] = useState(false)
-  const [bookmarks, setBookmarks] = useState<number[]>([])
+  const serializedBookmarks = useSyncExternalStore(subscribeToBookmarks, readBookmarks, emptyBookmarks)
+  const bookmarks = useMemo(() => parseBookmarks(serializedBookmarks), [serializedBookmarks])
   const [bookmarkStatus, setBookmarkStatus] = useState('')
   const [largePrint, setLargePrint] = useState(false)
   const [query, setQuery] = useState('')
   const [submittedQuery, setSubmittedQuery] = useState('')
-  const [searchMatch, setSearchMatch] = useState<number | null>(null)
-  const [duration, setDuration] = useState(excerptEnd)
-  const audioPage = Math.max(
-    0,
-    pageStarts.findLastIndex((start) => start <= time)
-  )
+  const [searchMatch, setSearchMatch] = useState<BookWord | null>(null)
+  const [duration, setDuration] = useState(lastWordEnd)
+  const audioPage = getAudioPage(time)
   const page = manualPage ?? audioPage
-  const activeWord = alicePages[page].find((word) => time >= word.start && time < word.end)?.start
-  const matchingWords = submittedQuery ? excerptWords.filter((word) => word.word.toLowerCase().includes(submittedQuery)) : []
+  const openingChapter = chaptersByOpeningPage.get(page)
+  const activeChapter = aliceChapters.findLast((chapter) => chapter.page <= page)
+  const activeWord = alicePages[page].findIndex(({ start, end }) => start !== undefined && end !== undefined && time >= start && time < end)
+  const matchingWords = useMemo(() => (submittedQuery ? bookWords.filter((word) => word.word.toLowerCase().includes(submittedQuery)) : []), [submittedQuery])
+  const pageOptions = useMemo(
+    () =>
+      pageStarts.map((start, index) => (
+        <option key={start} value={index}>
+          {t('LabelPlayerChapterNumberMarker', { 0: index + 1, 1: pageStarts.length })}
+        </option>
+      )),
+    [t]
+  )
 
   useEffect(() => {
     if (!playing && searchMatch === null) return
@@ -79,7 +144,7 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
   function seek(position: number) {
     const player = audioRef.current
     if (!player) return
-    const duration = Number.isFinite(player.duration) ? player.duration : excerptEnd
+    const duration = Number.isFinite(player.duration) ? player.duration : lastWordEnd
     const nextTime = Math.max(0, Math.min(position, duration))
     player.currentTime = nextTime
     setSearchMatch(null)
@@ -90,6 +155,19 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
     if (next < 0 || next >= alicePages.length) return
     if (manualPage !== null) setManualPage(next)
     seek(pageStarts[next])
+  }
+
+  function jumpFromMenu(next: number, menu: HTMLDetailsElement | null) {
+    turnPage(next)
+    closeReadingMenu(menu)
+  }
+
+  function closeReadingMenu(menu: HTMLDetailsElement | null) {
+    if (menu) {
+      menu.open = false
+      menu.querySelector('summary')?.focus({ preventScroll: true })
+    }
+    frameRef.current?.scrollTo({ top: 0 })
   }
 
   function startAudio() {
@@ -103,13 +181,22 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
   }
 
   function saveBookmark() {
-    const position = audioRef.current?.currentTime ?? time
-    if (bookmarks.some((saved) => Math.floor(saved) === Math.floor(position))) {
+    const position = time
+    const savedBookmarks = parseBookmarks(readBookmarks())
+    if (savedBookmarks.some((saved) => Math.floor(saved) === Math.floor(position))) {
       setBookmarkStatus(t('LabelReadAlongDemoAlreadySaved'))
       return
     }
-    setBookmarks([...bookmarks, position])
-    setBookmarkStatus(t('LabelReadAlongDemoBookmarkSaved'))
+    const updated = JSON.stringify([...savedBookmarks, position])
+    try {
+      window.localStorage.setItem(bookmarkKey, updated)
+      sessionBookmarks = null
+      setBookmarkStatus(t('LabelReadAlongDemoBookmarkSaved'))
+    } catch {
+      sessionBookmarks = updated
+      setBookmarkStatus(t('LabelReadAlongDemoBookmarkSavedSession'))
+    }
+    window.dispatchEvent(new Event(bookmarkEvent))
   }
 
   return (
@@ -131,9 +218,9 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
         </button>
       </header>
 
-      <div className={styles.frame}>
+      <div className={styles.frame} ref={frameRef}>
         <div className={styles.bookHeader}>
-          <p className={styles.muted}>{t('LabelReadAlongDemoTiming', { time: clock(excerptEnd) })}</p>
+          <p className={styles.muted}>{t('LabelReadAlongDemoTiming', { time: clock(lastWordEnd) })}</p>
           <button type="button" aria-haspopup="dialog" onClick={() => searchRef.current?.showModal()}>
             {t('ButtonSearch')}
           </button>
@@ -145,11 +232,7 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
             </button>
             <label htmlFor="sample-page">{t('LabelReadAlongDemoPage')}</label>
             <select id="sample-page" value={page} onChange={(event) => turnPage(Number(event.target.value))}>
-              {alicePages.map((wordsOnPage, index) => (
-                <option key={wordsOnPage[0].start} value={index}>
-                  {t('LabelPlayerChapterNumberMarker', { 0: index + 1, 1: alicePages.length })}
-                </option>
-              ))}
+              {pageOptions}
             </select>
             <button type="button" aria-label={t('ButtonNext')} disabled={page === alicePages.length - 1} onClick={() => turnPage(page + 1)}>
               ›
@@ -164,14 +247,7 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
           <details className={styles.tool} name="demo-reading-tools">
             <summary>{t('LabelReadAlongDemoContents')}</summary>
             <div className={styles.panel}>
-              <button
-                type="button"
-                lang="en"
-                onClick={(event) => {
-                  turnPage(0)
-                  event.currentTarget.closest('details')!.open = false
-                }}
-              >
+              <button type="button" lang="en" onClick={(event) => jumpFromMenu(0, event.currentTarget.closest('details'))}>
                 {bookTitle}
               </button>
             </div>
@@ -179,16 +255,21 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
           <details className={styles.tool} name="demo-reading-tools">
             <summary>{t('LabelChapters')}</summary>
             <div className={styles.panel}>
-              <button
-                type="button"
-                lang="en"
-                onClick={(event) => {
-                  turnPage(0)
-                  event.currentTarget.closest('details')!.open = false
-                }}
-              >
-                {chapterTitle}
-              </button>
+              {aliceChapters.map((chapter, index) => (
+                <button
+                  key={chapter.page}
+                  className={styles.chapterChoice}
+                  type="button"
+                  lang="en"
+                  aria-current={activeChapter === chapter || undefined}
+                  onClick={(event) => jumpFromMenu(chapter.page, event.currentTarget.closest('details'))}
+                >
+                  <span>
+                    {index + 1}. {chapter.title}
+                  </span>
+                  <span className={styles.chapterPosition}>{clock(chapter.start)}</span>
+                </button>
+              ))}
             </div>
           </details>
           <details className={styles.tool} name="demo-reading-tools">
@@ -198,14 +279,16 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
                 bookmarks.map((position) => (
                   <button
                     key={position}
+                    className={styles.chapterChoice}
                     type="button"
                     onClick={(event) => {
                       setManualPage(null)
                       seek(position)
-                      event.currentTarget.closest('details')!.open = false
+                      closeReadingMenu(event.currentTarget.closest('details'))
                     }}
                   >
-                    {clock(position)}
+                    <span>{t('LabelReadAlongDemoBookmarkLocation', { page: getAudioPage(position) + 1 })}</span>
+                    <span className={styles.chapterPosition}>{clock(position)}</span>
                   </button>
                 ))
               ) : (
@@ -231,16 +314,17 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
         </div>
         <article className={styles.leaf} ref={leafRef} data-size={largePrint ? 'large' : undefined} lang="en">
           <header className={styles.runningHead}>{bookTitle}</header>
-          {page === 0 && <h2 className={styles.chapter}>{chapterTitle}</h2>}
+          {openingChapter && <h2 className={styles.chapter}>{openingChapter.title}</h2>}
           <div className={styles.passage}>
             {pageParagraphs[page].map((paragraph) => (
-              <p key={paragraph[0].start}>
+              <p key={paragraph[0].index}>
                 {paragraph.map((word, index) => (
-                  <span key={word.start}>
-                    <span aria-current={word.start === activeWord ? 'true' : undefined} data-match={searchMatch === word.start || undefined}>
+                  <span key={word.index}>
+                    {index > 0 && word.lineStart && <br />}
+                    <span aria-current={word.index === activeWord ? 'true' : undefined} data-match={searchMatch === word || undefined}>
                       {word.word}
                     </span>
-                    {index < paragraph.length - 1 && ' '}
+                    {index < paragraph.length - 1 && !paragraph[index + 1].lineStart && ' '}
                   </span>
                 ))}
               </p>
@@ -268,7 +352,7 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
             onSeeking={(event) => {
               const position = event.currentTarget.currentTime
               setTime(position)
-              setSearchMatch((match) => (match !== null && Math.abs(match - position) < 0.01 ? match : null))
+              setSearchMatch((match) => (match !== null && Math.abs(match.position - position) < 0.01 ? match : null))
             }}
             onPlay={() => {
               setPlaying(true)
@@ -340,17 +424,17 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
         <div className={styles.searchResults}>
           {matchingWords.map((result) => (
             <button
-              key={result.start}
+              key={`${result.page}-${result.index}`}
               type="button"
               onClick={() => {
                 audioRef.current?.pause()
                 setManualPage(null)
-                seek(result.start)
-                setSearchMatch(result.start)
+                seek(result.position)
+                setSearchMatch(result)
                 searchRef.current?.close()
               }}
             >
-              <span lang="en">{result.word}</span> · {clock(result.start)}
+              <span lang="en">{result.word}</span> · {clock(result.position)}
             </button>
           ))}
           {submittedQuery && !matchingWords.length && <p role="status">{t('LabelReadAlongDemoNoMatches')}</p>}

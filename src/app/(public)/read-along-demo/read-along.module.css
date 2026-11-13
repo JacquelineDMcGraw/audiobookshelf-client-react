@@ -227,6 +227,24 @@
   text-align: start;
 }
 
+.chapterChoice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.chapterChoice[aria-current='true'] {
+  border-color: var(--reader-accent);
+  color: var(--reader-accent);
+}
+
+.chapterPosition {
+  flex: none;
+  color: var(--reader-muted);
+  font-variant-numeric: tabular-nums;
+}
+
 .panel .check {
   margin-inline-start: 0;
 }
