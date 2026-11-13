@@ -1,0 +1,49 @@
+name: Alice Read Along live test
+
+on:
+  workflow_run:
+    workflows: [pages-build-deployment, pages build and deployment]
+    types: [completed]
+    branches: [gh-pages]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: read
+
+jobs:
+  smoke:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      READ_ALONG_SMOKE_URL: https://jacquelinedmcgraw.github.io/audiobookshelf-client-react/
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: scripts/read-along-pages
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Get the expected deployed bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          if [[ -z "$PAGES_SHA" ]]; then
+            PAGES_SHA=$(gh api "repos/$GITHUB_REPOSITORY/pages/builds/latest" --jq 'select(.status == "built") | .commit')
+          fi
+          [[ "$PAGES_SHA" =~ ^[0-9a-f]{40}$ ]]
+          script_href=$(gh api -H 'Accept: application/vnd.github.raw+json' \
+            "repos/$GITHUB_REPOSITORY/contents/index.html?ref=$PAGES_SHA" | \
+            sed -nE 's/.*src="(\.\/demo\.js\?v=[a-f0-9]+)".*/\1/p')
+          [[ "$script_href" =~ ^\./demo\.js\?v=[0-9a-f]{16}$ ]]
+          printf 'READ_ALONG_EXPECTED_JS=%s\n' "$script_href" >> "$GITHUB_ENV"
+      - name: Install Chromium
+        run: |
+          npm install --prefix "$RUNNER_TEMP/alice-test" --ignore-scripts playwright@1.61.0
+          "$RUNNER_TEMP/alice-test/node_modules/.bin/playwright" install --with-deps chromium
+          printf 'READ_ALONG_PLAYWRIGHT_MODULE=%s\n' "$RUNNER_TEMP/alice-test/node_modules/playwright" >> "$GITHUB_ENV"
+      - name: Test the live demo
+        run: node scripts/read-along-pages/smoke.mjs

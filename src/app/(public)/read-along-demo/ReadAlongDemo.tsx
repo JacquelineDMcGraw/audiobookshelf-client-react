@@ -1,7 +1,7 @@
 'use client'
 
 import { useTranslations } from 'next-intl'
-import { type ReactNode, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
+import { type ReactNode, type Ref, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react'
 
 import { aliceChapters, alicePages } from './alice'
 import styles from './read-along.module.css'
@@ -13,6 +13,8 @@ const pageStarts = alicePages.map((page, index) => {
   return start
 })
 const bookTitle = 'Alice’s Adventures in Wonderland'
+const bookAuthor = 'Lewis Carroll'
+const repositoryUrl = 'https://github.com/JacquelineDMcGraw/audiobookshelf-client-react'
 const textSettingsGlyph = 'Aa'
 const playbackSpeeds = [0.75, 0.9, 1, 1.15, 1.25, 1.5, 1.75, 2]
 const bookWords = alicePages.flatMap((words, page) => {
@@ -82,12 +84,49 @@ function clock(seconds: number) {
   return hours ? `${hours}:${minutes.padStart(2, '0')}:${remaining}` : `${minutes}:${remaining}`
 }
 
+function DemoLibrary({ duration, onRead, headingRef }: { duration: number; onRead: () => void; headingRef: Ref<HTMLHeadingElement> }) {
+  const t = useTranslations()
+
+  return (
+    <main className={`${styles.demo} ${styles.library}`}>
+      <header className={styles.libraryHeader}>
+        <a href={repositoryUrl} className={styles.repoLink}>
+          <span aria-hidden="true">← </span>
+          {t('LabelReadAlongDemoBackToRepo')}
+        </a>
+        <h1 ref={headingRef} tabIndex={-1}>
+          {t('LabelReadAlongDemoLibrary')}
+        </h1>
+      </header>
+      <section className={styles.shelf} aria-label={t('LabelReadAlongDemoLibrary')}>
+        <article className={styles.libraryBook}>
+          <div className={styles.cover} aria-hidden="true">
+            <span>A</span>
+          </div>
+          <div className={styles.libraryBookInfo}>
+            <h2>{bookTitle}</h2>
+            <p className={styles.muted}>{bookAuthor}</p>
+            <p className={styles.muted}>{clock(duration)}</p>
+            <button type="button" onClick={onRead}>
+              {t('LabelReadAlongDemo')}
+            </button>
+          </div>
+        </article>
+      </section>
+    </main>
+  )
+}
+
 export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string; credits?: ReactNode }) {
   const t = useTranslations()
   const audioRef = useRef<HTMLAudioElement>(null)
   const searchRef = useRef<HTMLDialogElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const leafRef = useRef<HTMLElement>(null)
+  const readerHeadingRef = useRef<HTMLHeadingElement>(null)
+  const libraryHeadingRef = useRef<HTMLHeadingElement>(null)
+  const hasNavigated = useRef(false)
+  const [showLibrary, setShowLibrary] = useState(false)
   const [time, setTime] = useState(0)
   const [manualPage, setManualPage] = useState<number | null>(null)
   const [playing, setPlaying] = useState(false)
@@ -115,6 +154,10 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
       )),
     [t]
   )
+
+  useEffect(() => {
+    if (hasNavigated.current) (showLibrary ? libraryHeadingRef : readerHeadingRef).current?.focus()
+  }, [showLibrary])
 
   useEffect(() => {
     if (!playing && searchMatch === null) return
@@ -199,20 +242,22 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
     window.dispatchEvent(new Event(bookmarkEvent))
   }
 
-  return (
-    <main className={styles.demo}>
+  const reader = (
+    <main className={styles.demo} hidden={showLibrary}>
       <header className={styles.header}>
         <button
           type="button"
           onClick={() => {
             audioRef.current?.pause()
-            setManualPage(null)
-            seek(0)
+            hasNavigated.current = true
+            setShowLibrary(true)
           }}
         >
           ← {t('LabelReadAlongDemoBack')}
         </button>
-        <h1 className={styles.headerTitle}>{t('LabelReadAlongDemo')}</h1>
+        <h1 className={styles.headerTitle} ref={readerHeadingRef} tabIndex={-1}>
+          {t('LabelReadAlongDemo')}
+        </h1>
         <button className={styles.playToggle} type="button" onClick={() => (playing ? audioRef.current?.pause() : startAudio())}>
           {t(playing ? 'LabelReadAlongDemoPauseAudio' : 'LabelReadAlongDemoPlayAudio')}
         </button>
@@ -441,5 +486,12 @@ export default function ReadAlongDemo({ audioSrc, credits }: { audioSrc: string;
         </div>
       </dialog>
     </main>
+  )
+
+  return (
+    <>
+      {reader}
+      {showLibrary && <DemoLibrary duration={duration} onRead={() => setShowLibrary(false)} headingRef={libraryHeadingRef} />}
+    </>
   )
 }

@@ -20,6 +20,94 @@
     sans-serif;
 }
 
+.demo[hidden] {
+  display: none;
+}
+
+.library {
+  grid-template-rows: auto 1fr;
+  overflow: auto;
+}
+
+.libraryHeader,
+.shelf {
+  padding-inline: calc(max(0px, (100% - var(--reader-width)) / 2) + var(--reader-gutter));
+}
+
+.libraryHeader {
+  padding-block: 0.75rem 1.25rem;
+  box-shadow: 0 1px 3px #0005;
+}
+
+.libraryHeader h1 {
+  margin-top: 0.65rem;
+  font-size: clamp(1.6rem, 5vw, 2.25rem);
+  font-weight: 600;
+}
+
+.repoLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--reader-muted);
+  text-underline-offset: 0.2em;
+}
+
+.repoLink:hover {
+  color: var(--reader-text);
+}
+
+.shelf {
+  padding-block: 1.5rem;
+}
+
+.libraryBook {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1rem, 5vw, 1.75rem);
+  width: min(100%, 32rem);
+  padding: clamp(1rem, 4vw, 1.5rem);
+  border: 1px solid var(--reader-border);
+  border-radius: 0.45rem;
+  background: var(--reader-panel);
+}
+
+.cover {
+  display: grid;
+  width: clamp(5.25rem, 24vw, 8rem);
+  aspect-ratio: 3 / 4;
+  place-items: center;
+  border: 1px solid #a9926b;
+  border-inline-start: 0.35rem solid #776039;
+  border-radius: 0.1rem 0.3rem 0.3rem 0.1rem;
+  color: #344c46;
+  background: #efe0c5;
+  box-shadow:
+    inset 0 0 0 0.35rem #dcc8a5,
+    0 0.15rem 0.3rem #0007;
+  font:
+    3rem/1 Georgia,
+    serif;
+}
+
+.libraryBookInfo {
+  flex: 1 1 10rem;
+}
+
+.libraryBookInfo h2 {
+  margin-bottom: 0.25rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.demo .libraryBookInfo button {
+  margin-top: 0.75rem;
+  border-color: var(--reader-accent);
+  color: var(--reader-accent);
+}
+
 .demo :is(button, select, summary) {
   min-height: 2.75rem;
   padding: 0.4rem 0.7rem;
