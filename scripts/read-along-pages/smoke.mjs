@@ -42,6 +42,17 @@ try {
 
   await openDeployment(page, errors)
 
+  const aliceLink = page.getByRole('link', { name: aliceTitle, exact: true })
+  if (process.env.READ_ALONG_SMOKE_ALICE_ONLY !== '1') {
+    assert.equal(new URL(page.url()).hash, '', 'The base demo URL should show the library without a hash')
+    await page.getByRole('heading', { name: 'Demo library', exact: true }).waitFor()
+    for (const title of [aliceTitle, ...addedBooks.map(({ title }) => title)]) {
+      await page.getByRole('link', { name: title, exact: true }).waitFor()
+    }
+    await aliceLink.click()
+    assert.equal(new URL(page.url()).hash, '#alice', 'The Alice link should open its shareable book page')
+  }
+
   const bookTitle = aliceTitle
   const book = page.getByRole('heading', { level: 1, name: bookTitle, exact: true })
   const openReader = page.getByRole('button', { name: 'Read Along', exact: true })

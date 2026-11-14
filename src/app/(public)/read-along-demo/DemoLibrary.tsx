@@ -15,10 +15,10 @@ function subscribe(callback: () => void) {
 
 function readRoute() {
   const route = window.location.hash.slice(1)
-  return route === 'library' || demoBooks.some(({ id }) => id === route) ? route : 'alice'
+  return demoBooks.some(({ id }) => id === route) ? route : 'library'
 }
 
-const readServerRoute = () => 'alice'
+const readServerRoute = () => 'library'
 const aliceText = { chapters: aliceChapters, pages: alicePages }
 
 export function DemoHeader({ logoSrc }: { logoSrc: string }) {
