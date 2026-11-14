@@ -10,7 +10,8 @@ import styles from './read-along.module.css'
 const textSettingsGlyph = 'Aa'
 const playbackSpeeds = [0.5, 0.75, 0.9, 1, 1.15, 1.2, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3]
 const searchPageSize = 30
-const facingPagesQuery = '(min-width: 52rem)'
+// Landscape phones can have less usable width around their camera cutout.
+const facingPagesQuery = '(min-width: 52rem), (orientation: landscape) and (pointer: coarse) and (min-width: 40rem)'
 // A seek can land a few milliseconds before its exact timestamp in compressed audio.
 const pageBoundaryTolerance = 0.005
 
