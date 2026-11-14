@@ -10,6 +10,21 @@ import styles from './read-along.module.css'
 const textSettingsGlyph = 'Aa'
 const playbackSpeeds = [0.5, 0.75, 0.9, 1, 1.15, 1.2, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3]
 const searchPageSize = 30
+const facingPagesQuery = '(min-width: 52rem)'
+// A seek can land a few milliseconds before its exact timestamp in compressed audio.
+const pageBoundaryTolerance = 0.005
+
+function subscribeToFacingPages(onChange: () => void) {
+  const query = window.matchMedia(facingPagesQuery)
+  query.addEventListener('change', onChange)
+  return () => query.removeEventListener('change', onChange)
+}
+
+function getFacingPages() {
+  return window.matchMedia(facingPagesQuery).matches
+}
+
+const getInitialFacingPages = () => false
 
 function normalizeSearchWord(word: string) {
   return word
@@ -138,7 +153,7 @@ export default function ReadAlongDemo({
   function getAudioPage(position: number) {
     return Math.max(
       0,
-      pageStarts.findLastIndex((start) => start <= position)
+      pageStarts.findLastIndex((start) => start <= position + pageBoundaryTolerance)
     )
   }
 
@@ -147,7 +162,7 @@ export default function ReadAlongDemo({
   const searchRef = useRef<HTMLDialogElement>(null)
   const searchCountRef = useRef<HTMLParagraphElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
-  const leafRef = useRef<HTMLElement>(null)
+  const spreadRef = useRef<HTMLDivElement>(null)
   const toolsRef = useRef<HTMLElement>(null)
   const readerHeadingRef = useRef<HTMLHeadingElement>(null)
   const bookHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -169,9 +184,12 @@ export default function ReadAlongDemo({
   const [searchPage, setSearchPage] = useState(0)
   const [readingMenuOpen, setReadingMenuOpen] = useState(false)
   const [duration, setDuration] = useState(lastWordEnd)
+  const facingPages = useSyncExternalStore(subscribeToFacingPages, getFacingPages, getInitialFacingPages)
   const audioPage = getAudioPage(time)
   const page = manualPage ?? audioPage
-  const openingChapter = chaptersByOpeningPage.get(page)
+  const firstVisiblePage = facingPages ? page - (page % 2) : page
+  const pageStep = facingPages ? 2 : 1
+  const visiblePages = facingPages ? [firstVisiblePage, firstVisiblePage + 1] : [page]
   const activeChapter = chapters.findLast((chapter) => chapter.page <= page)
   const activeWord = pages[page].findIndex(({ start, end }) => start !== undefined && end !== undefined && time >= start && time < end)
   const searchResults = useMemo(() => findMatches(submittedQuery, bookWords, searchableWords), [submittedQuery, bookWords, searchableWords])
@@ -193,9 +211,9 @@ export default function ReadAlongDemo({
   useEffect(() => {
     if (!showReader || readingMenuOpen || searchRef.current?.open) return
     if (!searchMatch && (!playing || manualPage !== null)) return
-    const marker = leafRef.current?.querySelector(searchMatch === null ? '[aria-current="true"]' : '[data-match="true"]')
+    const marker = spreadRef.current?.querySelector(searchMatch === null ? '[aria-current="true"]' : '[data-match="true"]')
     marker?.scrollIntoView({ block: 'nearest', inline: 'nearest' })
-  }, [activeWord, manualPage, page, playing, readingMenuOpen, searchMatch, showReader])
+  }, [activeWord, facingPages, manualPage, page, playing, readingMenuOpen, searchMatch, showReader])
 
   useEffect(() => {
     const audio = audioRef.current
@@ -301,7 +319,7 @@ export default function ReadAlongDemo({
   }
 
   return (
-    <div className={styles.demo}>
+    <div className={styles.demo} data-facing-pages={facingPages || undefined}>
       {appHeader}
       <main className={styles.bookPanel}>
         {!showReader && (
@@ -353,14 +371,26 @@ export default function ReadAlongDemo({
             </div>
             <div className={styles.toolbar}>
               <nav className={styles.pageNav} aria-label={t('LabelReadAlongDemoPages')}>
-                <button type="button" aria-label={t('ButtonPrevious')} disabled={page === 0} onClick={() => turnPage(page - 1)}>
+                <button
+                  type="button"
+                  aria-label={t('ButtonPrevious')}
+                  aria-description={facingPages ? t('LabelReadAlongDemoPreviousSpread') : undefined}
+                  disabled={firstVisiblePage === 0}
+                  onClick={() => turnPage(firstVisiblePage - pageStep)}
+                >
                   ‹
                 </button>
                 <label htmlFor="sample-page">{t('LabelReadAlongDemoPage')}</label>
                 <select id="sample-page" value={page} onChange={(event) => turnPage(Number(event.target.value))}>
                   {pageOptions}
                 </select>
-                <button type="button" aria-label={t('ButtonNext')} disabled={page === pages.length - 1} onClick={() => turnPage(page + 1)}>
+                <button
+                  type="button"
+                  aria-label={t('ButtonNext')}
+                  aria-description={facingPages ? t('LabelReadAlongDemoNextSpread') : undefined}
+                  disabled={firstVisiblePage + pageStep >= pages.length}
+                  onClick={() => turnPage(firstVisiblePage + pageStep)}
+                >
                   ›
                 </button>
               </nav>
@@ -463,26 +493,48 @@ export default function ReadAlongDemo({
                 {t(searchMatch !== null ? 'LabelReadAlongDemoPlayMatch' : 'LabelReadAlongDemoPlayHere')}
               </button>
             </div>
-            <article className={styles.leaf} ref={leafRef} data-size={largePrint ? 'large' : undefined} lang="en">
-              <header className={styles.runningHead}>{bookTitle}</header>
-              {openingChapter && <h2 className={styles.chapter}>{openingChapter.title}</h2>}
-              <div className={styles.passage}>
-                {pageParagraphs[page].map((paragraph) => (
-                  <p key={paragraph[0].index}>
-                    {paragraph.map((word, index) => (
-                      <span key={word.index}>
-                        {index > 0 && word.lineStart && <br />}
-                        <span aria-current={word.index === activeWord ? 'true' : undefined} data-match={searchMatch?.words.includes(word) || undefined}>
-                          {word.word}
-                        </span>
-                        {index < paragraph.length - 1 && !paragraph[index + 1].lineStart && ' '}
-                      </span>
-                    ))}
-                  </p>
-                ))}
-              </div>
-              <footer className={styles.folio}>{page + 1}</footer>
-            </article>
+            <div className={styles.spread} ref={spreadRef} data-layout={facingPages ? 'facing' : 'single'}>
+              {visiblePages.map((pageIndex, side) => {
+                if (pageIndex >= pages.length) {
+                  return <div className={styles.leaf} key={pageIndex} data-side="right" aria-hidden="true" />
+                }
+                const openingChapter = chaptersByOpeningPage.get(pageIndex)
+                const runningHead = side === 1 && book.author ? book.author : bookTitle
+                return (
+                  <article
+                    className={styles.leaf}
+                    key={pageIndex}
+                    data-page={pageIndex + 1}
+                    data-side={side === 1 ? 'right' : 'left'}
+                    data-size={largePrint ? 'large' : undefined}
+                    aria-label={t('LabelReadAlongDemoBookmarkLocation', { page: pageIndex + 1 })}
+                    lang="en"
+                  >
+                    <header className={styles.runningHead}>{runningHead}</header>
+                    {openingChapter && <h2 className={styles.chapter}>{openingChapter.title}</h2>}
+                    <div className={styles.passage}>
+                      {pageParagraphs[pageIndex].map((paragraph) => (
+                        <p key={paragraph[0].index}>
+                          {paragraph.map((word, index) => (
+                            <span key={word.index}>
+                              {index > 0 && word.lineStart && <br />}
+                              <span
+                                aria-current={pageIndex === page && word.index === activeWord ? 'true' : undefined}
+                                data-match={searchMatch?.words.includes(word) || undefined}
+                              >
+                                {word.word}
+                              </span>
+                              {index < paragraph.length - 1 && !paragraph[index + 1].lineStart && ' '}
+                            </span>
+                          ))}
+                        </p>
+                      ))}
+                    </div>
+                    <footer className={styles.folio}>{pageIndex + 1}</footer>
+                  </article>
+                )
+              })}
+            </div>
             <div className={styles.credits}>
               <a href={book.textCredit}>{t('LabelReadAlongDemoTextCredit')}</a>
               <a href={book.audioCredit}>{t('LabelReadAlongDemoAudioCredit', { narrator: book.narrator })}</a>

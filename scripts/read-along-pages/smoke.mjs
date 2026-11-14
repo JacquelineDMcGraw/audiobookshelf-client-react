@@ -116,6 +116,7 @@ try {
   await book.waitFor({ state: 'hidden' })
   assert.equal(page.url(), bookUrl, 'Read Along should open inside the book page')
   await readerPanel.getByText('Word highlighting is available', { exact: false }).waitFor()
+  assert.equal(await readerPanel.locator('article[data-page]:visible').count(), 1, 'Phone readers should keep one page visible')
   await readerPanel.locator('article footer').scrollIntoViewIfNeeded()
   const headerBounds = await appHeader.boundingBox()
   const playerBounds = await audio.boundingBox()
@@ -244,6 +245,12 @@ try {
   await reader.waitFor()
   await finalChapter.waitFor()
   assert(Math.abs((await audio.evaluate((element) => element.currentTime)) - returnedPosition) < 0.1, 'Reopening Read Along should keep the playback position')
+  const desktopPages = readerPanel.locator('article[data-page]:visible')
+  const firstSpreadPage = Number(finalPage) - (Number(finalPage) % 2)
+  assert.deepEqual(await desktopPages.locator('footer').allTextContents(), [String(firstSpreadPage + 1), String(firstSpreadPage + 2)])
+  assert((await desktopPages.nth(1).boundingBox()).x > (await desktopPages.first().boundingBox()).x, 'Desktop pages should appear side by side')
+  await readerPanel.getByRole('button', { name: 'Previous', exact: true }).click()
+  assert.deepEqual(await desktopPages.locator('footer').allTextContents(), [String(firstSpreadPage - 1), String(firstSpreadPage)])
 
   console.log(
     'Alice passed: book details, playback and speed, embedded reader with visible app header, phrase search and playback, manual page turns, 12 chapters, highlighting and automatic page turn, bookmark deletion and restore after reload, and Back to book.'
