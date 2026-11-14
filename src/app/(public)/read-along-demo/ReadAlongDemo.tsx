@@ -33,17 +33,25 @@ function findMatches(query: string, bookWords: BookWord[], searchableWords: stri
   return results
 }
 
-function indexBook({ chapters, pages }: DemoBookText) {
+function indexBook({ chapters, pages, pageStarts: sourcePageStarts }: DemoBookText) {
   const chaptersByOpeningPage = new Map(chapters.map((chapter) => [chapter.page, chapter]))
-  const pageStarts = pages.map((words, page) => {
-    const start = chaptersByOpeningPage.get(page)?.start ?? words.find((word) => word.start !== undefined)?.start
-    if (start === undefined) throw new Error(`Read-along page ${page + 1} needs a narration cue`)
-    return start
-  })
+  const pageStarts = pages.map((words, page) =>
+    sourcePageStarts
+      ? (sourcePageStarts[page] ?? null)
+      : (chaptersByOpeningPage.get(page)?.start ?? words.find((word) => word.start !== undefined)?.start ?? null)
+  )
+  const navigationStarts = pageStarts.slice()
+  let nextStart: number | null = null
+  for (let page = navigationStarts.length - 1; page >= 0; page--) {
+    nextStart = navigationStarts[page] ?? nextStart
+    navigationStarts[page] = nextStart
+  }
+  const lastStart = pageStarts.findLast((start) => start !== null) ?? 0
+  const seekStarts = navigationStarts.map((start) => start ?? lastStart)
   const pageParagraphs = pages.map<BookWord[][]>(() => [])
   const bookWords = pages.flatMap((words, page) => {
     // Printed words that the narrator skipped still appear in search and use the previous cue.
-    let position = pageStarts[page]
+    let position = seekStarts[page]
     const paragraphs = pageParagraphs[page]
     return words.map((word, index) => {
       position = word.start ?? position
@@ -56,6 +64,7 @@ function indexBook({ chapters, pages }: DemoBookText) {
   return {
     chaptersByOpeningPage,
     pageStarts,
+    seekStarts,
     pageParagraphs,
     bookWords,
     searchableWords: bookWords.map(({ word }) => normalizeSearchWord(word)),
@@ -67,7 +76,7 @@ const bookmarkEvent = 'audiobookshelf-read-along-bookmarks'
 const emptyBookmarks = () => '[]'
 const sessionBookmarks = new Map<string, string>()
 
-function bookBookmarkStore(bookId: DemoBook['id']) {
+function bookBookmarkStore(bookId: string) {
   const key = `audiobookshelf:read-along:${bookId === 'alice' ? 'alice-full-v1' : bookId}:bookmarks`
   return {
     subscribe(onChange: () => void) {
@@ -119,26 +128,28 @@ export default function ReadAlongDemo({
   audioSrc,
   coverSrc,
   appHeader,
-  credits
+  credits,
+  onBack
 }: {
-  book: DemoBook
+  book: DemoBook | { id: string; title: string; textCredit?: undefined; audioCredit?: undefined; narrator?: undefined }
   text: DemoBookText
   audioSrc: string
-  coverSrc: string
-  appHeader: ReactNode
+  coverSrc?: string
+  appHeader?: ReactNode
   credits?: ReactNode
+  onBack?: () => void
 }) {
   const { title: bookTitle, id: bookId } = book
   const { pages, chapters } = text
   const hasIntroduction = chapters[0]?.title === 'Introduction'
   const indexed = useMemo(() => indexBook(text), [text])
-  const { chaptersByOpeningPage, pageStarts, pageParagraphs, bookWords, searchableWords, lastWordEnd } = indexed
+  const { chaptersByOpeningPage, pageStarts, seekStarts, pageParagraphs, bookWords, searchableWords, lastWordEnd } = indexed
   const bookmarkStore = useMemo(() => bookBookmarkStore(bookId), [bookId])
 
   function getAudioPage(position: number) {
     return Math.max(
       0,
-      pageStarts.findLastIndex((start) => start <= position)
+      pageStarts.findLastIndex((start) => start !== null && start <= position)
     )
   }
 
@@ -151,8 +162,8 @@ export default function ReadAlongDemo({
   const toolsRef = useRef<HTMLElement>(null)
   const readerHeadingRef = useRef<HTMLHeadingElement>(null)
   const bookHeadingRef = useRef<HTMLHeadingElement>(null)
-  const hasNavigated = useRef(false)
-  const [showReader, setShowReader] = useState(false)
+  const hasNavigated = useRef(Boolean(onBack))
+  const [showReader, setShowReader] = useState(Boolean(onBack))
   const [playerOpened, setPlayerOpened] = useState(false)
   const [time, setTime] = useState(0)
   const [manualPage, setManualPage] = useState<number | null>(null)
@@ -178,8 +189,8 @@ export default function ReadAlongDemo({
   const visibleSearchResults = searchResults.slice(searchPage * searchPageSize, (searchPage + 1) * searchPageSize)
   const pageOptions = useMemo(
     () =>
-      pageStarts.map((start, index) => (
-        <option key={start} value={index}>
+      pageStarts.map((_, index) => (
+        <option key={index} value={index}>
           {t('LabelPlayerChapterNumberMarker', { 0: index + 1, 1: pageStarts.length })}
         </option>
       )),
@@ -229,7 +240,8 @@ export default function ReadAlongDemo({
 
   function turnPage(next: number) {
     if (next < 0 || next >= pages.length) return
-    if (manualPage === null) seek(pageStarts[next])
+    const nextStart = pageStarts[next]
+    if (manualPage === null && nextStart !== null) seek(nextStart)
     else {
       setManualPage(next)
       setSearchMatch(null)
@@ -238,8 +250,8 @@ export default function ReadAlongDemo({
   }
 
   function jumpFromMenu(next: number, menu: HTMLDetailsElement | null) {
-    if (manualPage !== null) setManualPage(next)
-    seek(pageStarts[next])
+    if (manualPage !== null || pageStarts[next] === null) setManualPage(next)
+    seek(seekStarts[next])
     closeReadingMenu(menu)
   }
 
@@ -278,13 +290,13 @@ export default function ReadAlongDemo({
 
   function playFromHere() {
     if (searchMatch) seek(searchMatch.position)
-    else if (manualPage !== null) seek(pageStarts[page])
+    else if (manualPage !== null) seek(seekStarts[page])
     setManualPage(null)
     startAudio()
   }
 
   function saveBookmark() {
-    const position = manualPage !== null && page !== audioPage ? pageStarts[page] : (audioRef.current?.currentTime ?? time)
+    const position = manualPage !== null && page !== audioPage ? seekStarts[page] : (audioRef.current?.currentTime ?? time)
     const savedBookmarks = parseBookmarks(bookmarkStore.read())
     if (savedBookmarks.some((saved) => Math.floor(saved) === Math.floor(position))) {
       setBookmarkStatus(t('LabelReadAlongDemoAlreadySaved'))
@@ -301,10 +313,10 @@ export default function ReadAlongDemo({
   }
 
   return (
-    <div className={styles.demo}>
+    <div className={onBack ? `${styles.demo} ${styles.embedded}` : styles.demo}>
       {appHeader}
       <main className={styles.bookPanel}>
-        {!showReader && (
+        {!showReader && 'author' in book && coverSrc && (
           <DemoBookDetails
             book={book}
             chapters={chapters}
@@ -330,8 +342,11 @@ export default function ReadAlongDemo({
               type="button"
               onClick={() => {
                 audioRef.current?.pause()
-                hasNavigated.current = true
-                setShowReader(false)
+                if (onBack) onBack()
+                else {
+                  hasNavigated.current = true
+                  setShowReader(false)
+                }
               }}
             >
               ← {t('LabelReadAlongDemoBack')}
@@ -484,8 +499,8 @@ export default function ReadAlongDemo({
               <footer className={styles.folio}>{page + 1}</footer>
             </article>
             <div className={styles.credits}>
-              <a href={book.textCredit}>{t('LabelReadAlongDemoTextCredit')}</a>
-              <a href={book.audioCredit}>{t('LabelReadAlongDemoAudioCredit', { narrator: book.narrator })}</a>
+              {book.textCredit && <a href={book.textCredit}>{t('LabelReadAlongDemoTextCredit')}</a>}
+              {book.audioCredit && <a href={book.audioCredit}>{t('LabelReadAlongDemoAudioCredit', { narrator: book.narrator })}</a>}
               {credits}
             </div>
           </div>
@@ -594,7 +609,8 @@ export default function ReadAlongDemo({
               type="button"
               onClick={() => {
                 audioRef.current?.pause()
-                setManualPage(null)
+                const resultPage = result.words[0].page
+                setManualPage(getAudioPage(result.position) === resultPage ? null : resultPage)
                 seek(result.position)
                 setSearchMatch(result)
                 searchRef.current?.close()
@@ -625,4 +641,20 @@ export default function ReadAlongDemo({
       </dialog>
     </div>
   )
+}
+
+export function EmbeddedReadAlong({
+  title,
+  bookmarkId,
+  text,
+  audioSrc,
+  onBack
+}: {
+  title: string
+  bookmarkId: string
+  text: DemoBookText
+  audioSrc: string
+  onBack: () => void
+}) {
+  return <ReadAlongDemo book={{ id: `library:${bookmarkId}`, title }} text={text} audioSrc={audioSrc} onBack={onBack} />
 }

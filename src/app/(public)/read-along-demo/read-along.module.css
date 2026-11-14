@@ -20,6 +20,11 @@
     sans-serif;
 }
 
+.embedded {
+  grid-template-rows: minmax(0, 1fr) auto;
+  height: calc(100dvh - var(--header-height, 4rem));
+}
+
 .demo [hidden] {
   display: none;
 }

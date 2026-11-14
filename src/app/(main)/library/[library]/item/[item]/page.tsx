@@ -1,6 +1,7 @@
 import { getData } from '@/lib/api'
 import { getLibraryItemOrNotFound } from '@/lib/notFound'
 import { namedPageMetadata } from '@/lib/pageMetadata'
+import { isReadAlongConfigured } from '@/lib/readAlongConfig'
 import { BookLibraryItem, PodcastLibraryItem } from '@/types/api'
 import type { Metadata } from 'next'
 import LibraryItemClient from './LibraryItemClient'
@@ -18,7 +19,7 @@ export default async function ItemPage({ params }: { params: Promise<{ item: str
 
   return (
     <div className="w-full">
-      <LibraryItemClient libraryItem={libraryItem as BookLibraryItem | PodcastLibraryItem} />
+      <LibraryItemClient libraryItem={libraryItem as BookLibraryItem | PodcastLibraryItem} readAlongEnabled={isReadAlongConfigured()} />
     </div>
   )
 }

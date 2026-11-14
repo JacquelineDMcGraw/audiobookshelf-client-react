@@ -1,6 +1,11 @@
 export type DemoWord = { word: string; start?: number; end?: number; paragraphStart?: true; lineStart?: true }
 export type DemoChapter = { title: string; page: number; start: number }
-export type DemoBookText = { chapters: readonly DemoChapter[]; pages: readonly (readonly DemoWord[])[] }
+export type DemoBookText = {
+  chapters: readonly DemoChapter[]
+  pages: readonly (readonly DemoWord[])[]
+  /** Untimed pages are still selectable with the reader's page controls. */
+  pageStarts?: readonly (number | null)[]
+}
 
 export const demoBooks = [
   {

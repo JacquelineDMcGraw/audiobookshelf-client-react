@@ -1,4 +1,4 @@
-import { SupportedFileTypes } from '@/lib/fileUtils'
+import { sanitizeFileName, SupportedFileTypes } from '@/lib/fileUtils'
 import type { Library } from '@/types/api'
 import path from 'path'
 
@@ -109,6 +109,31 @@ function cleanPodcast(item: UploadItemData, index: number): CleanedItem {
 function cleanItem(item: UploadItemData, mediaType: string, index: number): CleanedItem {
   if (mediaType === 'podcast') return cleanPodcast(item, index)
   return cleanBook(item, index)
+}
+
+/** Stage a single Read Along book even when its audio and ebook were picked separately. */
+export function createReadAlongUploadItem(ebook: File, audio: File[]): CleanedItem | null {
+  if (!/\.(epub|pdf)$/i.test(ebook.name) || ebook.size === 0 || !audio.length) return null
+  if (audio.some((file) => checkFileType(file.name) !== 'audio' || file.size === 0)) return null
+  const filenames = new Set(audio.map((file) => sanitizeFileName(file.name.normalize('NFC')).toLowerCase()))
+  if (filenames.size !== audio.length) return null
+
+  // The ebook name is a better starting title than the name of the first audio chapter.
+  const ebookFile: FileWithMetadata = ebook
+  ebookFile.filetype = 'ebook'
+  const audioFiles: FileWithMetadata[] = audio.map((file: FileWithMetadata) => {
+    file.filetype = 'audio'
+    return file
+  })
+  return {
+    index: 1,
+    title: path.basename(ebook.name, path.extname(ebook.name)),
+    author: '',
+    series: '',
+    itemFiles: [ebookFile, ...audioFiles],
+    otherFiles: [],
+    ignoredFiles: []
+  }
 }
 
 /**

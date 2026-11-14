@@ -1,5 +1,6 @@
 import { getCurrentUser, getData } from '@/lib/api'
 import { staticPageMetadata } from '@/lib/pageMetadata'
+import { isReadAlongConfigured } from '@/lib/readAlongConfig'
 import { userCanUpload } from '@/lib/userPermissions'
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
@@ -19,5 +20,5 @@ export default async function UploadPage({ params }: { params: Promise<{ library
     redirect(`/library/${libraryId}`)
   }
 
-  return <UploadClient />
+  return <UploadClient readAlongEnabled={isReadAlongConfigured()} />
 }

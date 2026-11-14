@@ -48,6 +48,10 @@ module.exports.config = {
 1. `pnpm run build` this NextJS app
 2. Start the audiobookshelf server with `npm run start-dev` (uses the dev.js file w/ production)
 
+### Self-hosted Read Along
+
+Pair a DRM-free EPUB or text PDF with audiobook tracks in your library and sync them on your own machine. See [setup and usage](self-hosted-read-along/README.md).
+
 ### Read Along demo
 
 After installing the client dependencies, start the standalone preview:
