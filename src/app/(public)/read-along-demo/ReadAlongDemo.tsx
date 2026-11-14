@@ -164,6 +164,7 @@ export default function ReadAlongDemo({
   const searchCountRef = useRef<HTMLParagraphElement>(null)
   const frameRef = useRef<HTMLDivElement>(null)
   const spreadRef = useRef<HTMLDivElement>(null)
+  const compactToolsRef = useRef<HTMLButtonElement>(null)
   const toolsRef = useRef<HTMLElement>(null)
   const readerHeadingRef = useRef<HTMLHeadingElement>(null)
   const bookHeadingRef = useRef<HTMLHeadingElement>(null)
@@ -184,6 +185,7 @@ export default function ReadAlongDemo({
   const [searchMatch, setSearchMatch] = useState<SearchMatch | null>(null)
   const [searchPage, setSearchPage] = useState(0)
   const [readingMenuOpen, setReadingMenuOpen] = useState(false)
+  const [compactToolsOpen, setCompactToolsOpen] = useState(false)
   const [duration, setDuration] = useState(lastWordEnd)
   const facingPages = useSyncExternalStore(subscribeToFacingPages, getFacingPages, getInitialFacingPages)
   const audioPage = getAudioPage(time)
@@ -246,6 +248,15 @@ export default function ReadAlongDemo({
     setTime(nextTime)
   }
 
+  function closeCompactTools() {
+    if (!compactToolsOpen) return
+    setCompactToolsOpen(false)
+    const openMenu = toolsRef.current?.querySelector<HTMLDetailsElement>('details[open]')
+    if (openMenu) openMenu.open = false
+    const trigger = compactToolsRef.current
+    if (trigger?.getClientRects().length) trigger.focus({ preventScroll: true })
+  }
+
   function turnPage(next: number) {
     if (next < 0 || next >= pages.length) return
     if (manualPage === null) seek(pageStarts[next])
@@ -253,6 +264,7 @@ export default function ReadAlongDemo({
       setManualPage(next)
       setSearchMatch(null)
     }
+    closeCompactTools()
     frameRef.current?.scrollTo({ top: 0 })
   }
 
@@ -267,6 +279,7 @@ export default function ReadAlongDemo({
       menu.open = false
       menu.querySelector('summary')?.focus({ preventScroll: true })
     }
+    closeCompactTools()
     frameRef.current?.scrollTo({ top: 0 })
   }
 
@@ -299,6 +312,7 @@ export default function ReadAlongDemo({
     if (searchMatch) seek(searchMatch.position)
     else if (manualPage !== null) seek(pageStarts[page])
     setManualPage(null)
+    closeCompactTools()
     startAudio()
   }
 
@@ -319,8 +333,37 @@ export default function ReadAlongDemo({
     menu?.querySelector('summary')?.focus({ preventScroll: true })
   }
 
+  function renderPageNavigation(pickerId: string) {
+    return (
+      <nav className={styles.pageNav} aria-label={t('LabelReadAlongDemoPages')}>
+        <button
+          type="button"
+          aria-label={t('ButtonPrevious')}
+          aria-description={facingPages ? t('LabelReadAlongDemoPreviousSpread') : undefined}
+          disabled={firstVisiblePage === 0}
+          onClick={() => turnPage(firstVisiblePage - pageStep)}
+        >
+          ‹
+        </button>
+        <label htmlFor={pickerId}>{t('LabelReadAlongDemoPage')}</label>
+        <select id={pickerId} value={page} onChange={(event) => turnPage(Number(event.target.value))}>
+          {pageOptions}
+        </select>
+        <button
+          type="button"
+          aria-label={t('ButtonNext')}
+          aria-description={facingPages ? t('LabelReadAlongDemoNextSpread') : undefined}
+          disabled={firstVisiblePage + pageStep >= pages.length}
+          onClick={() => turnPage(firstVisiblePage + pageStep)}
+        >
+          ›
+        </button>
+      </nav>
+    )
+  }
+
   return (
-    <div className={styles.demo} data-facing-pages={facingPages || undefined}>
+    <div className={styles.demo} data-facing-pages={facingPages || undefined} data-reading={showReader || undefined}>
       {appHeader}
       <main className={styles.bookPanel}>
         {!showReader && (
@@ -344,155 +387,152 @@ export default function ReadAlongDemo({
           />
         )}
         <section className={styles.readerPanel} hidden={!showReader} aria-labelledby="read-along-heading">
+          <div className={styles.compactBrand}>{appHeader}</div>
           <header className={styles.header}>
             <button
               type="button"
+              aria-label={t('LabelReadAlongDemoBack')}
               onClick={() => {
                 audioRef.current?.pause()
+                closeCompactTools()
                 hasNavigated.current = true
                 setShowReader(false)
               }}
             >
-              ← {t('LabelReadAlongDemoBack')}
+              <span aria-hidden="true">←</span> <span className={styles.backText}>{t('LabelReadAlongDemoBack')}</span>
             </button>
             <h1 className={styles.headerTitle} id="read-along-heading" ref={readerHeadingRef} tabIndex={-1}>
               {t('LabelReadAlongDemo')}
             </h1>
+            <div className={styles.compactPageNav}>{renderPageNavigation('compact-sample-page')}</div>
+            <button
+              className={styles.compactToolsToggle}
+              type="button"
+              ref={compactToolsRef}
+              aria-expanded={compactToolsOpen}
+              aria-controls="reader-options"
+              onClick={() => {
+                if (compactToolsOpen) closeCompactTools()
+                else setCompactToolsOpen(true)
+                frameRef.current?.scrollTo({ top: 0 })
+              }}
+            >
+              {t('LabelReadAlongDemoTools')}
+            </button>
             <button className={styles.playToggle} type="button" onClick={togglePlayback}>
               {t(playing ? 'LabelReadAlongDemoPauseAudio' : 'LabelReadAlongDemoPlayAudio')}
             </button>
           </header>
 
           <div className={styles.frame} ref={frameRef}>
-            <div className={styles.bookHeader}>
-              <p className={styles.muted}>{t('LabelReadAlongDemoTiming', { time: clock(lastWordEnd) })}</p>
-              <button type="button" aria-haspopup="dialog" onClick={() => searchRef.current?.showModal()}>
-                {t('ButtonSearch')}
-              </button>
-            </div>
-            <div className={styles.toolbar}>
-              <nav className={styles.pageNav} aria-label={t('LabelReadAlongDemoPages')}>
-                <button
-                  type="button"
-                  aria-label={t('ButtonPrevious')}
-                  aria-description={facingPages ? t('LabelReadAlongDemoPreviousSpread') : undefined}
-                  disabled={firstVisiblePage === 0}
-                  onClick={() => turnPage(firstVisiblePage - pageStep)}
-                >
-                  ‹
+            <div id="reader-options" className={styles.readerOptions} data-expanded={compactToolsOpen || undefined}>
+              <div className={styles.bookHeader}>
+                <p className={styles.muted}>{t('LabelReadAlongDemoTiming', { time: clock(lastWordEnd) })}</p>
+                <button type="button" aria-haspopup="dialog" onClick={() => searchRef.current?.showModal()}>
+                  {t('ButtonSearch')}
                 </button>
-                <label htmlFor="sample-page">{t('LabelReadAlongDemoPage')}</label>
-                <select id="sample-page" value={page} onChange={(event) => turnPage(Number(event.target.value))}>
-                  {pageOptions}
-                </select>
-                <button
-                  type="button"
-                  aria-label={t('ButtonNext')}
-                  aria-description={facingPages ? t('LabelReadAlongDemoNextSpread') : undefined}
-                  disabled={firstVisiblePage + pageStep >= pages.length}
-                  onClick={() => turnPage(firstVisiblePage + pageStep)}
-                >
-                  ›
-                </button>
-              </nav>
-              <label className={styles.check}>
-                <input type="checkbox" checked={manualPage === null} onChange={(event) => setManualPage(event.target.checked ? null : page)} />
-                {t('LabelReadAlongDemoFollow')}
-              </label>
-            </div>
-            <nav className={styles.tools} ref={toolsRef} onKeyDown={onReadingMenuKeyDown} aria-label={t('LabelReadAlongDemoTools')}>
-              <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
-                <summary>
-                  <svg className={styles.toolIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01" />
-                  </svg>
-                  {t('LabelReadAlongDemoContents')}
-                </summary>
-                <div className={styles.panel}>
-                  <button type="button" lang="en" onClick={(event) => jumpFromMenu(0, event.currentTarget.closest('details'))}>
-                    {bookTitle}
-                  </button>
-                </div>
-              </details>
-              <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
-                <summary>
-                  <svg className={styles.toolIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M12 6c-2.5-2-6-2-9-1v14c3-1 6.5-1 9 1 2.5-2 6-2 9-1V5c-3-1-6.5-1-9 1Zm0 0v14" />
-                  </svg>
-                  {t('LabelChapters')}
-                </summary>
-                <div className={styles.panel}>
-                  {chapters.map((chapter, index) => (
-                    <button
-                      key={chapter.page}
-                      className={styles.chapterChoice}
-                      type="button"
-                      lang="en"
-                      aria-current={activeChapter === chapter || undefined}
-                      onClick={(event) => jumpFromMenu(chapter.page, event.currentTarget.closest('details'))}
-                    >
-                      <span>{hasIntroduction && index === 0 ? chapter.title : `${hasIntroduction ? index : index + 1}. ${chapter.title}`}</span>
-                      <span className={styles.chapterPosition}>{clock(chapter.start)}</span>
+              </div>
+              <div className={styles.toolbar}>
+                {renderPageNavigation('sample-page')}
+                <label className={styles.check}>
+                  <input type="checkbox" checked={manualPage === null} onChange={(event) => setManualPage(event.target.checked ? null : page)} />
+                  {t('LabelReadAlongDemoFollow')}
+                </label>
+              </div>
+              <nav className={styles.tools} ref={toolsRef} onKeyDown={onReadingMenuKeyDown} aria-label={t('LabelReadAlongDemoTools')}>
+                <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
+                  <summary>
+                    <svg className={styles.toolIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01" />
+                    </svg>
+                    {t('LabelReadAlongDemoContents')}
+                  </summary>
+                  <div className={styles.panel}>
+                    <button type="button" lang="en" onClick={(event) => jumpFromMenu(0, event.currentTarget.closest('details'))}>
+                      {bookTitle}
                     </button>
-                  ))}
-                </div>
-              </details>
-              <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
-                <summary>
-                  <svg className={styles.toolIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path d="M6 4h12v16l-6-4-6 4z" />
-                  </svg>
-                  {t('LabelReadAlongDemoBookmarks')}
-                </summary>
-                <div className={styles.panel}>
-                  {bookmarks.length ? (
-                    bookmarks.map((position) => {
-                      const location = t('LabelReadAlongDemoBookmarkLocation', { page: getAudioPage(position) + 1 })
-                      const timestamp = clock(position)
-                      return (
-                        <div key={position} className={styles.bookmarkRow}>
-                          <button
-                            className={styles.chapterChoice}
-                            type="button"
-                            onClick={(event) => {
-                              setManualPage(null)
-                              seek(position)
-                              closeReadingMenu(event.currentTarget.closest('details'))
-                            }}
-                          >
-                            <span>{location}</span>
-                            <span className={styles.chapterPosition}>{timestamp}</span>
-                          </button>
-                          <button
-                            type="button"
-                            aria-label={t('LabelReadAlongDemoDeleteBookmarkAt', { timestamp })}
-                            onClick={(event) => deleteBookmark(position, event.currentTarget.closest('details'))}
-                          >
-                            {t('LabelReadAlongDemoDeleteBookmark')}
-                          </button>
-                        </div>
-                      )
-                    })
-                  ) : (
-                    <p>{t('LabelReadAlongDemoNoBookmarks')}</p>
-                  )}
-                </div>
-              </details>
-              <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
-                <summary aria-label={t('LabelReadAlongDemoDisplay')}>{textSettingsGlyph}</summary>
-                <div className={styles.panel}>
-                  <label className={styles.check}>
-                    <input type="checkbox" checked={largePrint} onChange={(event) => setLargePrint(event.target.checked)} />
-                    {t('LabelReadAlongDemoLargePrint')}
-                  </label>
-                </div>
-              </details>
-            </nav>
-            <div className={styles.pageActions}>
-              <p className={styles.muted}>{t(manualPage === null ? 'LabelReadAlongDemoFollowing' : 'LabelReadAlongDemoManual')}</p>
-              <button type="button" onClick={playFromHere}>
-                {t(searchMatch !== null ? 'LabelReadAlongDemoPlayMatch' : 'LabelReadAlongDemoPlayHere')}
-              </button>
+                  </div>
+                </details>
+                <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
+                  <summary>
+                    <svg className={styles.toolIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M12 6c-2.5-2-6-2-9-1v14c3-1 6.5-1 9 1 2.5-2 6-2 9-1V5c-3-1-6.5-1-9 1Zm0 0v14" />
+                    </svg>
+                    {t('LabelChapters')}
+                  </summary>
+                  <div className={styles.panel}>
+                    {chapters.map((chapter, index) => (
+                      <button
+                        key={chapter.page}
+                        className={styles.chapterChoice}
+                        type="button"
+                        lang="en"
+                        aria-current={activeChapter === chapter || undefined}
+                        onClick={(event) => jumpFromMenu(chapter.page, event.currentTarget.closest('details'))}
+                      >
+                        <span>{hasIntroduction && index === 0 ? chapter.title : `${hasIntroduction ? index : index + 1}. ${chapter.title}`}</span>
+                        <span className={styles.chapterPosition}>{clock(chapter.start)}</span>
+                      </button>
+                    ))}
+                  </div>
+                </details>
+                <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
+                  <summary>
+                    <svg className={styles.toolIcon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path d="M6 4h12v16l-6-4-6 4z" />
+                    </svg>
+                    {t('LabelReadAlongDemoBookmarks')}
+                  </summary>
+                  <div className={styles.panel}>
+                    {bookmarks.length ? (
+                      bookmarks.map((position) => {
+                        const location = t('LabelReadAlongDemoBookmarkLocation', { page: getAudioPage(position) + 1 })
+                        const timestamp = clock(position)
+                        return (
+                          <div key={position} className={styles.bookmarkRow}>
+                            <button
+                              className={styles.chapterChoice}
+                              type="button"
+                              onClick={(event) => {
+                                setManualPage(null)
+                                seek(position)
+                                closeReadingMenu(event.currentTarget.closest('details'))
+                              }}
+                            >
+                              <span>{location}</span>
+                              <span className={styles.chapterPosition}>{timestamp}</span>
+                            </button>
+                            <button
+                              type="button"
+                              aria-label={t('LabelReadAlongDemoDeleteBookmarkAt', { timestamp })}
+                              onClick={(event) => deleteBookmark(position, event.currentTarget.closest('details'))}
+                            >
+                              {t('LabelReadAlongDemoDeleteBookmark')}
+                            </button>
+                          </div>
+                        )
+                      })
+                    ) : (
+                      <p>{t('LabelReadAlongDemoNoBookmarks')}</p>
+                    )}
+                  </div>
+                </details>
+                <details className={styles.tool} name="demo-reading-tools" onToggle={onReadingMenuToggle}>
+                  <summary aria-label={t('LabelReadAlongDemoDisplay')}>{textSettingsGlyph}</summary>
+                  <div className={styles.panel}>
+                    <label className={styles.check}>
+                      <input type="checkbox" checked={largePrint} onChange={(event) => setLargePrint(event.target.checked)} />
+                      {t('LabelReadAlongDemoLargePrint')}
+                    </label>
+                  </div>
+                </details>
+              </nav>
+              <div className={styles.pageActions}>
+                <p className={styles.muted}>{t(manualPage === null ? 'LabelReadAlongDemoFollowing' : 'LabelReadAlongDemoManual')}</p>
+                <button type="button" onClick={playFromHere}>
+                  {t(searchMatch !== null ? 'LabelReadAlongDemoPlayMatch' : 'LabelReadAlongDemoPlayHere')}
+                </button>
+              </div>
             </div>
             <div className={styles.spread} ref={spreadRef} data-layout={facingPages ? 'facing' : 'single'}>
               {visiblePages.map((pageIndex, side) => {
@@ -651,6 +691,7 @@ export default function ReadAlongDemo({
                 seek(result.position)
                 setSearchMatch(result)
                 searchRef.current?.close()
+                closeCompactTools()
               }}
             >
               <span lang="en">{result.words.map(({ word }) => word).join(' ')}</span> · {clock(result.position)}

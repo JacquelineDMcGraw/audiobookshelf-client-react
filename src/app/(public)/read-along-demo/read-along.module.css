@@ -254,6 +254,12 @@
   transform: rotate(225deg);
 }
 
+.compactBrand,
+.compactPageNav,
+.compactToolsToggle {
+  display: none;
+}
+
 .header {
   z-index: 2;
   display: grid;
@@ -742,38 +748,51 @@
 }
 
 @media (orientation: landscape) and (pointer: coarse) and (max-height: 30rem) {
-  .demo[data-facing-pages] {
-    --reader-gutter: 0.75rem;
+  .demo[data-facing-pages][data-reading] {
+    --reader-gutter: 0.65rem;
+    grid-template-rows: minmax(0, 1fr) auto;
   }
 
-  .demo[data-facing-pages] .appHeader {
-    min-height: 2.75rem;
-    padding-block: 0.25rem;
+  .demo[data-facing-pages][data-reading] > .appHeader {
+    display: none;
   }
 
-  .demo[data-facing-pages] .appHeader img {
-    width: 1.75rem;
-    height: 1.75rem;
+  .demo[data-facing-pages] .readerPanel {
+    grid-template-columns: auto minmax(0, 1fr);
+    background: #232323;
   }
 
-  .demo[data-facing-pages] .frame {
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-    align-items: center;
-    gap: 0.35rem 0.6rem;
+  .demo[data-facing-pages] .compactBrand,
+  .demo[data-facing-pages] .compactPageNav,
+  .demo[data-facing-pages] .compactToolsToggle {
+    display: block;
   }
 
-  .demo[data-facing-pages] :is(.bookHeader, .toolbar, .tools, .pageActions) {
-    margin-block: 0;
+  .demo[data-facing-pages] .compactBrand .appHeader {
+    height: 100%;
+    min-height: 0;
+    gap: 0.4rem;
     padding-block: 0;
+    box-shadow: none;
   }
 
-  .demo[data-facing-pages] .toolbar {
-    border-bottom: 0;
+  .demo[data-facing-pages] .compactBrand img {
+    width: 1.55rem;
+    height: 1.55rem;
   }
 
-  .demo[data-facing-pages] :is(.bookHeader, .pageActions) .muted {
+  .demo[data-facing-pages] .compactBrand .libraryLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    white-space: nowrap;
+  }
+
+  .demo[data-facing-pages] :is(.compactBrand .appHeader span, .header .backText, .readerOptions .pageNav, .readerOptions:not([data-expanded])) {
+    display: none;
+  }
+
+  .demo[data-facing-pages] :is(.headerTitle, .playerBar > .muted) {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -782,28 +801,95 @@
     white-space: nowrap;
   }
 
+  .demo[data-facing-pages] .header {
+    display: flex;
+    gap: 0.4rem;
+    padding: 0 var(--reader-gutter) 0 0;
+    box-shadow: none;
+    font-size: 0.875rem;
+  }
+
+  .demo[data-facing-pages] .header > button:first-child {
+    flex: none;
+    width: 2.75rem;
+    padding: 0;
+    font-size: 1.25rem;
+  }
+
+  .demo[data-facing-pages] .compactPageNav {
+    margin-inline-end: auto;
+  }
+
+  .demo[data-facing-pages] .compactToolsToggle {
+    white-space: nowrap;
+  }
+
+  .demo[data-facing-pages] .frame {
+    grid-column: 1 / -1;
+    padding-block-start: 0.2rem;
+    border-top: 1px solid var(--reader-border);
+  }
+
+  .demo[data-facing-pages] .readerOptions[data-expanded] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.65rem;
+    margin-block-end: 0.65rem;
+  }
+
+  .demo[data-facing-pages] .readerOptions :is(.bookHeader, .toolbar, .tools, .pageActions) {
+    margin-block: 0;
+    padding-block: 0;
+    border: 0;
+  }
+
+  .demo[data-facing-pages] .readerOptions :is(.bookHeader, .pageActions) .muted {
+    display: none;
+  }
+
   .demo[data-facing-pages] .spread[data-layout='facing'] {
-    flex: 0 0 calc(100% - 1.1rem);
+    margin-block-start: 0.25rem;
   }
 
   .demo[data-facing-pages] .spread .leaf {
     min-height: 0;
-    padding: 0.85rem clamp(0.75rem, 2.5vw, 1.5rem) 0.85rem;
+    padding: 0.35rem clamp(0.75rem, 2.5vw, 1.5rem) 0.65rem;
+    line-height: 1.48;
   }
 
-  .demo[data-facing-pages] .credits {
-    flex-basis: 100%;
+  .demo[data-facing-pages] .runningHead {
+    margin-block-end: 0.35rem;
+    padding-block-end: 0.2rem;
+  }
+
+  .demo[data-facing-pages] .spread .chapter {
+    margin-block: 0.1rem 0.3rem;
+    font-size: 1.15em;
+    line-height: 1.2;
+  }
+
+  .demo[data-facing-pages] .spread .chapter::after {
+    display: none;
+  }
+
+  .demo[data-facing-pages] .player {
+    padding-block: 0.2rem max(0.2rem, env(safe-area-inset-bottom));
   }
 
   .demo[data-facing-pages] .playerInner {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.2rem 0.55rem;
   }
 
   .demo[data-facing-pages] .playerBar {
     margin-top: 0;
+  }
+
+  .demo[data-facing-pages] .playerInner :is([role='status'], [role='alert']) {
+    grid-column: 1 / -1;
   }
 }
 
