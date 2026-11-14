@@ -1,10 +1,28 @@
 # Audiobookshelf React client
 
+**[Try the live Read Along demo](https://jacquelinedmcgraw.github.io/audiobookshelf-client-react/#library)**
+
+Listen and follow along with three sample books. No installation or sign-in required.
+
 This is my fork of the Audiobookshelf React client. I added [self-hosted Read Along](self-hosted-read-along/README.md) to sync audiobook narration with EPUB or PDF text on your own server.
+
+## Screenshots
+
+**Read Along in the live demo.** Follow the highlighted words as the audiobook plays. Use the chapter menu, search, or bookmarks to find your place.
+
+![Read Along in the public demo, with a highlighted word in Alice’s Adventures in Wonderland and playback controls below the page.](docs/images/demo-read-along.webp)
+
+**Self-hosted Audiobookshelf.** Once a book is synced, **Read Along** appears on its book page. This screenshot uses a sample library.
+
+![An Audiobookshelf book page in a self-hosted sample library, with a Read Along button and a Word highlighting is ready message.](docs/images/self-hosted-book.webp)
+
+**Demo library.** Choose from _Alice’s Adventures in Wonderland_, _The Wonderful Wizard of Oz_, and _The Yellow Wallpaper_.
+
+![The public demo library with covers for Alice’s Adventures in Wonderland, The Wonderful Wizard of Oz, and The Yellow Wallpaper.](docs/images/demo-library.webp)
 
 The upstream React client is in active development.
 
-You can test using this docker image built for every commit:
+The upstream preview image below is for testing Audiobookshelf itself. To try this fork’s upload and sync feature, follow the [self-hosted setup guide](self-hosted-read-along/README.md).
 
 ```
 ghcr.io/advplyr/audiobookshelf:v3

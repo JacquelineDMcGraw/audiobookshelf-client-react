@@ -59,9 +59,13 @@ Use the React client from this fork with an Audiobookshelf server that supports 
 
 ## Pair and sync
 
+![The Audiobookshelf Upload screen with a sample EPUB and audio track selected in the Upload a Read Along pair panel.](images/upload-pair.webp)
+
+_Screenshot of the self-hosted Audiobookshelf React client using sample files._
+
 ![Sample walkthrough showing the ebook and audio selectors, the Sync button, and the Read Along player highlighting words.](images/pair-and-sync.png)
 
-_Example screens use sample files._
+_Illustrated walkthrough with sample files._
 
 1. From a book library, open **Upload** and use **Upload a Read Along pair**. Choose one EPUB or text PDF and the audiobook tracks. Click **Review upload**, then **Upload**. Use a library folder the server can write to. Upload requires Audiobookshelf’s upload permission.
 2. Click **Open uploaded book** once Audiobookshelf indexes the pair. Existing library items with a supported primary ebook and audio can also be synced.
