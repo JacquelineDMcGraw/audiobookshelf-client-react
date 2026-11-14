@@ -6,18 +6,18 @@
 type AliceWord = { word: string; start?: number; end?: number; paragraphStart?: true; lineStart?: true }
 
 export const aliceChapters: readonly { title: string; page: number; start: number }[] = [
-  { title: 'Down the Rabbit-Hole', page: 0, start: 0.0 },
-  { title: 'The Pool of Tears', page: 9, start: 765.47 },
-  { title: 'A Caucus-Race and a Long Tale', page: 18, start: 1486.0 },
-  { title: 'The Rabbit Sends in a Little Bill', page: 25, start: 2069.88 },
-  { title: 'Advice from a Caterpillar', page: 36, start: 2912.34 },
-  { title: 'Pig and Pepper', page: 45, start: 3662.06 },
-  { title: 'A Mad Tea-Party', page: 56, start: 4587.11 },
-  { title: 'The Queen’s Croquet-Ground', page: 65, start: 5403.62 },
-  { title: 'The Mock Turtle’s Story', page: 75, start: 6224.63 },
-  { title: 'The Lobster Quadrille', page: 84, start: 7055.32 },
-  { title: 'Who Stole the Tarts?', page: 92, start: 7932.17 },
-  { title: 'Alice’s Evidence', page: 100, start: 8601.26 }
+  { title: 'Down the Rabbit-Hole', page: 0, start: 0.0 }, // i18n-ignore: original chapter title
+  { title: 'The Pool of Tears', page: 9, start: 765.47 }, // i18n-ignore: original chapter title
+  { title: 'A Caucus-Race and a Long Tale', page: 18, start: 1486.0 }, // i18n-ignore: original chapter title
+  { title: 'The Rabbit Sends in a Little Bill', page: 25, start: 2069.88 }, // i18n-ignore: original chapter title
+  { title: 'Advice from a Caterpillar', page: 36, start: 2912.34 }, // i18n-ignore: original chapter title
+  { title: 'Pig and Pepper', page: 45, start: 3662.06 }, // i18n-ignore: original chapter title
+  { title: 'A Mad Tea-Party', page: 56, start: 4587.11 }, // i18n-ignore: original chapter title
+  { title: 'The Queen’s Croquet-Ground', page: 65, start: 5403.62 }, // i18n-ignore: original chapter title
+  { title: 'The Mock Turtle’s Story', page: 75, start: 6224.63 }, // i18n-ignore: original chapter title
+  { title: 'The Lobster Quadrille', page: 84, start: 7055.32 }, // i18n-ignore: original chapter title
+  { title: 'Who Stole the Tarts?', page: 92, start: 7932.17 }, // i18n-ignore: original chapter title
+  { title: 'Alice’s Evidence', page: 100, start: 8601.26 } // i18n-ignore: original chapter title
 ]
 
 export const alicePages: readonly (readonly AliceWord[])[] = [

@@ -56,11 +56,11 @@ After installing the client dependencies, start the standalone preview:
 HOST=127.0.0.2 READ_ALONG_DEMO=1 pnpm dev --hostname 127.0.0.1 --port 3015
 ```
 
-Open [Read Along Demo](http://127.0.0.1:3015/read-along-demo). Play the narration to see word highlighting and automatic page turns. Previous and Next also seek the narration to the selected page.
+Open [Read Along Demo](http://127.0.0.1:3015/read-along-demo) and select **Read Along**. Play the narration to see word highlighting and automatic page turns. Turn off **Follow audio** to browse pages without moving playback. **Play from here** starts narration at the displayed page.
 
 The demo includes all 12 chapters of *Alice’s Adventures in Wonderland* by Lewis Carroll with aligned narration. Choose **Chapters** to jump to the opening page and audio for any chapter. Automatic highlighting follows the narration where word timings are available. The demo runs without an Audiobookshelf server or account. The extra loopback address keeps backend requests from other routes separate from the preview listener. The [Project Gutenberg text](https://www.gutenberg.org/ebooks/11) and [LibriVox recording by Peter Yearsley](https://librivox.org/alices-adventures-in-wonderland-by-lewis-carroll-3/) are public domain in the United States.
 
-Use **Save bookmark** in the player and **Bookmarks** in the reading toolbar to return to a saved page and timestamp. The standalone demo stores bookmarks in the current browser; it does not sync across devices.
+Use **Search** to find words or phrases and play from a match. Use **Save bookmark** in the player and **Bookmarks** in the reading toolbar to return to a saved timestamp or delete a bookmark. The standalone demo stores bookmarks in the current browser.
 
 The [public Read Along demo](https://jacquelinedmcgraw.github.io/audiobookshelf-client-react/) is hosted on GitHub Pages. To rebuild the static site after installing the client dependencies, run:
 
@@ -70,4 +70,4 @@ npm install --prefix "$tools_dir" --ignore-scripts esbuild@0.27.7
 node scripts/read-along-pages/build.mjs ./out "$tools_dir/node_modules/esbuild"
 ```
 
-Use a new output directory for each build. The export uses relative asset links and contains only the demo, its audio, and license files.
+Use a new output directory for each build. The export uses relative asset links and includes the demo, its audio, the [Project Gutenberg cover](https://www.gutenberg.org/files/11/11-h/images/cover.jpg), the Audiobookshelf logo, and license files.
