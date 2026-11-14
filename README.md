@@ -56,11 +56,17 @@ After installing the client dependencies, start the standalone preview:
 HOST=127.0.0.2 READ_ALONG_DEMO=1 pnpm dev --hostname 127.0.0.1 --port 3015
 ```
 
-Open [Read Along Demo](http://127.0.0.1:3015/read-along-demo) and select **Read Along**. Play the narration to see word highlighting and automatic page turns. Turn off **Follow audio** to browse pages without moving playback. **Play from here** starts narration at the displayed page.
+Open [Read Along Demo](http://127.0.0.1:3015/read-along-demo) and select **Demo library** to choose a book. Open **Read Along** on its book page and play the narration to see word highlighting and automatic page turns. **Chapters** jumps to a chapter in both the text and audio. Turn off **Follow audio** to browse pages independently, then select **Play from here** to resume at the displayed page.
 
-The demo includes all 12 chapters of *Alice’s Adventures in Wonderland* by Lewis Carroll with aligned narration. Choose **Chapters** to jump to the opening page and audio for any chapter. Automatic highlighting follows the narration where word timings are available. The demo runs without an Audiobookshelf server or account. The extra loopback address keeps backend requests from other routes separate from the preview listener. The [Project Gutenberg text](https://www.gutenberg.org/ebooks/11) and [LibriVox recording by Peter Yearsley](https://librivox.org/alices-adventures-in-wonderland-by-lewis-carroll-3/) are public domain in the United States.
+The demo runs without an Audiobookshelf server or account and uses these complete public-domain editions and recordings:
 
-Use **Search** to find words or phrases and play from a match. Use **Save bookmark** in the player and **Bookmarks** in the reading toolbar to return to a saved timestamp or delete a bookmark. The standalone demo stores bookmarks in the current browser.
+| Book | Text | Narration |
+| --- | --- | --- |
+| _Alice’s Adventures in Wonderland_ | [Project Gutenberg #11](https://www.gutenberg.org/ebooks/11) | [Peter Yearsley, LibriVox](https://librivox.org/alices-adventures-in-wonderland-by-lewis-carroll-3/) |
+| _The Wonderful Wizard of Oz_ | [Project Gutenberg #43936](https://www.gutenberg.org/ebooks/43936) | [Lyn Stanley, LibriVox](https://librivox.org/the-wonderful-wizard-of-oz-version-7-by-l-frank-baum/) |
+| _The Yellow Wallpaper_ | [Project Gutenberg #1952](https://www.gutenberg.org/ebooks/1952) | [Anna Shirey, LibriVox track 19](https://librivox.org/short-story-collection-108-by-various/) |
+
+Use **Search** to find words or phrases and play from a match. Use **Save bookmark** in the player and **Bookmarks** in the reading toolbar to return to a saved timestamp or delete a bookmark. Each book has its own bookmarks in the current browser. The extra loopback address keeps backend requests from other routes separate from the preview listener.
 
 The [public Read Along demo](https://jacquelinedmcgraw.github.io/audiobookshelf-client-react/) is hosted on GitHub Pages. To rebuild the static site after installing the client dependencies, run:
 
@@ -70,4 +76,4 @@ npm install --prefix "$tools_dir" --ignore-scripts esbuild@0.27.7
 node scripts/read-along-pages/build.mjs ./out "$tools_dir/node_modules/esbuild"
 ```
 
-Use a new output directory for each build. The export uses relative asset links and includes the demo, its audio, the [Project Gutenberg cover](https://www.gutenberg.org/files/11/11-h/images/cover.jpg), the Audiobookshelf logo, and license files.
+Use a new output directory for each build. The export uses relative asset links and includes the demo, book covers, narration, timing data, the Audiobookshelf logo, and license files.

@@ -1,4 +1,4 @@
-name: Alice Read Along live test
+name: Read Along live test
 
 on:
   workflow_run:
@@ -42,8 +42,8 @@ jobs:
           printf 'READ_ALONG_EXPECTED_JS=%s\n' "$script_href" >> "$GITHUB_ENV"
       - name: Install Chromium
         run: |
-          npm install --prefix "$RUNNER_TEMP/alice-test" --ignore-scripts playwright@1.61.0
-          "$RUNNER_TEMP/alice-test/node_modules/.bin/playwright" install --with-deps chromium
-          printf 'READ_ALONG_PLAYWRIGHT_MODULE=%s\n' "$RUNNER_TEMP/alice-test/node_modules/playwright" >> "$GITHUB_ENV"
+          npm install --prefix "$RUNNER_TEMP/read-along-test" --ignore-scripts playwright@1.61.0
+          "$RUNNER_TEMP/read-along-test/node_modules/.bin/playwright" install --with-deps chromium
+          printf 'READ_ALONG_PLAYWRIGHT_MODULE=%s\n' "$RUNNER_TEMP/read-along-test/node_modules/playwright" >> "$GITHUB_ENV"
       - name: Test the live demo
         run: node scripts/read-along-pages/smoke.mjs

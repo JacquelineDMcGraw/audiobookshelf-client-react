@@ -1,12 +1,13 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { createRoot } from 'react-dom/client'
 
-import ReadAlongDemo from '../../src/app/(public)/read-along-demo/ReadAlongDemo'
+import type { DemoBookAssets, DemoBookId } from '../../src/app/(public)/read-along-demo/books'
+import DemoLibrary from '../../src/app/(public)/read-along-demo/DemoLibrary'
 import enUS from '../../src/locales/en-us.json'
 import './reset.css'
 
 declare const READ_ALONG_SOURCE_URL: string
-declare const READ_ALONG_AUDIO_URL: string
+declare const READ_ALONG_BOOK_ASSETS: Record<DemoBookId, DemoBookAssets>
 
 const sharedLabels = new Set([
   'ButtonClose',
@@ -30,9 +31,8 @@ const messages = Object.fromEntries(Object.entries(enUS).filter(([key]) => key.s
 
 createRoot(document.getElementById('root')!).render(
   <NextIntlClientProvider locale="en-US" messages={messages} timeZone="UTC">
-    <ReadAlongDemo
-      audioSrc={READ_ALONG_AUDIO_URL}
-      coverSrc="./alice-cover.jpg"
+    <DemoLibrary
+      assets={READ_ALONG_BOOK_ASSETS}
       logoSrc="./audiobookshelf-logo.png"
       credits={
         <>

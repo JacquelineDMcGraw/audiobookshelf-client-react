@@ -1,11 +1,9 @@
 import { useTranslations } from 'next-intl'
 import type { Ref } from 'react'
 
-import { aliceChapters } from './alice'
+import type { DemoBook, DemoChapter } from './books'
 import styles from './read-along.module.css'
 
-export const bookTitle = 'Alice’s Adventures in Wonderland'
-const narrator = 'Peter Yearsley'
 const editionLanguage = 'English'
 
 export function clock(seconds: number) {
@@ -17,6 +15,8 @@ export function clock(seconds: number) {
 }
 
 type DemoBookDetailsProps = {
+  book: DemoBook
+  chapters: readonly DemoChapter[]
   coverSrc: string
   headingRef: Ref<HTMLHeadingElement>
   onRead: () => void
@@ -26,8 +26,9 @@ type DemoBookDetailsProps = {
   duration: number
 }
 
-export function DemoBookDetails({ coverSrc, headingRef, onRead, onTogglePlayback, onPlayChapter, playing, duration }: DemoBookDetailsProps) {
+export function DemoBookDetails({ book, chapters, coverSrc, headingRef, onRead, onTogglePlayback, onPlayChapter, playing, duration }: DemoBookDetailsProps) {
   const t = useTranslations()
+  const { title: bookTitle, author, narrator, year } = book
 
   return (
     <div className={styles.bookDetailScroll}>
@@ -39,7 +40,7 @@ export function DemoBookDetails({ coverSrc, headingRef, onRead, onTogglePlayback
           <h1 ref={headingRef} tabIndex={-1}>
             {bookTitle}
           </h1>
-          <p className={styles.bookAuthor}>{t('LabelByAuthor', { 0: 'Lewis Carroll' })}</p>
+          <p className={styles.bookAuthor}>{t('LabelByAuthor', { 0: author })}</p>
           <dl className={styles.bookMetadata}>
             <div>
               <dt>{t('LabelNarrators')}</dt>
@@ -47,7 +48,7 @@ export function DemoBookDetails({ coverSrc, headingRef, onRead, onTogglePlayback
             </div>
             <div>
               <dt>{t('LabelPublishYear')}</dt>
-              <dd>1865</dd>
+              <dd>{year}</dd>
             </div>
             <div>
               <dt>{t('LabelLanguage')}</dt>
@@ -66,10 +67,10 @@ export function DemoBookDetails({ coverSrc, headingRef, onRead, onTogglePlayback
               {t('LabelReadAlongDemo')}
             </button>
           </div>
-          <p className={styles.bookDescription}>{t('LabelReadAlongDemoDescription')}</p>
+          <p className={styles.bookDescription}>{t('descriptionKey' in book ? book.descriptionKey : 'LabelReadAlongDemoDescription')}</p>
           <details className={styles.bookChapters}>
             <summary>
-              {t('LabelChapters')} ({aliceChapters.length})
+              {t('LabelChapters')} ({chapters.length})
             </summary>
             <table>
               <thead>
@@ -80,7 +81,7 @@ export function DemoBookDetails({ coverSrc, headingRef, onRead, onTogglePlayback
                 </tr>
               </thead>
               <tbody>
-                {aliceChapters.map((chapter, index) => (
+                {chapters.map((chapter, index) => (
                   <tr key={chapter.start}>
                     <td>{chapter.title}</td>
                     <td>
@@ -92,7 +93,7 @@ export function DemoBookDetails({ coverSrc, headingRef, onRead, onTogglePlayback
                         {clock(chapter.start)}
                       </button>
                     </td>
-                    <td>{clock((aliceChapters[index + 1]?.start ?? duration) - chapter.start)}</td>
+                    <td>{clock((chapters[index + 1]?.start ?? duration) - chapter.start)}</td>
                   </tr>
                 ))}
               </tbody>

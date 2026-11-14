@@ -2,6 +2,8 @@ import assert from 'node:assert/strict'
 import { createRequire } from 'node:module'
 import { setTimeout as delay } from 'node:timers/promises'
 
+import { addedBooks, aliceTitle, checkBook } from './catalog-smoke.mjs'
+
 const demoUrl = process.env.READ_ALONG_SMOKE_URL ?? 'https://jacquelinedmcgraw.github.io/audiobookshelf-client-react/'
 const expectedJs = process.env.READ_ALONG_EXPECTED_JS
 const playwrightModule = process.env.READ_ALONG_PLAYWRIGHT_MODULE ?? 'playwright'
@@ -40,7 +42,7 @@ try {
 
   await openDeployment(page, errors)
 
-  const bookTitle = 'Alice’s Adventures in Wonderland'
+  const bookTitle = aliceTitle
   const book = page.getByRole('heading', { level: 1, name: bookTitle, exact: true })
   const openReader = page.getByRole('button', { name: 'Read Along', exact: true })
   const reader = page.getByRole('heading', { level: 1, name: 'Read Along', exact: true })
@@ -232,10 +234,34 @@ try {
   await finalChapter.waitFor()
   assert(Math.abs((await audio.evaluate((element) => element.currentTime)) - returnedPosition) < 0.1, 'Reopening Read Along should keep the playback position')
 
-  assert.deepEqual(errors, [], 'Browser did not complete the smoke test without JavaScript errors')
   console.log(
-    'Read Along smoke passed: book details, playback and speed, embedded reader with visible app header, phrase search and playback, manual page turns, 12 chapters, highlighting and automatic page turn, bookmark deletion and restore after reload, and Back to book.'
+    'Alice passed: book details, playback and speed, embedded reader with visible app header, phrase search and playback, manual page turns, 12 chapters, highlighting and automatic page turn, bookmark deletion and restore after reload, and Back to book.'
   )
+
+  if (process.env.READ_ALONG_SMOKE_ALICE_ONLY !== '1') {
+    const library = page.getByRole('link', { name: 'Demo library', exact: true })
+    for (const entry of addedBooks) {
+      await library.click()
+      assert.equal(new URL(page.url()).hash, '#library', 'Library navigation should keep the demo on the same page')
+      for (const title of [aliceTitle, ...addedBooks.map(({ title }) => title)]) {
+        await page.getByRole('link', { name: title, exact: true }).waitFor()
+      }
+      const [timingResponse] = await Promise.all([
+        page.waitForResponse((response) => new URL(response.url()).pathname.endsWith('/' + entry.slug + '.json')),
+        page.getByRole('link', { name: entry.title, exact: true }).click()
+      ])
+      await checkBook(page, entry, timingResponse)
+    }
+
+    await library.click()
+    await page.getByRole('link', { name: aliceTitle, exact: true }).click()
+    await book.waitFor()
+    await openReader.click()
+    await bookmarkMenu.locator('summary').click()
+    await bookmarkOnPage(finalPage).waitFor()
+    assert.equal(await bookmarkMenu.getByRole('button', { name: /^Page \d+/ }).count(), 1, 'Alice should keep only its own bookmarks')
+  }
+  assert.deepEqual(errors, [], 'Browser did not complete the smoke test without JavaScript errors')
 } finally {
   await browser.close()
 }

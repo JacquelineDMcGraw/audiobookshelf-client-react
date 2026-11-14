@@ -710,3 +710,55 @@
     background: Highlight;
   }
 }
+
+.libraryLink {
+  margin-inline-start: auto;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+}
+
+.catalog {
+  max-width: 72rem;
+  margin-inline: auto;
+}
+
+.catalog h1 {
+  font-size: clamp(1.5rem, 4vw, 1.875rem);
+  font-weight: 600;
+}
+
+.catalogGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 9rem), 1fr));
+  gap: 1.5rem;
+  max-width: 43rem;
+  margin-block: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.catalogGrid a {
+  display: grid;
+  gap: 0.65rem;
+  text-decoration: none;
+}
+
+.catalogGrid a:hover strong {
+  text-decoration: underline;
+}
+
+.catalogGrid img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  border-radius: 0.25rem;
+  background: #232323;
+  box-shadow: 0 0.4rem 1rem #0008;
+}
+
+.catalogGrid p {
+  margin-block: 0.15rem 0;
+  color: var(--reader-muted);
+  font-size: 0.875rem;
+}
