@@ -1,8 +1,24 @@
 # Self-hosted Read Along
 
-Pair an EPUB or selectable-text PDF with one or more audiobook tracks in Audiobookshelf. The worker runs speech recognition and matches the narration to the ebook on your own machine. The browser reads the result through the signed-in Audiobookshelf client.
+I built Read Along so you can pair an EPUB or selectable-text PDF with one or more audiobook tracks in Audiobookshelf. The worker runs speech recognition and matches the narration to the ebook on your own machine. The browser reads the result through the signed-in Audiobookshelf client.
+
+[See the upload walkthrough](#pair-and-sync)
 
 ## Install
+
+```mermaid
+flowchart TD
+    Browser["Your browser"]
+    React["Audiobookshelf server with this fork’s React client"]
+    Worker["Local Read Along worker"]
+    Files["Your library files and downloaded Whisper model"]
+    State["Private output folder"]
+    Browser <-->|"Upload, Sync, and Read Along"| React
+    React -->|"Request sync using the worker URL and shared token"| Worker
+    Worker -->|"Return progress, timings, and audio"| React
+    Files -->|"Read ebook, audio, and model"| Worker
+    Worker -->|"Save word timings and playback audio"| State
+```
 
 Use the React client from this fork with an Audiobookshelf server that supports the React client, as described in the [project setup](../README.md#how-to-run-locally). The stock Vue client and the GitHub Pages demo do not load the worker integration.
 
@@ -43,8 +59,12 @@ Use the React client from this fork with an Audiobookshelf server that supports 
 
 ## Pair and sync
 
-1. From a book library, open **Upload** and use **Upload a Read Along pair**. Choose one EPUB or text PDF and the audiobook tracks, then follow Audiobookshelf’s normal upload review. Use a library folder the server can write to. Upload requires Audiobookshelf’s upload permission.
-2. Open the combined item once Audiobookshelf indexes it. Existing library items with a supported primary ebook and audio can also be synced.
+![Sample walkthrough showing the ebook and audio selectors, the Sync button, and the Read Along player highlighting words.](images/pair-and-sync.png)
+
+_Example screens use sample files._
+
+1. From a book library, open **Upload** and use **Upload a Read Along pair**. Choose one EPUB or text PDF and the audiobook tracks. Click **Review upload**, then **Upload**. Use a library folder the server can write to. Upload requires Audiobookshelf’s upload permission.
+2. Click **Open uploaded book** once Audiobookshelf indexes the pair. Existing library items with a supported primary ebook and audio can also be synced.
 3. Click **Sync** and wait for **Word highlighting is ready**. Processing continues on the worker while you browse elsewhere. Return to the book for progress or to retry a failed sync.
 4. Click **Read Along** on the book page. The reader follows the narration, turns pages, and can search the text. Its bookmarks are saved in the current browser for the signed-in account.
 
