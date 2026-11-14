@@ -25,6 +25,8 @@ import { uploadLibraryItem } from '@/lib/libraryItemUpload'
 import { bytesPretty } from '@/lib/string'
 import type { UploadProgressInfo } from '@/types/upload'
 import path from 'path'
+import ReadAlongPairPicker from './ReadAlongPairPicker'
+import ReadAlongUploadResult from './ReadAlongUploadResult'
 import { CleanedItem, FileWithMetadata, getItemsFromFilelist } from './UploadHelper'
 import { checkUploadPathExists, fetchBookMetadata, fetchPodcastMetadata } from './actions'
 
@@ -38,9 +40,11 @@ export interface ItemToUpload extends CleanedItem {
   uploadError?: string
   uploadComplete?: boolean
   uploadFailed?: boolean
+  readAlongPair?: boolean
+  uploadedReadAlongFolder?: string
 }
 
-export default function UploadClient() {
+export default function UploadClient({ readAlongEnabled = false }: { readAlongEnabled?: boolean }) {
   const t = useTypeSafeTranslations()
   const { showToast } = useGlobalToast()
   const { library } = useLibrary()
@@ -244,6 +248,7 @@ export default function UploadClient() {
         const data = await checkUploadPathExists(directory, folderPath)
         exists = data.exists
         if (data.exists) {
+          if (item.readAlongPair) item.uploadFailed = true
           if (data.libraryItemTitle) {
             showToast(t('ToastUploaderItemExistsInSubdirectoryError', { 0: data.libraryItemTitle }), { type: 'error' })
           } else {
@@ -252,8 +257,9 @@ export default function UploadClient() {
         }
       } catch (error) {
         console.error('Failed to check if filepath exists', error)
+        if (item.readAlongPair) item.uploadFailed = true
       }
-      if (!exists) {
+      if (!exists && !item.uploadFailed) {
         itemsToUpload.push(item)
       }
     }
@@ -272,6 +278,7 @@ export default function UploadClient() {
           const updatedItemsForProgress = [...uploadItems]
           setUploadItems(updatedItemsForProgress)
         })
+        if (item.readAlongPair) item.uploadedReadAlongFolder = selectedFolder
       } catch (error) {
         console.error('Upload failed:', error)
         item.uploadFailed = true
@@ -325,6 +332,15 @@ export default function UploadClient() {
             <Dropdown items={bookProviders} value={selectedProvider} onChange={(value) => setSelectedProvider(value as string)} />
           </div>
         </div>
+      )}
+      {readAlongEnabled && currentLibraryMediaType === 'book' && uploadItems.length === 0 && errors === '' && (
+        <ReadAlongPairPicker
+          key={libraryId}
+          onStage={(item) => {
+            setUploadItems([{ ...item, readAlongPair: true }])
+            setIgnoredFiles([])
+          }}
+        />
       )}
       {/* Add Files / drag and drop */}
       {uploadItems.length === 0 && errors === '' && (
@@ -524,7 +540,15 @@ export default function UploadClient() {
                     )}
                   </>
                 )}
-                {item.uploadComplete && (
+                {item.uploadComplete && item.uploadedReadAlongFolder && (
+                  <ReadAlongUploadResult
+                    libraryId={libraryId}
+                    folderId={item.uploadedReadAlongFolder}
+                    directory={getDirectory(item).normalize('NFC')}
+                    audioCount={item.itemFiles.length - 1}
+                  />
+                )}
+                {item.uploadComplete && !item.readAlongPair && (
                   <Alert type="success" autoFocus={false}>
                     <p>{t('MessageUploaderItemSuccess')}</p>
                   </Alert>
